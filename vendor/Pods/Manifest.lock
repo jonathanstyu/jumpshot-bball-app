@@ -1,0 +1,13 @@
+PODS:
+  - GHSidebarNav (1.0.0)
+  - JASidePanels (1.3.0)
+
+DEPENDENCIES:
+  - GHSidebarNav
+  - JASidePanels
+
+SPEC CHECKSUMS:
+  GHSidebarNav: f5b4647fab93960dab192b618f2172621a30454d
+  JASidePanels: 172b5130c7e3d9e3d2a0b3821d53f0764b4a2ff9
+
+COCOAPODS: 0.18.1

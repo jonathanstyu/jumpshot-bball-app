@@ -1,0 +1,421 @@
+<?xml version='1.0'?>
+<signatures version='1.0'>
+<constant declared_type='NSTimeInterval' const='true' name='kGHRevealSidebarDefaultAnimationDuration' type='d'/>
+<constant declared_type='int' const='true' name='kGHRevealSidebarWidth' type='i'/>
+<constant declared_type='NSTimeInterval' const='true' name='kGHSidebarDefaultSearchDelay' type='d'/>
+<enum value='1' name='JASidePanelCenterVisible'/>
+<enum value='2' name='JASidePanelLeftVisible'/>
+<enum value='1' name='JASidePanelMultipleActive'/>
+<enum value='3' name='JASidePanelRightVisible'/>
+<enum value='0' name='JASidePanelSingleActive'/>
+<class name='GHRevealViewController'>
+<method selector='contentViewController'>
+<retval declared_type='int*' type='^i'/>
+</method>
+<method selector='dragContentView:'>
+<arg declared_type='id' index='0' name='panGesture' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='isSearching'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='isSidebarShowing'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='setContentViewController:'>
+<arg declared_type='int*' index='0' name='contentViewController' type='^i'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setSidebarViewController:'>
+<arg declared_type='int*' index='0' name='sidebarViewController' type='^i'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='sidebarViewController'>
+<retval declared_type='int*' type='^i'/>
+</method>
+<method selector='toggleSearch:withSearchView:duration:'>
+<arg declared_type='BOOL' index='0' name='showSearch' type='B'/>
+<arg declared_type='id' index='1' name='searchView' type='@'/>
+<arg declared_type='NSTimeInterval' index='2' name='duration' type='d'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='toggleSearch:withSearchView:duration:completion:'>
+<arg declared_type='BOOL' index='0' name='showSearch' type='B'/>
+<arg declared_type='id' index='1' name='searchView' type='@'/>
+<arg declared_type='NSTimeInterval' index='2' name='duration' type='d'/>
+<arg declared_type='void (^)(BOOL)' index='3' name='completion' type='@?' function_pointer='true'>
+<arg declared_type='BOOL' type='B'/>
+<retval declared_type='void' type='v'/>
+</arg>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='toggleSidebar:duration:'>
+<arg declared_type='BOOL' index='0' name='show' type='B'/>
+<arg declared_type='NSTimeInterval' index='1' name='duration' type='d'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='toggleSidebar:duration:completion:'>
+<arg declared_type='BOOL' index='0' name='show' type='B'/>
+<arg declared_type='NSTimeInterval' index='1' name='duration' type='d'/>
+<arg declared_type='void (^)(BOOL)' index='2' name='completion' type='@?' function_pointer='true'>
+<arg declared_type='BOOL' type='B'/>
+<retval declared_type='void' type='v'/>
+</arg>
+<retval declared_type='void' type='v'/>
+</method>
+</class>
+<class name='GHSidebarSearchViewController'>
+<method selector='entries'>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+<method selector='initWithSidebarViewController:'>
+<arg declared_type='GHRevealViewController*' index='0' name='sidebarVC' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='searchBar'>
+<retval declared_type='int*' type='^i'/>
+</method>
+<method selector='searchDelay'>
+<retval declared_type='NSTimeInterval' type='d'/>
+</method>
+<method selector='searchDelegate'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='setSearchDelay:'>
+<arg declared_type='NSTimeInterval' index='0' name='searchDelay' type='d'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setSearchDelegate:'>
+<arg declared_type='id' index='0' name='searchDelegate' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+</class>
+<class name='JASidePanelController'>
+<method selector='allowLeftOverpan'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='allowLeftSwipe'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='allowRightOverpan'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='allowRightSwipe'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='bounceDuration'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='bounceOnSidePanelClose'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='bounceOnSidePanelOpen'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='bouncePercentage'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='canUnloadLeftPanel'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='canUnloadRightPanel'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='centerPanel'>
+<retval declared_type='UIViewController*' type='@'/>
+</method>
+<method selector='centerPanelContainer'>
+<retval declared_type='UIView*' type='@'/>
+</method>
+<method selector='centerPanelHidden'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='defaultImage' class_method='true'>
+<retval declared_type='UIImage*' type='@'/>
+</method>
+<method selector='leftButtonForCenterPanel'>
+<retval declared_type='UIBarButtonItem*' type='@'/>
+</method>
+<method selector='leftFixedWidth'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='leftGapPercentage'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='leftPanel'>
+<retval declared_type='UIViewController*' type='@'/>
+</method>
+<method selector='leftPanelContainer'>
+<retval declared_type='UIView*' type='@'/>
+</method>
+<method selector='leftVisibleWidth'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='maximumAnimationDuration'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='minimumMovePercentage'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='panningLimitedToTopViewController'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='recognizesPanGesture'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='rightFixedWidth'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='rightGapPercentage'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='rightPanel'>
+<retval declared_type='UIViewController*' type='@'/>
+</method>
+<method selector='rightPanelContainer'>
+<retval declared_type='UIView*' type='@'/>
+</method>
+<method selector='rightVisibleWidth'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='setAllowLeftOverpan:'>
+<arg declared_type='BOOL' index='0' name='allowLeftOverpan' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setAllowLeftSwipe:'>
+<arg declared_type='BOOL' index='0' name='allowLeftSwipe' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setAllowRightOverpan:'>
+<arg declared_type='BOOL' index='0' name='allowRightOverpan' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setAllowRightSwipe:'>
+<arg declared_type='BOOL' index='0' name='allowRightSwipe' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setBounceDuration:'>
+<arg declared_type='CGFloat' index='0' name='bounceDuration' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setBounceOnSidePanelClose:'>
+<arg declared_type='BOOL' index='0' name='bounceOnSidePanelClose' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setBounceOnSidePanelOpen:'>
+<arg declared_type='BOOL' index='0' name='bounceOnSidePanelOpen' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setBouncePercentage:'>
+<arg declared_type='CGFloat' index='0' name='bouncePercentage' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setCanUnloadLeftPanel:'>
+<arg declared_type='BOOL' index='0' name='canUnloadLeftPanel' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setCanUnloadRightPanel:'>
+<arg declared_type='BOOL' index='0' name='canUnloadRightPanel' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setCenterPanel:'>
+<arg declared_type='UIViewController*' index='0' name='centerPanel' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setCenterPanelContainer:'>
+<arg declared_type='UIView*' index='0' name='centerPanelContainer' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setCenterPanelHidden:'>
+<arg declared_type='BOOL' index='0' name='centerPanelHidden' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setCenterPanelHidden:animated:duration:'>
+<arg declared_type='BOOL' index='0' name='centerPanelHidden' type='B'/>
+<arg declared_type='BOOL' index='1' name='animated' type='B'/>
+<arg declared_type='NSTimeInterval' index='2' name='duration' type='d'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setLeftFixedWidth:'>
+<arg declared_type='CGFloat' index='0' name='leftFixedWidth' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setLeftGapPercentage:'>
+<arg declared_type='CGFloat' index='0' name='leftGapPercentage' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setLeftPanel:'>
+<arg declared_type='UIViewController*' index='0' name='leftPanel' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setLeftPanelContainer:'>
+<arg declared_type='UIView*' index='0' name='leftPanelContainer' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setMaximumAnimationDuration:'>
+<arg declared_type='CGFloat' index='0' name='maximumAnimationDuration' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setMinimumMovePercentage:'>
+<arg declared_type='CGFloat' index='0' name='minimumMovePercentage' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setPanningLimitedToTopViewController:'>
+<arg declared_type='BOOL' index='0' name='panningLimitedToTopViewController' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setRecognizesPanGesture:'>
+<arg declared_type='BOOL' index='0' name='recognizesPanGesture' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setRightFixedWidth:'>
+<arg declared_type='CGFloat' index='0' name='rightFixedWidth' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setRightGapPercentage:'>
+<arg declared_type='CGFloat' index='0' name='rightGapPercentage' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setRightPanel:'>
+<arg declared_type='UIViewController*' index='0' name='rightPanel' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setRightPanelContainer:'>
+<arg declared_type='UIView*' index='0' name='rightPanelContainer' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setShouldDelegateAutorotateToVisiblePanel:'>
+<arg declared_type='BOOL' index='0' name='shouldDelegateAutorotateToVisiblePanel' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setShouldResizeLeftPanel:'>
+<arg declared_type='BOOL' index='0' name='shouldResizeLeftPanel' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setShouldResizeRightPanel:'>
+<arg declared_type='BOOL' index='0' name='shouldResizeRightPanel' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setStyle:'>
+<arg declared_type='JASidePanelStyle' index='0' name='style' type='i'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setVisiblePanel:'>
+<arg declared_type='UIViewController*' index='0' name='visiblePanel' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='shouldDelegateAutorotateToVisiblePanel'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='shouldResizeLeftPanel'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='shouldResizeRightPanel'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='showCenterPanel:'>
+<arg declared_type='BOOL' index='0' name='animated' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='showCenterPanelAnimated:'>
+<arg declared_type='BOOL' index='0' name='animated' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='showLeftPanel:'>
+<arg declared_type='BOOL' index='0' name='animated' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='showLeftPanelAnimated:'>
+<arg declared_type='BOOL' index='0' name='animated' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='showRightPanel:'>
+<arg declared_type='BOOL' index='0' name='animated' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='showRightPanelAnimated:'>
+<arg declared_type='BOOL' index='0' name='animated' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='state'>
+<retval declared_type='JASidePanelState' type='i'/>
+</method>
+<method selector='style'>
+<retval declared_type='JASidePanelStyle' type='i'/>
+</method>
+<method selector='styleContainer:animate:duration:'>
+<arg declared_type='UIView*' index='0' name='container' type='@'/>
+<arg declared_type='BOOL' index='1' name='animate' type='B'/>
+<arg declared_type='NSTimeInterval' index='2' name='duration' type='d'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='stylePanel:'>
+<arg declared_type='UIView*' index='0' name='panel' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='toggleLeftPanel:'>
+<arg declared_type='id' index='0' name='sender' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='toggleRightPanel:'>
+<arg declared_type='id' index='0' name='sender' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='visiblePanel'>
+<retval declared_type='UIViewController*' type='@'/>
+</method>
+</class>
+<class name='NSObject'>
+<method selector='searchResult:selectedAtIndexPath:'>
+<arg declared_type='id' index='0' name='result' type='@'/>
+<arg declared_type='NSIndexPath*' index='1' name='indexPath' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='searchResultCellForEntry:atIndexPath:inTableView:'>
+<arg declared_type='id' index='0' name='entry' type='@'/>
+<arg declared_type='NSIndexPath*' index='1' name='indexPath' type='@'/>
+<arg declared_type='id' index='2' name='tableView' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='searchResultsForText:withScope:callback:'>
+<arg declared_type='NSString*' index='0' name='text' type='@'/>
+<arg declared_type='NSString*' index='1' name='scope' type='@'/>
+<arg declared_type='SearchResultsBlock' index='2' name='callback' type='@?' function_pointer='true'>
+<arg declared_type='NSArray*' type='@'/>
+<retval declared_type='void' type='v'/>
+</arg>
+<retval declared_type='void' type='v'/>
+</method>
+</class>
+<class name='UIViewController'>
+<method selector='setSidePanelController:'>
+<arg declared_type='JASidePanelController*' index='0' name='sidePanelController' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='sidePanelController'>
+<retval declared_type='JASidePanelController*' type='@'/>
+</method>
+</class>
+<informal_protocol name='GHSidebarSearchViewControllerDelegate'>
+<method selector='searchResult:selectedAtIndexPath:' type='v16@0:4@8@12'>
+<arg declared_type='id' index='0' name='result' type='@'/>
+<arg declared_type='NSIndexPath*' index='1' name='indexPath' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='searchResultCellForEntry:atIndexPath:inTableView:' type='@20@0:4@8@12@16'>
+<arg declared_type='id' index='0' name='entry' type='@'/>
+<arg declared_type='NSIndexPath*' index='1' name='indexPath' type='@'/>
+<arg declared_type='id' index='2' name='tableView' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='searchResultsForText:withScope:callback:' type='v20@0:4@8@12@?16'>
+<arg declared_type='NSString*' index='0' name='text' type='@'/>
+<arg declared_type='NSString*' index='1' name='scope' type='@'/>
+<arg declared_type='SearchResultsBlock' index='2' name='callback' type='@?' function_pointer='true'>
+<arg declared_type='NSArray*' type='@'/>
+<retval declared_type='void' type='v'/>
+</arg>
+<retval declared_type='void' type='v'/>
+</method>
+</informal_protocol>
+</signatures>
