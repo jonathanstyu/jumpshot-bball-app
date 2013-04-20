@@ -1,4 +1,6 @@
 class AddGameViewController < UIViewController
+  # The center view of the app
+  
   def viewDidLoad
     super
     self.title = "Add Game"

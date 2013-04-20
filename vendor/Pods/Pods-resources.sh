@@ -25,8 +25,3 @@ install_resource()
       ;;
   esac
 }
-install_resource 'GHSidebarNav/GHSidebarNav/Images/searchBarBG.png'
-install_resource 'GHSidebarNav/GHSidebarNav/Images/searchBarIcon.png'
-install_resource 'GHSidebarNav/GHSidebarNav/Images/searchBarIcon@2x.png'
-install_resource 'GHSidebarNav/GHSidebarNav/Images/searchTextBG.png'
-install_resource 'GHSidebarNav/GHSidebarNav/Images/user.png'

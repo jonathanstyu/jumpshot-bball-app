@@ -1,7 +1,9 @@
 class StatViewController < UIViewController
+  # Right side view controller 
+  
   def viewDidLoad
     super
-    # Do any additional setup after loading the view.
+    view.backgroundColor = "noisy_net.png".uicolor
   end
 
   def viewDidUnload

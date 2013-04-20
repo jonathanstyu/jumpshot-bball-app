@@ -1,6 +1,9 @@
 class SettingsViewController < UIViewController
+  # The right side panel view
+  
   def viewDidLoad
     super
+    view.backgroundColor = "noisy_net.png".uicolor
         
   end
 
