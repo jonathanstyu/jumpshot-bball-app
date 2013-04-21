@@ -21,7 +21,7 @@ class StatViewController < UIViewController
   end
   
   def tableView(tableView, numberOfRowsInSection: section)
-    return 1 
+    return game1.players.count
   end
   
   def tableView(tableView, cellForRowAtIndexPath: indexPath)
@@ -31,7 +31,7 @@ class StatViewController < UIViewController
     end
     
     cell.backgroundColor = :clear.uicolor
-    
+    cell.textLabel.text = game1.player.name
     cell
   end
 

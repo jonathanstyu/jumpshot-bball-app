@@ -6,6 +6,13 @@ class AddGameViewController < UIViewController
     self.title = "Add Game"
     view.backgroundColor = UIColor.whiteColor
     
+    @add = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+    @add.frame = [[0,0],[100,100]]
+    @add.setTitle("Add",forState:UIControlStateNormal)
+    @add.sizeToFit
+    @add.addTarget(self, action: "addGame", forControlEvents: UIControlEventTouchUpInside)
+    view << @add 
+    
   end
 
   def viewDidUnload
@@ -16,4 +23,11 @@ class AddGameViewController < UIViewController
   def shouldAutorotateToInterfaceOrientation(interfaceOrientation)
     interfaceOrientation == UIInterfaceOrientationPortrait
   end
+  
+  def addGame
+    game1 = Game.create(:team1 => "The Pigeons", :team2 => "The Cats")
+    game1.players.create(:player_name => "Jenny", :player_name => "Libby")
+    puts Game.first.team2
+  end
+  
 end
