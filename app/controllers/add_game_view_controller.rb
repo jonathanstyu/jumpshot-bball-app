@@ -26,8 +26,9 @@ class AddGameViewController < UIViewController
   
   def addGame
     game1 = Game.create(:team1 => "The Pigeons", :team2 => "The Cats")
-    game1.players.create(:player_name => "Jenny", :player_name => "Libby")
-    puts Game.first.team2
+    game1.players.create(:player_name => "Jenny")
+    game1.players.create(:player_name => "Libby")
+    puts game1.players.count
   end
   
 end

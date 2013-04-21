@@ -16,12 +16,13 @@ class StatViewController < UIViewController
     label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin
     view << label 
     
-    table = UITableView.alloc.initWithFrame label_frame.below(10).taller(100)
+    table = UITableView.alloc.initWithFrame label_frame.below(10).width(self.sidePanelController.rightVisibleWidth).height(view.bounds.height - label_frame.height)
+    table.dataSource = self 
     view << table
   end
   
   def tableView(tableView, numberOfRowsInSection: section)
-    return game1.players.count
+    return Game.first.players.count
   end
   
   def tableView(tableView, cellForRowAtIndexPath: indexPath)
@@ -31,7 +32,7 @@ class StatViewController < UIViewController
     end
     
     cell.backgroundColor = :clear.uicolor
-    cell.textLabel.text = game1.player.name
+    cell.textLabel.text = "23"
     cell
   end
 
