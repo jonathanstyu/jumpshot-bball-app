@@ -1,8 +1,8 @@
-class Game
+class Team
   include MotionModel::Model
   include MotionModel::ArrayModelAdapter
   
-  columns :team1 => :string, :team2 => :string
+  columns :team_name => :string, :number_of_players => :int
   has_many :players
   
 end

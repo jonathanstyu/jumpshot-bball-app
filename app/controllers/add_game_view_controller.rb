@@ -4,14 +4,15 @@ class AddGameViewController < UIViewController
   def viewDidLoad
     super
     self.title = "Add Game"
-    view.backgroundColor = UIColor.whiteColor
+    view.backgroundColor = "noise_lines.png".uicolor
     
-    @add = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-    @add.frame = [[0,0],[100,100]]
-    @add.setTitle("Add",forState:UIControlStateNormal)
-    @add.sizeToFit
-    @add.addTarget(self, action: "addGame", forControlEvents: UIControlEventTouchUpInside)
-    view << @add 
+    # @add = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+    # @add.frame = [[0,0],[100,100]]
+    # @add.setTitle("Add",forState:UIControlStateNormal)
+    # @add.sizeToFit
+    # @add.addTarget(self, action: "addGame", forControlEvents: UIControlEventTouchUpInside)
+    # view << @add 
+    addGame 
     
   end
 
@@ -25,10 +26,14 @@ class AddGameViewController < UIViewController
   end
   
   def addGame
-    game1 = Game.create(:team1 => "The Pigeons", :team2 => "The Cats")
-    game1.players.create(:player_name => "Jenny")
-    game1.players.create(:player_name => "Libby")
-    puts game1.players.count
+    team1 = Team.create(:team_name => "Flying Meat", :number_of_players => 3)
+    team2 = Team.create(:team_name => "Falling Hippos", :number_of_players => 3)
+    team1.players.create(:player_name => "Jon")
+    team1.players.create(:player_name => "Matt")
+    team1.players.create(:player_name => "Paul")
+    team2.players.create(:player_name => "Pharaoh")
+    team2.players.create(:player_name => "Zorro")
+    team2.players.create(:player_name => "Carl")
   end
   
 end
