@@ -16,11 +16,12 @@ class StatViewController < UIViewController
     label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin
     view << label 
 
-    table = UITableView.alloc.initWithFrame label_frame.below(20).thinner(20).height(view.bounds.height - label_frame.height - 50) 
+    table = UITableView.alloc.initWithFrame label_frame.below(20).thinner(10).height(view.bounds.height - label_frame.height - 30) 
     # label_frame.below(20).width(self.sidePanelController.rightVisibleWidth-25).height(100)
     table.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin
     table.backgroundColor = :clear.uicolor
     table.separatorColor = 0x667c83.uicolor
+    table.rowHeight = 65
     table.dataSource = self 
     view << table
     
@@ -49,6 +50,10 @@ class StatViewController < UIViewController
   
   # def tableView(tableView, numberOfSectionsInTableView: tableView)
   #   return 2
+  # end
+  
+  # def tableView(tableView, heightForRowAtIndexPath: indexPath)
+  #   return 200.0
   # end
 
   def viewDidUnload
