@@ -88,7 +88,7 @@ class PlayerCell < UITableViewCell
     @position_label.frame = name_frame.below
     @points_label.frame = points_frame
     @rebounds_label.frame = @points_label.frame.beside 
-    @assists_label.frame = @rebounds_label.frame.beside.right(7)
+    @assists_label.frame = @rebounds_label.frame.beside.right(4)
     @info_label.frame = @points_label.frame.below(4)
     @infoR_label.frame = @rebounds_label.frame.below(4)
     @infoA_label.frame = @assists_label.frame.below(4)

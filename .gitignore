@@ -14,3 +14,7 @@ nbproject
 .eprj
 .sass-cache
 .idea
+
+*.000
+
+*.001
