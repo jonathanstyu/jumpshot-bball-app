@@ -44,9 +44,25 @@ class AddGameViewController < UIViewController
       playerButton = UIButton.buttonWithType(UIButtonTypeRoundedRect)
       playerButton.frame = [[20, 100*x],[right_frame.width * 0.6,50]]
       playerButton.setTitle("#{roster[x].player_name}", forState: UIControlStateNormal)
-      playerButton.addTarget(self, action: "nothing", forControlEvents: UIControlEventTouchUpInside)
+      playerButton.addTarget(self, action: "player_button_touched:", forControlEvents: UIControlEventTouchUpInside)
+      playerButton.tag = x+1
       right_scroll << playerButton
     end
+    
+    # Adds the function buttons to track points and scored
+    actions = ["Made FG", "Missed FG", "Rebound", "Assist"]
+    @buttons = []
+    
+    actions.each_index do |x|
+      actionButton = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+      actionButton.frame = [[20, 100*x],[left_frame.width * 0.6,50]]
+      actionButton.setTitle("#{actions[x]}", forState: UIControlStateNormal)
+      actionButton.addTarget(self, action: "add_#{actions[x].downcase.tr(' ', '_')}", forControlEvents: UIControlEventTouchUpInside)
+      @buttons << actionButton
+    end
+    
+    @buttons.each {|button| button.enabled = false
+       left_scroll << button }
     
   end
 
@@ -68,6 +84,11 @@ class AddGameViewController < UIViewController
     team2.players.create(:player_name => "Pharaoh")
     team2.players.create(:player_name => "Zorro")
     team2.players.create(:player_name => "Carl")
+  end
+  
+  def player_button_touched(sender)
+    puts sender.tag
+    @buttons.each {|button| button.enabled = true }
   end
   
 end
