@@ -2,3 +2,4 @@
 #define __COCOA_PODS
 
 #define __POD_JASidePanels
+#define __POD_SVPullToRefresh

@@ -23,7 +23,6 @@ class StatViewController < UIViewController
     table.separatorColor = 0x667c83.uicolor
     table.rowHeight = 65
     table.dataSource = self 
-    table.tableView.reloadData
     view << table
     
     @players = Player.all
