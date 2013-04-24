@@ -61,7 +61,7 @@ class AddGameViewController < UIViewController
       
     roster.each_index do |x|
       playerButton = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-      playerButton.frame = [[20, 100*x],[right_frame.width * 0.6,50]]
+      playerButton.frame = [[20, 75*x],[right_frame.width * 0.6,50]]
       playerButton.setTitle("#{roster[x].player_name}", forState: UIControlStateNormal)
       playerButton.addTarget(self, action: "player_button_touched:", forControlEvents: UIControlEventTouchUpInside)
       playerButton.tag = x
@@ -71,7 +71,6 @@ class AddGameViewController < UIViewController
     # Adds the function buttons to track points and scored
     actions = ["Made FG", "Missed FG", "Rebound", "Assist"]
     @buttons = []
-    @data_tag = {}
     
     # actions.each_index do |x|
     #   actionButton = UIButton.buttonWithType(UIButtonTypeRoundedRect)
@@ -89,9 +88,10 @@ class AddGameViewController < UIViewController
     made_fg_button.addTarget(self, action: "action_button_touched:", forControlEvents: UIControlEventTouchUpInside)
     @buttons << made_fg_button 
     
-    @buttons.each {|button| button.enabled = false
+    @buttons.each {|button| 
        left_scroll << button }
     
+    reset_menu
   end
 
   def viewDidUnload
@@ -133,8 +133,14 @@ class AddGameViewController < UIViewController
     if @data_tag[:action] == 1
       accessed_player.points += 2
     end
-    @data_tag.clear
     puts @data_tag
+    reset_menu
+  end
+  
+  def reset_menu
+    @data_tag = {}
+    @data_tag.clear
+    @buttons.each {|button| button.enabled = false }
   end
   
   def tally_points(team_name)

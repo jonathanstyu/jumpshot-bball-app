@@ -12,6 +12,7 @@ Motion::Project::App.setup do |app|
   app.name = 'BBall'
   app.prerendered_icon = true
   app.pods do 
-    # pod 'JASidePanels'
+    pod 'JASidePanels'
+    pod 'SVPullToRefresh'
   end
 end
