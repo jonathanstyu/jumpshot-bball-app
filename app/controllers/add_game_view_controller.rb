@@ -25,14 +25,14 @@ class AddGameViewController < UIViewController
     team1_name.font = :bold.uifont(12)
     view << team1_name
     
-    team1_label = UILabel.new
-    team1_label.frame = team1_name.frame.below.height(60)
-    team1_label.text = "#{tally_points('Flying Meat')}"
-    team1_label.backgroundColor = :black.uicolor
-    team1_label.textAlignment = :center.uialignment
-    team1_label.textColor = :white.uicolor
-    team1_label.font = :bold.uifont(40)
-    view << team1_label
+    @team1_label = UILabel.new
+    @team1_label.frame = team1_name.frame.below.height(60)
+    @team1_label.text = "0"
+    @team1_label.backgroundColor = :black.uicolor
+    @team1_label.textAlignment = :center.uialignment
+    @team1_label.textColor = :white.uicolor
+    @team1_label.font = :bold.uifont(40)
+    view << @team1_label
     
     team2_name = UILabel.new
     team2_name.frame = team1_name.frame.beside
@@ -43,18 +43,18 @@ class AddGameViewController < UIViewController
     team2_name.font = team1_name.font
     view << team2_name
     
-    team2_label = UILabel.new
-    team2_label.frame = team1_label.frame.beside
-    team2_label.text = "#{tally_points('Falling Hippos')}"
-    team2_label.backgroundColor = team1_label.backgroundColor
-    team2_label.textAlignment = team1_label.textAlignment
-    team2_label.textColor = team1_label.textColor
-    team2_label.font = team1_label.font
-    view << team2_label
+    @team2_label = UILabel.new
+    @team2_label.frame = @team1_label.frame.beside
+    @team2_label.text = "0"
+    @team2_label.backgroundColor = @team1_label.backgroundColor
+    @team2_label.textAlignment = @team1_label.textAlignment
+    @team2_label.textColor = @team1_label.textColor
+    @team2_label.font = @team1_label.font
+    view << @team2_label
     
     # Panel for the action recording buttons 
     left_scroll = UIScrollView.new
-    left_scroll.frame = CGRect.make(x: 0, y: team1_label.frame.y + team1_label.frame.height, width: left_frame.width, height: view.bounds.height)
+    left_scroll.frame = CGRect.make(x: 0, y: @team1_label.frame.y + @team1_label.frame.height, width: left_frame.width, height: view.bounds.height)
     left_scroll.backgroundColor = "subtle_dots.png".uicolor
     left_scroll.contentSize = CGSizeMake(left_frame.width, left_frame.height * 2)
     left_scroll.pagingEnabled = true
@@ -80,7 +80,7 @@ class AddGameViewController < UIViewController
       
     roster.each_index do |x|
       playerButton = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-      playerButton.frame = [[20, 75*x],[right_frame.width * 0.6,50]]
+      playerButton.frame = [[20, 50*x],[right_frame.width * 0.6,40]]
       playerButton.setTitle("#{roster[x].player_name}", forState: UIControlStateNormal)
       playerButton.addTarget(self, action: "player_button_touched:", forControlEvents: UIControlEventTouchUpInside)
       playerButton.tag = x
@@ -92,7 +92,7 @@ class AddGameViewController < UIViewController
     @buttons = []
     
     made_fg_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-    made_fg_button.frame = CGRect.make(x: 10, y: 25, width: (left_frame.width * 0.7), height: 30)
+    made_fg_button.frame = CGRect.make(x: 20, y: 25, width: (left_frame.width * 0.8), height: 30)
     made_fg_button.font = "Avenir-Black".uifont(18.0)
     made_fg_button.setTitle("Made FG", forState: UIControlStateNormal)
     made_fg_button.tag = 1
@@ -178,15 +178,19 @@ class AddGameViewController < UIViewController
     elsif @data_tag[:action] == 5
       accessed_player.points += 3
     end
+    @team1_label.text = "#{tally_points("Flying Meat")}"
+    @team2_label.text = "#{tally_points("Falling Hippos")}"
     reset_menu
   end
   
+  # Clears up the menu to prepare for the next number 
   def reset_menu
     @data_tag = {}
     @data_tag.clear
     @buttons.each {|button| button.enabled = false }
   end
   
+  # Tallies up all the points on a team
   def tally_points(team_name)
     team = Team.where(:team_name).eq(team_name).first
     total = 0
