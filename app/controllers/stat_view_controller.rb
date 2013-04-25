@@ -5,7 +5,7 @@ class StatViewController < UIViewController
     super
     view.backgroundColor = "noisy_net.png".uicolor
     
-    label_frame = CGRect.make(x: view.bounds.width - self.sidePanelController.rightVisibleWidth, y: 10, width: self.sidePanelController.rightVisibleWidth, height: 30)
+    label_frame = CGRect.make(x: 0, y: 10, width: self.sidePanelController.leftVisibleWidth, height: 30)
     
     label = UILabel.alloc.initWithFrame label_frame
     label.font = UIFont.boldSystemFontOfSize(20)
@@ -17,18 +17,18 @@ class StatViewController < UIViewController
     view << label 
     @players = Player.all
 
-    table = UITableView.alloc.initWithFrame label.frame.below.height(view.bounds.height)
+    @table = UITableView.alloc.initWithFrame label.frame.below.height(view.bounds.height)
     # table.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin
-    table.backgroundColor = :clear.uicolor
-    table.separatorColor = 0x667c83.uicolor
-    table.rowHeight = 65
-    table.dataSource = self 
-    table.addPullToRefreshWithActionHandler(
+    @table.backgroundColor = :clear.uicolor
+    @table.separatorColor = 0x667c83.uicolor
+    @table.rowHeight = 65
+    @table.dataSource = self 
+    @table.addPullToRefreshWithActionHandler(
     Proc.new do 
       loadData
     end
     )
-    view << table    
+    view << @table 
   end
   
   def tableView(tableView, numberOfRowsInSection: section)
@@ -60,11 +60,11 @@ class StatViewController < UIViewController
     interfaceOrientation == UIInterfaceOrientationPortrait
   end
   
-  # def loadData
-  #   Dispatch::Queue.main.after(3){
-  #     table.reloadData
-  #     tableView.pullToRefreshView.stopAnimating
-  #   }
-  # end
+  def loadData
+    Dispatch::Queue.main.after(2){
+      @table.reloadData
+      @table.pullToRefreshView.stopAnimating
+    }
+  end
   
 end

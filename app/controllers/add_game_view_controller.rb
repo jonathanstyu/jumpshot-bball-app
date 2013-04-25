@@ -3,7 +3,7 @@ class AddGameViewController < UIViewController
   
   def viewDidLoad
     super
-    self.title = "Add Game"
+    self.title = "Game Record"
     view.backgroundColor = :white.uicolor
     # @add = UIButton.buttonWithType(UIButtonTypeRoundedRect)
     # @add.frame = [[0,0],[100,100]]
@@ -16,14 +16,32 @@ class AddGameViewController < UIViewController
     left_frame = CGRect.make(x: 0, y: 0, width: view.bounds.width * 0.6, height: view.bounds.height)
     right_frame = CGRect.make(x: left_frame.width, y: 0, width: view.bounds.width * 0.4, height: view.bounds.height)
     
+    team1_name = UILabel.new
+    team1_name.frame = CGRect.make(x: 0, y: 0, width: left_frame.width / 2, height: 25)
+    team1_name.text = "Team 1"
+    team1_name.backgroundColor = "noise_lines.png".uicolor
+    team1_name.textAlignment = :center.uialignment
+    team1_name.textColor = :black.uicolor
+    team1_name.font = :bold.uifont(12)
+    view << team1_name
+    
     team1_label = UILabel.new
-    team1_label.frame = CGRect.make(x: 0, y: 0, width: left_frame.width / 2, height: 45)
+    team1_label.frame = team1_name.frame.below.height(60)
     team1_label.text = "#{tally_points('Flying Meat')}"
-    team1_label.backgroundColor = "noise_lines.png".uicolor
+    team1_label.backgroundColor = :black.uicolor
     team1_label.textAlignment = :center.uialignment
-    team1_label.textColor = 0x417a71.uicolor
-    team1_label.font = :bold.uifont(27)
+    team1_label.textColor = :white.uicolor
+    team1_label.font = :bold.uifont(40)
     view << team1_label
+    
+    team2_name = UILabel.new
+    team2_name.frame = team1_name.frame.beside
+    team2_name.text = "Team 2"
+    team2_name.backgroundColor = team1_name.backgroundColor
+    team2_name.textAlignment = team1_name.textAlignment
+    team2_name.textColor = team1_name.textColor
+    team2_name.font = team1_name.font
+    view << team2_name
     
     team2_label = UILabel.new
     team2_label.frame = team1_label.frame.beside
@@ -34,9 +52,10 @@ class AddGameViewController < UIViewController
     team2_label.font = team1_label.font
     view << team2_label
     
+    # Panel for the action recording buttons 
     left_scroll = UIScrollView.new
     left_scroll.frame = CGRect.make(x: 0, y: team1_label.frame.y + team1_label.frame.height, width: left_frame.width, height: view.bounds.height)
-    left_scroll.backgroundColor = "noise_lines.png".uicolor
+    left_scroll.backgroundColor = "subtle_dots.png".uicolor
     left_scroll.contentSize = CGSizeMake(left_frame.width, left_frame.height * 2)
     left_scroll.pagingEnabled = true
     
@@ -72,21 +91,45 @@ class AddGameViewController < UIViewController
     actions = ["Made FG", "Missed FG", "Rebound", "Assist"]
     @buttons = []
     
-    # actions.each_index do |x|
-    #   actionButton = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-    #   actionButton.frame = [[20, 100*x],[left_frame.width * 0.6,50]]
-    #   actionButton.setTitle("#{actions[x]}", forState: UIControlStateNormal)
-    #   actionButton.addTarget(self, action: "add_#{actions[x].downcase.tr(' ', '_')}", forControlEvents: UIControlEventTouchUpInside)
-    #   @buttons << actionButton
-    # end
-    # 
-    
     made_fg_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-    made_fg_button.frame = CGRect.make(x: 0, y: 0, width: left_frame.width/2, height: 100)
+    made_fg_button.frame = CGRect.make(x: 10, y: 25, width: (left_frame.width * 0.7), height: 30)
+    made_fg_button.font = "Avenir-Black".uifont(18.0)
     made_fg_button.setTitle("Made FG", forState: UIControlStateNormal)
     made_fg_button.tag = 1
     made_fg_button.addTarget(self, action: "action_button_touched:", forControlEvents: UIControlEventTouchUpInside)
     @buttons << made_fg_button 
+    
+    missed_fg_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+    missed_fg_button.frame = made_fg_button.frame.below(20)
+    missed_fg_button.font = "Avenir-Black".uifont(18.0)
+    missed_fg_button.setTitle("Missed FG", forState: UIControlStateNormal)
+    missed_fg_button.tag = 2
+    missed_fg_button.addTarget(self, action: "action_button_touched:", forControlEvents: UIControlEventTouchUpInside)
+    @buttons << missed_fg_button 
+    
+    made_3fg_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+    made_3fg_button.frame = missed_fg_button.frame.below(20)
+    made_3fg_button.font = "Avenir-Black".uifont(18.0)
+    made_3fg_button.setTitle("Made 3FG", forState: UIControlStateNormal)
+    made_3fg_button.tag = 5
+    made_3fg_button.addTarget(self, action: "action_button_touched:", forControlEvents: UIControlEventTouchUpInside)
+    @buttons << made_3fg_button 
+    
+    rebound_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+    rebound_button.frame = made_3fg_button.frame.below(20)
+    rebound_button.font = "Avenir-Black".uifont(18.0)
+    rebound_button.setTitle("Rebound", forState: UIControlStateNormal)
+    rebound_button.tag = 3
+    rebound_button.addTarget(self, action: "action_button_touched:", forControlEvents: UIControlEventTouchUpInside)
+    @buttons << rebound_button
+    
+    assist_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+    assist_button.frame = rebound_button.frame.below(20)
+    assist_button.font = "Avenir-Black".uifont(18.0)
+    assist_button.setTitle("Assist", forState: UIControlStateNormal)
+    assist_button.tag = 4
+    assist_button.addTarget(self, action: "action_button_touched:", forControlEvents: UIControlEventTouchUpInside)
+    @buttons << assist_button
     
     @buttons.each {|button| 
        left_scroll << button }
@@ -116,24 +159,25 @@ class AddGameViewController < UIViewController
   
   def player_button_touched(sender)
     @data_tag[:player] = sender.tag
-    puts @data_tag[:player]
     @buttons.each {|button| button.enabled = true }
-    puts @data_tag
   end
   
   def action_button_touched(sender)
-    puts sender.tag
     @data_tag[:action] = sender.tag
     process_data
-    puts @data_tag
   end
   
   def process_data
     accessed_player = Player.all[@data_tag[:player]]
     if @data_tag[:action] == 1
       accessed_player.points += 2
+    elsif @data_tag[:action] == 3
+      accessed_player.rebounds += 1
+    elsif @data_tag[:action] == 4
+      accessed_player.assists += 1 
+    elsif @data_tag[:action] == 5
+      accessed_player.points += 3
     end
-    puts @data_tag
     reset_menu
   end
   
