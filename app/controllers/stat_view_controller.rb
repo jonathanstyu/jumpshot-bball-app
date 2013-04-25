@@ -1,5 +1,5 @@
 class StatViewController < UIViewController
-  # Right side view controller 
+  # left side view controller 
   
   def viewDidLoad
     super
@@ -15,17 +15,20 @@ class StatViewController < UIViewController
     label.text = "Stat View"
     label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin
     view << label 
+    @players = Player.all
 
-    table = UITableView.alloc.initWithFrame label_frame.below(20).thinner(10).height(view.bounds.height - label_frame.height - 30) 
-    # label_frame.below(20).width(self.sidePanelController.rightVisibleWidth-25).height(100)
-    table.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin
+    table = UITableView.alloc.initWithFrame label.frame.below.height(view.bounds.height)
+    # table.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin
     table.backgroundColor = :clear.uicolor
     table.separatorColor = 0x667c83.uicolor
     table.rowHeight = 65
     table.dataSource = self 
-    view << table
-    
-    @players = Player.all
+    table.addPullToRefreshWithActionHandler(
+    Proc.new do 
+      loadData
+    end
+    )
+    view << table    
   end
   
   def tableView(tableView, numberOfRowsInSection: section)
@@ -47,14 +50,6 @@ class StatViewController < UIViewController
     cell.assists_label.text = @players[indexPath.row].assists.to_s
     cell
   end
-  
-  # def tableView(tableView, numberOfSectionsInTableView: tableView)
-  #   return 2
-  # end
-  
-  # def tableView(tableView, heightForRowAtIndexPath: indexPath)
-  #   return 200.0
-  # end
 
   def viewDidUnload
     super
@@ -64,4 +59,12 @@ class StatViewController < UIViewController
   def shouldAutorotateToInterfaceOrientation(interfaceOrientation)
     interfaceOrientation == UIInterfaceOrientationPortrait
   end
+  
+  # def loadData
+  #   Dispatch::Queue.main.after(3){
+  #     table.reloadData
+  #     tableView.pullToRefreshView.stopAnimating
+  #   }
+  # end
+  
 end

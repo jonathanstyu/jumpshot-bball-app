@@ -3,8 +3,8 @@ class SettingsViewController < UIViewController
   
   def viewDidLoad
     super
-    view.backgroundColor = "noisy_net.png".uicolor
-        
+    view.backgroundColor = "noisy_net.png".uicolor        
+    
   end
 
   def viewDidUnload

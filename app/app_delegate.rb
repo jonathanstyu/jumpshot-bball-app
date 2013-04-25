@@ -5,9 +5,8 @@ class AppDelegate
     # Handles the different behaviors of the sliding panels 
     viewController = JASidePanelController.alloc.init
     viewController.shouldDelegateAutorotateToVisiblePanel = false
-    viewController.leftPanel = SettingsViewController.alloc.init
+    viewController.leftPanel = StatViewController.alloc.init
     viewController.centerPanel = UINavigationController.alloc.initWithRootViewController(AddGameViewController.alloc.init)
-    viewController.rightPanel = StatViewController.alloc.init
     @window.rootViewController = viewController
     @window.makeKeyAndVisible
     
