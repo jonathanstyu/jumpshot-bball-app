@@ -1,16 +1,14 @@
 class AddGameViewController < UIViewController
+  include SugarCube::Modal 
   # The center view of the app
   
   def viewDidLoad
     super
     self.title = "Game Record"
     view.backgroundColor = :white.uicolor
-    # @add = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-    # @add.frame = [[0,0],[100,100]]
-    # @add.setTitle("Add",forState:UIControlStateNormal)
-    # @add.sizeToFit
-    # @add.addTarget(self, action: "addGame", forControlEvents: UIControlEventTouchUpInside)
-    # view << @add 
+    
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem.titled('Add') {open_add_player}
+  
     addGame 
     
     left_frame = CGRect.make(x: 0, y: 0, width: view.bounds.width * 0.6, height: view.bounds.height)
@@ -92,7 +90,7 @@ class AddGameViewController < UIViewController
     @buttons = []
     
     made_fg_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-    made_fg_button.frame = CGRect.make(x: 20, y: 25, width: (left_frame.width * 0.8), height: 30)
+    made_fg_button.frame = CGRect.make(x: 20, y: 25, width: (left_frame.width * 0.8), height: 35)
     made_fg_button.font = "Avenir-Black".uifont(18.0)
     made_fg_button.setTitle("Made FG", forState: UIControlStateNormal)
     made_fg_button.tag = 1
@@ -167,6 +165,7 @@ class AddGameViewController < UIViewController
     process_data
   end
   
+  # Resets the menu, updates the labels 
   def process_data
     accessed_player = Player.all[@data_tag[:player]]
     if @data_tag[:action] == 1
@@ -198,6 +197,11 @@ class AddGameViewController < UIViewController
       total += player.points
     end
     return total
+  end
+  
+  def open_add_player
+    player_panel = AddPlayerViewController.new
+    present_modal(UINavigationController.alloc.initWithRootViewController(player_panel))
   end
   
 end

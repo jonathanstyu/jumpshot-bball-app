@@ -8,11 +8,11 @@ class StatViewController < UIViewController
     label_frame = CGRect.make(x: 0, y: 10, width: self.sidePanelController.leftVisibleWidth, height: 30)
     
     label = UILabel.alloc.initWithFrame label_frame
-    label.font = UIFont.boldSystemFontOfSize(20)
+    label.font = UIFont.boldSystemFontOfSize(18)
     label.backgroundColor = :clear.uicolor
     label.textAlignment = :center.uialignment 
     label.textColor = :white.uicolor 
-    label.text = "Stat View"
+    label.text = "Quick Stat View"
     label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin
     view << label 
     @players = Player.all
