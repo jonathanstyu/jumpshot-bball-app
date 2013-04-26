@@ -15,40 +15,20 @@ class StatViewController < UIViewController
     label.text = "Quick Stat View"
     label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin
     view << label 
-    @players = Player.all
 
-    @table = UITableView.alloc.initWithFrame label.frame.below.height(view.bounds.height)
+    @table = UITableView.alloc.initWithFrame label.frame.below.height(view.bounds.height - 60)
     # table.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin
     @table.backgroundColor = :clear.uicolor
     @table.separatorColor = 0x667c83.uicolor
     @table.rowHeight = 65
-    @table.dataSource = self 
+    @table_delegate = QStatTableDelegate.new
+    @table.delegate = @table.dataSource =  @table_delegate
     @table.addPullToRefreshWithActionHandler(
     Proc.new do 
       loadData
     end
     )
     view << @table 
-  end
-  
-  def tableView(tableView, numberOfRowsInSection: section)
-    return @players.count
-  end
-  
-  def tableView(tableView, cellForRowAtIndexPath: indexPath)
-    @reuseIdentifier ||= "CELL_IDENTIFIER"
-    cell = tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier) || begin
-      cell = PlayerCell.alloc.initWithStyle(UITableViewCellStyleDefault, reuseIdentifier:@reuseIdentifier)
-      cell.createLabels
-      cell
-    end
-  
-    cell.name_label.text = @players[indexPath.row].player_name
-    cell.position_label.text = @players[indexPath.row].position
-    cell.points_label.text = @players[indexPath.row].points.to_s
-    cell.rebounds_label.text = @players[indexPath.row].rebounds.to_s
-    cell.assists_label.text = @players[indexPath.row].assists.to_s
-    cell
   end
 
   def viewDidUnload

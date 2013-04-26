@@ -10,7 +10,7 @@ Bundler.require
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
-  app.name = 'BBall'
+  app.name = 'HardWood'
   app.prerendered_icon = true
   app.pods do 
     # pod 'JASidePanels'

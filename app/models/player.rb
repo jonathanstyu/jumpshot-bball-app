@@ -4,6 +4,7 @@ class Player
   
   columns :player_name => :string, 
   :position => {:type => :string, :default => "Guard"}, 
+  :team => :int, 
   :points => {:type => :int, :default => 0}, 
   :rebounds => {:type => :int, :default => 0}, 
   :assists => {:type => :int, :default => 0}, 
@@ -11,7 +12,5 @@ class Player
   :blocks => {:type => :int, :default => 0}, 
   :made_field_goals => {:type => :int, :default => 0}, 
   :total_field_goals => {:type => :int, :default => 0}
-  
-  belongs_to :team
   
 end

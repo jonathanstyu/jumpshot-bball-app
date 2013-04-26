@@ -6,9 +6,7 @@ class AddGameViewController < UIViewController
     super
     self.title = "Game Record"
     view.backgroundColor = :black.uicolor
-  
-    addGame 
-    
+
     left_frame = CGRect.make(x: 0, y: 0, width: view.bounds.width * 0.6, height: view.bounds.height)
     right_frame = CGRect.make(x: left_frame.width, y: 0, width: view.bounds.width * 0.4, height: view.bounds.height)
     
@@ -69,33 +67,21 @@ class AddGameViewController < UIViewController
     view << button_tray
     
     add_player_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-    add_player_button.frame = CGRect.make(x: 0, y:0, width: button_tray.frame.width/2, height: 45)
-    add_player_button.setBackgroundImage("player_add.png".uiimage, forState: UIControlStateNormal)
+    add_player_button.frame = CGRect.make(x: 0, y:0, width: button_tray.frame.width, height: 45)
+    add_player_button.setBackgroundImage("add_player.png".uiimage, forState: UIControlStateNormal)
     add_player_button.addTarget(self, action: "open_add_player", forControlEvents: UIControlEventTouchUpInside)
-    # add_player_button.backgroundColor = :clear.uicolor
     button_tray << add_player_button
-    
-    right_scroll = UIScrollView.alloc.initWithFrame button_tray.frame.below.height(view.bounds.height)
-    right_scroll.backgroundColor = :clear.uicolor
-    right_scroll.contentSize = CGSizeMake(right_frame.width, right_frame.height * 2)
   
     view << left_scroll
-    view << right_scroll
     
-    # adds the player buttons 
-    roster = Player.all 
-      
-    roster.each_index do |x|
-      playerButton = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-      playerButton.frame = [[20, 50*x],[right_frame.width * 0.6,40]]
-      playerButton.setTitle("#{roster[x].player_name}", forState: UIControlStateNormal)
-      playerButton.addTarget(self, action: "player_button_touched:", forControlEvents: UIControlEventTouchUpInside)
-      playerButton.tag = x
-      right_scroll << playerButton
-    end
+    @player_table = UITableView.new
+    @player_table.frame = CGRect.make(x: left_frame.width, y: 85, width: right_frame.width, height: view.bounds.height - 50)
+    @player_table.backgroundColor = :clear.uicolor
+    @player_table.separatorColor = :white.uicolor
+    @player_table.dataSource = @player_table.delegate = self 
+    view << @player_table
     
     # Adds the function buttons to track points and scored
-    actions = ["Made FG", "Missed FG", "Rebound", "Assist"]
     @buttons = []
     
     made_fg_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
@@ -103,7 +89,7 @@ class AddGameViewController < UIViewController
     made_fg_button.font = "Avenir-Black".uifont(18.0)
     made_fg_button.setTitle("Made FG", forState: UIControlStateNormal)
     made_fg_button.tag = 1
-    made_fg_button.addTarget(self, action: "action_button_touched:", forControlEvents: UIControlEventTouchUpInside)
+    made_fg_button.addTarget(self, action: "process_data:", forControlEvents: UIControlEventTouchUpInside)
     @buttons << made_fg_button 
     
     missed_fg_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
@@ -111,7 +97,7 @@ class AddGameViewController < UIViewController
     missed_fg_button.font = "Avenir-Black".uifont(18.0)
     missed_fg_button.setTitle("Missed FG", forState: UIControlStateNormal)
     missed_fg_button.tag = 2
-    missed_fg_button.addTarget(self, action: "action_button_touched:", forControlEvents: UIControlEventTouchUpInside)
+    missed_fg_button.addTarget(self, action: "process_data:", forControlEvents: UIControlEventTouchUpInside)
     @buttons << missed_fg_button 
     
     made_3fg_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
@@ -119,15 +105,23 @@ class AddGameViewController < UIViewController
     made_3fg_button.font = "Avenir-Black".uifont(18.0)
     made_3fg_button.setTitle("Made 3FG", forState: UIControlStateNormal)
     made_3fg_button.tag = 5
-    made_3fg_button.addTarget(self, action: "action_button_touched:", forControlEvents: UIControlEventTouchUpInside)
+    made_3fg_button.addTarget(self, action: "process_data:", forControlEvents: UIControlEventTouchUpInside)
     @buttons << made_3fg_button 
+
+    missed_3fg_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+    missed_3fg_button.frame = made_3fg_button.frame.below(20)
+    missed_3fg_button.font = "Avenir-Black".uifont(18.0)
+    missed_3fg_button.setTitle("Missed 3FG", forState: UIControlStateNormal)
+    missed_3fg_button.tag = 8
+    missed_3fg_button.addTarget(self, action: "process_data:", forControlEvents: UIControlEventTouchUpInside)
+    @buttons << missed_3fg_button
     
     rebound_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-    rebound_button.frame = made_3fg_button.frame.below(20)
+    rebound_button.frame = missed_3fg_button.frame.below(20)
     rebound_button.font = "Avenir-Black".uifont(18.0)
     rebound_button.setTitle("Rebound", forState: UIControlStateNormal)
     rebound_button.tag = 3
-    rebound_button.addTarget(self, action: "action_button_touched:", forControlEvents: UIControlEventTouchUpInside)
+    rebound_button.addTarget(self, action: "process_data:", forControlEvents: UIControlEventTouchUpInside)
     @buttons << rebound_button
     
     assist_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
@@ -135,7 +129,7 @@ class AddGameViewController < UIViewController
     assist_button.font = "Avenir-Black".uifont(18.0)
     assist_button.setTitle("Assist", forState: UIControlStateNormal)
     assist_button.tag = 4
-    assist_button.addTarget(self, action: "action_button_touched:", forControlEvents: UIControlEventTouchUpInside)
+    assist_button.addTarget(self, action: "process_data:", forControlEvents: UIControlEventTouchUpInside)
     @buttons << assist_button
     
     steal_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
@@ -143,7 +137,7 @@ class AddGameViewController < UIViewController
     steal_button.font = "Avenir-Black".uifont(18.0)
     steal_button.setTitle("Steal", forState: UIControlStateNormal)
     steal_button.tag = 6
-    steal_button.addTarget(self, action: "action_button_touched:", forControlEvents: UIControlEventTouchUpInside)
+    steal_button.addTarget(self, action: "process_data:", forControlEvents: UIControlEventTouchUpInside)
     @buttons << steal_button
     
     block_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
@@ -151,12 +145,23 @@ class AddGameViewController < UIViewController
     block_button.font = "Avenir-Black".uifont(18.0)
     block_button.setTitle("Block", forState: UIControlStateNormal)
     block_button.tag = 7
-    block_button.addTarget(self, action: "action_button_touched:", forControlEvents: UIControlEventTouchUpInside)
+    block_button.addTarget(self, action: "process_data:", forControlEvents: UIControlEventTouchUpInside)
     @buttons << block_button
     
+    # Adds the flat pill button that triggers the Full Stat View Controller 
+    full_stat_button = FlatPillButton.new 
+    full_stat_button.frame = block_button.frame.below(60).taller(10).wider(15).left(10)
+    full_stat_button.font = "Avenir-Black".uifont(20)
+    full_stat_button.setTitle("Full Box Score", forState: UIControlStateNormal)
+    full_stat_button.setTitleColor(0xff0000.uicolor, forState:UIControlStateNormal)
+    full_stat_button.addTarget(self, action: "open_stat_controller", forControlEvents: UIControlEventTouchUpInside)
+    left_scroll << full_stat_button
+    
+    # Adds the button to the scroll 
     @buttons.each {|button| 
        left_scroll << button }
     
+    # Kicks us off! 
     reset_menu
   end
 
@@ -164,71 +169,88 @@ class AddGameViewController < UIViewController
     super
     # Release any retained subviews of the main view.
   end
+  
+  def viewDidAppear(animated)
+    @player_table.reloadData
+  end
 
   def shouldAutorotateToInterfaceOrientation(interfaceOrientation)
     interfaceOrientation == UIInterfaceOrientationPortrait
   end
   
-  def addGame
-    team1 = Team.create(:team_name => "Flying Meat", :number_of_players => 3)
-    team2 = Team.create(:team_name => "Falling Hippos", :number_of_players => 3)
-    team1.players.create(:player_name => "Jon")
-    team1.players.create(:player_name => "Matt")
-    team1.players.create(:player_name => "Paul")
-    team2.players.create(:player_name => "Pharaoh")
-    team2.players.create(:player_name => "Zorro")
-    team2.players.create(:player_name => "Carl")
+  # For the player picking Table
+  def tableView(tableView, numberOfRowsInSection: section)
+    @players = Player.all
+    return @players.count
   end
   
-  def player_button_touched(sender)
-    @data_tag[:player] = sender.tag
+  def tableView(tableView, cellForRowAtIndexPath: indexPath)
+    @reuseIdentifier ||= "CELL_IDENTIFIER"
+    cell = tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier) || begin
+      cell = UITableViewCell.alloc.initWithStyle(UITableViewCellStyleDefault, reuseIdentifier:@reuseIdentifier)
+      cell
+    end
+    cell.text = @players[indexPath.row].player_name
+    cell.textColor = :white.uicolor
+    cell.font = "Avenir-Black".uifont(16)
+    cell
+  end
+  
+  def tableView(tableView, didSelectRowAtIndexPath: indexPath)
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    @data_tag[:player] = @players[indexPath.row]
     @buttons.each {|button| button.enabled = true }
   end
   
-  def action_button_touched(sender)
-    @data_tag[:action] = sender.tag
-    process_data
+  # Helper functions that help record games 
+  def addGame
+    Player.create(:player_name => "Jon", :team => 1)
+    Player.create(:player_name => "Paul", :team => 1)
+    Player.create(:player_name => "Rick", :team => 2)
+    Player.create(:player_name => "Carl", :team => 2)
   end
   
   # Resets the menu, updates the labels 
-  def process_data
-    accessed_player = Player.all[@data_tag[:player]]
-    if @data_tag[:action] == 1
+  def process_data(sender)
+    action_tag = sender.tag 
+    accessed_player = @data_tag[:player]
+    if action_tag == 1
       accessed_player.points += 2
       accessed_player.total_field_goals += 1
       accessed_player.made_field_goals += 1
-    elsif @data_tag[:action] == 3
+    elsif action_tag == 3
       accessed_player.rebounds += 1
-    elsif @data_tag[:action] == 4
+    elsif action_tag == 4
       accessed_player.assists += 1 
-    elsif @data_tag[:action] == 5
+    elsif action_tag == 5
       accessed_player.points += 3
       accessed_player.total_field_goals += 1
       accessed_player.made_field_goals += 1
-    elsif @data_tag[:action] == 2
+    elsif action_tag == 2
       accessed_player.total_field_goals += 1
-    elsif @data_tag[:action] == 6
+    elsif action_tag == 6
       accessed_player.steals += 1
-    elsif @data_tag[:action] == 7
+    elsif action_tag == 7
       accessed_player.blocks += 1
+    elsif action_tag == 8
+      accessed_player.total_field_goals += 1
     end
-    @team1_label.text = "#{tally_points("Flying Meat")}"
-    @team2_label.text = "#{tally_points("Falling Hippos")}"
+    @team1_label.text = "#{tally_points(1)}"
+    @team2_label.text = "#{tally_points(2)}"
     reset_menu
   end
   
   # Clears up the menu to prepare for the next number 
   def reset_menu
     @data_tag = {}
-    @data_tag.clear
     @buttons.each {|button| button.enabled = false }
   end
   
   # Tallies up all the points on a team
   def tally_points(team_name)
-    team = Team.where(:team_name).eq(team_name).first
+    players_on_team = Player.where(:team).eq(team_name).all
     total = 0
-    team.players.each do |player|
+    players_on_team.each do |player|
       total += player.points
     end
     return total
@@ -237,6 +259,11 @@ class AddGameViewController < UIViewController
   def open_add_player
     player_panel = AddPlayerViewController.new
     present_modal(UINavigationController.alloc.initWithRootViewController(player_panel))
+  end
+  
+  def open_stat_controller
+    stat_panel = FullStatViewController.new
+    present_modal(UINavigationController.alloc.initWithRootViewController(stat_panel))
   end
   
 end
