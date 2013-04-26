@@ -5,9 +5,7 @@ class AddGameViewController < UIViewController
   def viewDidLoad
     super
     self.title = "Game Record"
-    view.backgroundColor = :white.uicolor
-    
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem.titled('Add') {open_add_player}
+    view.backgroundColor = :black.uicolor
   
     addGame 
     
@@ -17,7 +15,7 @@ class AddGameViewController < UIViewController
     team1_name = UILabel.new
     team1_name.frame = CGRect.make(x: 0, y: 0, width: left_frame.width / 2, height: 25)
     team1_name.text = "Team 1"
-    team1_name.backgroundColor = "noise_lines.png".uicolor
+    team1_name.backgroundColor = "subtle_dots.png".uicolor
     team1_name.textAlignment = :center.uialignment
     team1_name.textColor = :black.uicolor
     team1_name.font = :bold.uifont(12)
@@ -54,19 +52,30 @@ class AddGameViewController < UIViewController
     left_scroll = UIScrollView.new
     left_scroll.frame = CGRect.make(x: 0, y: @team1_label.frame.y + @team1_label.frame.height, width: left_frame.width, height: view.bounds.height)
     left_scroll.backgroundColor = "subtle_dots.png".uicolor
-    left_scroll.contentSize = CGSizeMake(left_frame.width, left_frame.height * 2)
+    left_scroll.contentSize = CGSizeMake(left_frame.width, left_frame.height * 1.5)
     left_scroll.pagingEnabled = true
     
-    label = UILabel.alloc.initWithFrame right_frame.height(45)
-    label.font = UIFont.boldSystemFontOfSize(20)
-    label.backgroundColor = :clear.uicolor
-    label.textAlignment = :center.uialignment 
-    label.textColor = :black.uicolor 
-    label.text = "Players"
-    label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin
-    view << label
+    player_header = UILabel.new
+    player_header.frame = CGRect.make(x: left_frame.width, y: 0, width: right_frame.width, height: 25)  
+    player_header.backgroundColor = :black.uicolor
+    player_header.text = "Add Players"
+    player_header.textAlignment = :center.uialignment
+    player_header.textColor = :white.uicolor
+    player_header.font = :bold.uifont(12)
+    view << player_header
     
-    right_scroll = UIScrollView.alloc.initWithFrame label.frame.below.height(view.bounds.height)
+    button_tray = UIView.new
+    button_tray.frame = player_header.frame.below.height(60)
+    view << button_tray
+    
+    add_player_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+    add_player_button.frame = CGRect.make(x: 0, y:0, width: button_tray.frame.width/2, height: 45)
+    add_player_button.setBackgroundImage("player_add.png".uiimage, forState: UIControlStateNormal)
+    add_player_button.addTarget(self, action: "open_add_player", forControlEvents: UIControlEventTouchUpInside)
+    # add_player_button.backgroundColor = :clear.uicolor
+    button_tray << add_player_button
+    
+    right_scroll = UIScrollView.alloc.initWithFrame button_tray.frame.below.height(view.bounds.height)
     right_scroll.backgroundColor = :clear.uicolor
     right_scroll.contentSize = CGSizeMake(right_frame.width, right_frame.height * 2)
   
@@ -129,6 +138,22 @@ class AddGameViewController < UIViewController
     assist_button.addTarget(self, action: "action_button_touched:", forControlEvents: UIControlEventTouchUpInside)
     @buttons << assist_button
     
+    steal_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+    steal_button.frame = assist_button.frame.below(20)
+    steal_button.font = "Avenir-Black".uifont(18.0)
+    steal_button.setTitle("Steal", forState: UIControlStateNormal)
+    steal_button.tag = 6
+    steal_button.addTarget(self, action: "action_button_touched:", forControlEvents: UIControlEventTouchUpInside)
+    @buttons << steal_button
+    
+    block_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+    block_button.frame = steal_button.frame.below(20)
+    block_button.font = "Avenir-Black".uifont(18.0)
+    block_button.setTitle("Block", forState: UIControlStateNormal)
+    block_button.tag = 7
+    block_button.addTarget(self, action: "action_button_touched:", forControlEvents: UIControlEventTouchUpInside)
+    @buttons << block_button
+    
     @buttons.each {|button| 
        left_scroll << button }
     
@@ -170,12 +195,22 @@ class AddGameViewController < UIViewController
     accessed_player = Player.all[@data_tag[:player]]
     if @data_tag[:action] == 1
       accessed_player.points += 2
+      accessed_player.total_field_goals += 1
+      accessed_player.made_field_goals += 1
     elsif @data_tag[:action] == 3
       accessed_player.rebounds += 1
     elsif @data_tag[:action] == 4
       accessed_player.assists += 1 
     elsif @data_tag[:action] == 5
       accessed_player.points += 3
+      accessed_player.total_field_goals += 1
+      accessed_player.made_field_goals += 1
+    elsif @data_tag[:action] == 2
+      accessed_player.total_field_goals += 1
+    elsif @data_tag[:action] == 6
+      accessed_player.steals += 1
+    elsif @data_tag[:action] == 7
+      accessed_player.blocks += 1
     end
     @team1_label.text = "#{tally_points("Flying Meat")}"
     @team2_label.text = "#{tally_points("Falling Hippos")}"
