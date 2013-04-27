@@ -19,6 +19,10 @@ class AddPlayerViewController < UIViewController
     interfaceOrientation == UIInterfaceOrientationPortrait
   end
   
+  def shouldAutorotate
+    NO
+  end
+  
   def layout_views
     self.navigationItem.leftBarButtonItem = UIBarButtonItem.done { close_screen }
     

@@ -176,8 +176,8 @@ class AddGameViewController < UIViewController
        left_scroll << button }
   end
 
-  def shouldAutorotateToInterfaceOrientation(interfaceOrientation)
-    interfaceOrientation == UIInterfaceOrientationPortrait
+  def shouldAutorotate
+    NO
   end
   
   # For the player picking Table

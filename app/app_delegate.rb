@@ -14,4 +14,9 @@ class AppDelegate
     
     true
   end
+  
+  def shouldAutorotate
+    return NO 
+  end
+  
 end
