@@ -1,4 +1,5 @@
 class PlayerTableDelegate
+  include SugarCube::Modal 
   
   def tableView(tableView, numberOfRowsInSection: section)
     @players = Player.all
@@ -14,7 +15,15 @@ class PlayerTableDelegate
     selected_player = @players[indexPath.row]
     cell.text = selected_player.player_name  
     cell.detailTextLabel.text = "Team #{selected_player.team}"
+    # cell.AccessoryType = UITableViewCellAccessoryDetailDisclosureButton
     cell
   end
+  
+  # def tableView(tableView, accessoryButtonTappedForRowWithIndexPath: indexPath)
+  #   player_panel = PlayerEditViewController.new
+  #   present_modal(player_panel)
+  # end
+  
+  
   
 end

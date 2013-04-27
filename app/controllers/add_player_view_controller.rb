@@ -1,9 +1,26 @@
 class AddPlayerViewController < UIViewController
+  include SugarCube::Modal 
   def viewDidLoad
     super
     self.title = "Add Player"
     view.backgroundColor = "subtle_dots.png".uicolor
-    self.navigationItem.leftBarButtonItem = UIBarButtonItem.done {self.dismissViewControllerAnimated true, completion: nil}
+    
+    layout_views
+    reset_page
+    
+  end
+
+  def viewDidUnload
+    super
+    # Release any retained subviews of the main view.
+  end
+
+  def shouldAutorotateToInterfaceOrientation(interfaceOrientation)
+    interfaceOrientation == UIInterfaceOrientationPortrait
+  end
+  
+  def layout_views
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem.done { close_screen }
     
     team1_pick = UIButton.buttonWithType(UIButtonTypeRoundedRect)
     team1_pick.frame = CGRect.make(x: 10, y: 20, width: (view.bounds.width/2 - 20), height: 30)
@@ -41,17 +58,6 @@ class AddPlayerViewController < UIViewController
     @player_viewer.frame = CGRect.make(x: 0, y: (@add_player.frame.y + 55), width: view.bounds.width, height: view.bounds.height - 220)
     @player_viewer.delegate = @player_viewer.dataSource = @player_delegate
     view << @player_viewer
-    reset_page
-    
-  end
-
-  def viewDidUnload
-    super
-    # Release any retained subviews of the main view.
-  end
-
-  def shouldAutorotateToInterfaceOrientation(interfaceOrientation)
-    interfaceOrientation == UIInterfaceOrientationPortrait
   end
   
   def team_picked(sender)
@@ -60,14 +66,14 @@ class AddPlayerViewController < UIViewController
   end
   
   def save_player
-    if @name_text_field.text != nil && @name_text_field.text != ""
+    if @name_text_field.text != nil && @name_text_field.text != "" 
       @player_data[:player_name] = @name_text_field.text
       @name_text_field.resignFirstResponder
       Player.create(:player_name => @name_text_field.text, :team => @player_data[:team_info])
       add_confirm = UIAlertView.alloc.initWithTitle("Alert", message: "Player Added!", delegate: self, cancelButtonTitle: "Okay", otherButtonTitles: nil)
       add_confirm.show
       @name_text_field.text = nil
-      @player_viewer.reloadData
+      @player_viewer.reloadData 
     else
       bad_inputalert = UIAlertView.alloc.initWithTitle("Alert", message: "Please Add the Player's Name", delegate: self, cancelButtonTitle: "Okay", otherButtonTitles: nil)
       bad_inputalert.show
@@ -75,6 +81,15 @@ class AddPlayerViewController < UIViewController
       #   @name_text_field[:player_name] = alert.plain_text_field.text 
       # end
       # alert.show 
+    end
+  end
+  
+  def close_screen
+    if Player.all.count % 2 != 0
+      bad_inputalert = UIAlertView.alloc.initWithTitle("Alert", message: "Teams Not Equal!", delegate: self, cancelButtonTitle: "Okay", otherButtonTitles: nil)
+      bad_inputalert.show     
+    else
+      self.dismissViewControllerAnimated true, completion: nil
     end
   end
   

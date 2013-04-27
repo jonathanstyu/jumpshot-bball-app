@@ -6,7 +6,21 @@ class AddGameViewController < UIViewController
     super
     self.title = "Game Record"
     view.backgroundColor = :black.uicolor
+    addGame
+    layout_views
+    reset_menu
+  end
 
+  def viewDidUnload
+    super
+    # Release any retained subviews of the main view.
+  end
+  
+  def viewDidAppear(animated)
+    @player_table.reloadData
+  end
+  
+  def layout_views
     left_frame = CGRect.make(x: 0, y: 0, width: view.bounds.width * 0.6, height: view.bounds.height)
     right_frame = CGRect.make(x: left_frame.width, y: 0, width: view.bounds.width * 0.4, height: view.bounds.height)
     
@@ -160,18 +174,6 @@ class AddGameViewController < UIViewController
     # Adds the button to the scroll 
     @buttons.each {|button| 
        left_scroll << button }
-    
-    # Kicks us off! 
-    reset_menu
-  end
-
-  def viewDidUnload
-    super
-    # Release any retained subviews of the main view.
-  end
-  
-  def viewDidAppear(animated)
-    @player_table.reloadData
   end
 
   def shouldAutorotateToInterfaceOrientation(interfaceOrientation)
@@ -180,8 +182,13 @@ class AddGameViewController < UIViewController
   
   # For the player picking Table
   def tableView(tableView, numberOfRowsInSection: section)
-    @players = Player.all
-    return @players.count
+    @players_team1 = Player.where(:team).eq(1).all
+    @players_team2 = Player.where(:team).eq(2).all
+    if section == 0
+      return @players_team1.count
+    else
+      return @players_team2.count
+    end
   end
   
   def tableView(tableView, cellForRowAtIndexPath: indexPath)
@@ -190,16 +197,39 @@ class AddGameViewController < UIViewController
       cell = UITableViewCell.alloc.initWithStyle(UITableViewCellStyleDefault, reuseIdentifier:@reuseIdentifier)
       cell
     end
-    cell.text = @players[indexPath.row].player_name
-    cell.textColor = :white.uicolor
-    cell.font = "Avenir-Black".uifont(16)
+    if indexPath.section == 0      
+      cell.text = @players_team1[indexPath.row].player_name
+      cell.textColor = :white.uicolor
+      cell.font = "Avenir-Black".uifont(16)
+    else
+      cell.text = @players_team2[indexPath.row].player_name
+      cell.textColor = :white.uicolor
+      cell.font = "Avenir-Black".uifont(16)
+    end
     cell
   end
   
   def tableView(tableView, didSelectRowAtIndexPath: indexPath)
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    @data_tag[:player] = @players[indexPath.row]
+    if indexPath.section == 0
+      @data_tag[:player] = @players_team1[indexPath.row]
+    else
+      @data_tag[:player] = @players_team2[indexPath.row]
+    end
     @buttons.each {|button| button.enabled = true }
+  end
+  
+  # weird implementation of the tableview function
+  def numberOfSectionsInTableView(tableView)
+    2
+  end
+  
+  def tableView(tableView, titleForHeaderInSection: section)
+    if section == 0 
+      return "Team 1"
+    else 
+      return "Team 2"
+    end
   end
   
   # Helper functions that help record games 
