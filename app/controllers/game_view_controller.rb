@@ -1,6 +1,5 @@
-class AddGameViewController < UIViewController
+class GameViewController < UIViewController
   include SugarCube::Modal 
-  # The center view of the app
   
   def viewDidLoad
     super
@@ -62,34 +61,15 @@ class AddGameViewController < UIViewController
     
     # Panel for the action recording buttons 
     left_scroll = UIScrollView.new
-    left_scroll.frame = CGRect.make(x: 0, y: @team1_label.frame.y + @team1_label.frame.height, width: left_frame.width, height: view.bounds.height)
+    left_scroll.frame = CGRect.make(x: 0, y: @team1_label.frame.y + @team1_label.frame.height, width: left_frame.width, height: view.bounds.height - @team1_label.frame.y)
     left_scroll.backgroundColor = "subtle_dots.png".uicolor
     left_scroll.contentSize = CGSizeMake(left_frame.width, left_frame.height * 1.5)
     left_scroll.pagingEnabled = true
-    
-    player_header = UILabel.new
-    player_header.frame = CGRect.make(x: left_frame.width, y: 0, width: right_frame.width, height: 25)  
-    player_header.backgroundColor = :black.uicolor
-    player_header.text = "Add Players"
-    player_header.textAlignment = :center.uialignment
-    player_header.textColor = :white.uicolor
-    player_header.font = :bold.uifont(12)
-    view << player_header
-    
-    button_tray = UIView.new
-    button_tray.frame = player_header.frame.below.height(60)
-    view << button_tray
-    
-    add_player_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-    add_player_button.frame = CGRect.make(x: 0, y:0, width: button_tray.frame.width, height: 45)
-    add_player_button.setBackgroundImage("add_player.png".uiimage, forState: UIControlStateNormal)
-    add_player_button.addTarget(self, action: "open_add_player", forControlEvents: UIControlEventTouchUpInside)
-    button_tray << add_player_button
   
     view << left_scroll
     
     @player_table = UITableView.new
-    @player_table.frame = CGRect.make(x: left_frame.width, y: 85, width: right_frame.width, height: view.bounds.height - 50)
+    @player_table.frame = CGRect.make(x: left_frame.width, y: 0, width: right_frame.width, height: view.bounds.height - 50)
     @player_table.backgroundColor = :clear.uicolor
     @player_table.separatorColor = :white.uicolor
     @player_table.dataSource = @player_table.delegate = self 
@@ -161,15 +141,6 @@ class AddGameViewController < UIViewController
     block_button.tag = 7
     block_button.addTarget(self, action: "process_data:", forControlEvents: UIControlEventTouchUpInside)
     @buttons << block_button
-    
-    # Adds the flat pill button that triggers the Full Stat View Controller 
-    full_stat_button = FlatPillButton.new 
-    full_stat_button.frame = block_button.frame.below(60).taller(10).wider(15).left(10)
-    full_stat_button.font = "Avenir-Black".uifont(20)
-    full_stat_button.setTitle("Full Box Score", forState: UIControlStateNormal)
-    full_stat_button.setTitleColor(0xff0000.uicolor, forState:UIControlStateNormal)
-    full_stat_button.addTarget(self, action: "open_stat_controller", forControlEvents: UIControlEventTouchUpInside)
-    left_scroll << full_stat_button
     
     # Adds the button to the scroll 
     @buttons.each {|button| 
@@ -284,16 +255,6 @@ class AddGameViewController < UIViewController
       total += player.points
     end
     return total
-  end
-  
-  def open_add_player
-    player_panel = AddPlayerViewController.new
-    present_modal(UINavigationController.alloc.initWithRootViewController(player_panel))
-  end
-  
-  def open_stat_controller
-    stat_panel = FullStatViewController.new
-    present_modal(UINavigationController.alloc.initWithRootViewController(stat_panel))
   end
   
 end

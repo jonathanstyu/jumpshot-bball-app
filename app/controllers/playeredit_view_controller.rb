@@ -2,7 +2,7 @@ class PlayerEditViewController < UIViewController
   
   def viewDidLoad
     super
-    self.title = "Player Edit"
+    self.title = "Edit Player"
     # Do any additional setup after loading the view.
   end
 

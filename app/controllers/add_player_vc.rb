@@ -2,8 +2,8 @@ class AddPlayerViewController < UIViewController
   include SugarCube::Modal 
   def viewDidLoad
     super
-    self.title = "Add Player"
-    view.backgroundColor = "subtle_dots.png".uicolor
+    self.title = "Roster"
+    view.backgroundColor = :black.uicolor
     
     layout_views
     reset_page
@@ -24,7 +24,8 @@ class AddPlayerViewController < UIViewController
   end
   
   def layout_views
-    self.navigationItem.leftBarButtonItem = UIBarButtonItem.done { close_screen }
+    
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem.done {close_screen}
     
     team1_pick = UIButton.buttonWithType(UIButtonTypeRoundedRect)
     team1_pick.frame = CGRect.make(x: 10, y: 20, width: (view.bounds.width/2 - 20), height: 30)
@@ -56,12 +57,7 @@ class AddPlayerViewController < UIViewController
       save_player
     end
     view << @add_player
-    
-    @player_viewer = UITableView.new
-    @player_delegate = PlayerTableDelegate.new 
-    @player_viewer.frame = CGRect.make(x: 0, y: (@add_player.frame.y + 55), width: view.bounds.width, height: view.bounds.height - 220)
-    @player_viewer.delegate = @player_viewer.dataSource = @player_delegate
-    view << @player_viewer
+  
   end
   
   def team_picked(sender)
@@ -77,7 +73,6 @@ class AddPlayerViewController < UIViewController
       add_confirm = UIAlertView.alloc.initWithTitle("Alert", message: "Player Added!", delegate: self, cancelButtonTitle: "Okay", otherButtonTitles: nil)
       add_confirm.show
       @name_text_field.text = nil
-      @player_viewer.reloadData 
     else
       bad_inputalert = UIAlertView.alloc.initWithTitle("Alert", message: "Please Add the Player's Name", delegate: self, cancelButtonTitle: "Okay", otherButtonTitles: nil)
       bad_inputalert.show
@@ -88,6 +83,11 @@ class AddPlayerViewController < UIViewController
     end
   end
   
+  def reset_page
+    @player_data = {}
+    @add_player.enabled = false
+  end
+  
   def close_screen
     if Player.all.count % 2 != 0
       bad_inputalert = UIAlertView.alloc.initWithTitle("Alert", message: "Teams Not Equal!", delegate: self, cancelButtonTitle: "Okay", otherButtonTitles: nil)
@@ -95,11 +95,6 @@ class AddPlayerViewController < UIViewController
     else
       self.dismissViewControllerAnimated true, completion: nil
     end
-  end
-  
-  def reset_page
-    @player_data = {}
-    @add_player.enabled = false
   end
   
 end

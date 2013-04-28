@@ -3,6 +3,7 @@ class SettingsViewController < UIViewController
   
   def viewDidLoad
     super
+    self.title = "Settings"
     view.backgroundColor = "noisy_net.png".uicolor        
     
   end

@@ -1,7 +1,7 @@
 class PlayerCell < UITableViewCell
   
   attr_accessor :name_label
-  attr_accessor :position_label
+  attr_accessor :team_label
   attr_accessor :points_label
   attr_accessor :rebounds_label
   attr_accessor :assists_label
@@ -15,11 +15,11 @@ class PlayerCell < UITableViewCell
     @name_label.textColor = :white.uicolor
     @name_label.backgroundColor = :clear.uicolor
   
-    @position_label = UILabel.new
-    @position_label.textAlignment = :left.uialignment
-    @position_label.font = :bold.uifont(11)
-    @position_label.backgroundColor = :clear.uicolor
-    @position_label.textColor = :white.uicolor
+    @team_label = UILabel.new
+    @team_label.textAlignment = :left.uialignment
+    @team_label.font = :bold.uifont(11)
+    @team_label.backgroundColor = :clear.uicolor
+    @team_label.textColor = :white.uicolor
     
     @points_label = UILabel.new
     @points_label.textAlignment = :center.uialignment
@@ -62,7 +62,7 @@ class PlayerCell < UITableViewCell
     
 
     self.contentView << @name_label
-    self.contentView << @position_label 
+    self.contentView << @team_label 
     self.contentView << @points_label
     self.contentView << @rebounds_label 
     self.contentView << @assists_label
@@ -85,7 +85,7 @@ class PlayerCell < UITableViewCell
     points_frame = CGRect.make(x: cellWidth-4,y: 12, width: cellWidth/3, height: 22)
     
     @name_label.frame = name_frame
-    @position_label.frame = name_frame.below
+    @team_label.frame = name_frame.below
     @points_label.frame = points_frame
     @rebounds_label.frame = @points_label.frame.beside 
     @assists_label.frame = @rebounds_label.frame.beside.right(4)

@@ -13,7 +13,6 @@ Motion::Project::App.setup do |app|
   app.name = 'HardWood'
   app.prerendered_icon = true
   app.pods do 
-    # pod 'JASidePanels'
     # pod 'SVPullToRefresh'
   end
 end
