@@ -13,4 +13,5 @@ class Player
   :made_field_goals => {:type => :int, :default => 0}, 
   :total_field_goals => {:type => :int, :default => 0}
   
+  
 end

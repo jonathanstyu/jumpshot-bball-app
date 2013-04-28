@@ -1,5 +1,6 @@
 class RosterViewController < UIViewController
   include SugarCube::Modal 
+  
   def viewDidLoad
     super
     self.title = "Roster"
@@ -32,8 +33,26 @@ class RosterViewController < UIViewController
     view << @player_viewer
   end
   
+  # helper methods for persisting
+  # def plist
+  #   document('bball_players.plist')
+  # end
+  # 
+  # def persist
+  #   @players.writeToFile(plist, atomically: true)
+  # end
+  # 
+  # def load_players
+  #   if exists(plist)
+  #     @players = NSArray.alloc.initWithContentsOfFile(plist)
+  #   else
+  #     @players = []
+  #   end
+  # end
+  
+  # Info for the table 
   def tableView(tableView, numberOfRowsInSection: section)
-    @players = Player.all
+    @players = Player.all 
     return @players.count
   end
   
@@ -45,7 +64,7 @@ class RosterViewController < UIViewController
     end
     selected_player = @players[indexPath.row]
     cell.text = selected_player.player_name  
-    cell.detailTextLabel.text = "Team #{selected_player.team}"
+    cell.detailTextLabel.text = "Guard"
     cell.AccessoryType = UITableViewCellAccessoryDetailDisclosureButton
     cell
   end
@@ -56,8 +75,13 @@ class RosterViewController < UIViewController
   end
 
   def open_add_player
-    player_panel = AddPlayerViewController.new
-    present_modal(UINavigationController.alloc.initWithRootViewController(player_panel))
+    options = { :title => "Authorization" }
+    alert = BW::UIAlertView.login_and_password_input(options).on_click do |alert|
+      alert.login_text_field.text    #=> "La Forge"
+      alert.password_text_field.text #=> "Theta2997"
+    end
+
+    alert.show
   end
   
 end

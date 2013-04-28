@@ -69,7 +69,7 @@ class AddPlayerViewController < UIViewController
     if @name_text_field.text != nil && @name_text_field.text != "" 
       @player_data[:player_name] = @name_text_field.text
       @name_text_field.resignFirstResponder
-      Player.create(:player_name => @name_text_field.text, :team => @player_data[:team_info])
+      created_player = Player.create(:player_name => @name_text_field.text, :team => @player_data[:team_info])
       add_confirm = UIAlertView.alloc.initWithTitle("Alert", message: "Player Added!", delegate: self, cancelButtonTitle: "Okay", otherButtonTitles: nil)
       add_confirm.show
       @name_text_field.text = nil

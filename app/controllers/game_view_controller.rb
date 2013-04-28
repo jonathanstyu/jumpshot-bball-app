@@ -5,7 +5,7 @@ class GameViewController < UIViewController
     super
     self.title = "Game Record"
     view.backgroundColor = :black.uicolor
-    addGame
+    # addGame
     layout_views
     reset_menu
   end
@@ -20,6 +20,7 @@ class GameViewController < UIViewController
   end
   
   def layout_views
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem.titled("New") { new_game }
     left_frame = CGRect.make(x: 0, y: 0, width: view.bounds.width * 0.6, height: view.bounds.height)
     right_frame = CGRect.make(x: left_frame.width, y: 0, width: view.bounds.width * 0.4, height: view.bounds.height)
     
@@ -142,6 +143,15 @@ class GameViewController < UIViewController
     block_button.addTarget(self, action: "process_data:", forControlEvents: UIControlEventTouchUpInside)
     @buttons << block_button
     
+    # Ends Game and Saves to Memory
+    end_game = FlatPillButton.new 
+    end_game.frame = block_button.frame.below(60).taller(10).wider(15).left(10)
+    end_game.font = "Avenir-Black".uifont(20)
+    end_game.setTitle("End Game", forState: UIControlStateNormal)
+    end_game.setTitleColor(0xff0000.uicolor, forState:UIControlStateNormal)
+    end_game.addTarget(self, action: "end_game", forControlEvents: UIControlEventTouchUpInside)
+    left_scroll << end_game
+    
     # Adds the button to the scroll 
     @buttons.each {|button| 
        left_scroll << button }
@@ -255,6 +265,11 @@ class GameViewController < UIViewController
       total += player.points
     end
     return total
+  end
+    
+  def new_game
+    UIActionSheet.alert 'Old game will be saved.', buttons: ['Cancel', nil, 'Okay'], cancel: proc {puts "boo"}, success: proc { puts "hello" }
+          # when you create new game, saves the old game to memory by copying all the player stats to memory and then opens a picker to reassign the players by acquiring each of the players and then editing their :team
   end
   
 end

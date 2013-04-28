@@ -1,8 +1,7 @@
-class PlayerEditViewController < UIViewController
-  
+class OldboxscoreViewController < UITableViewController
   def viewDidLoad
     super
-    self.title = "Edit Player"
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem.done {self.dismissViewControllerAnimated true, completion: nil}
   end
 
   def viewDidUnload

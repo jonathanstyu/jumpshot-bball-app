@@ -6,6 +6,7 @@ require 'bundler'
 require 'sugarcube-gestures'
 require 'motion-cocoapods'
 require 'bubble-wrap'
+require 'bubble-wrap/ui'
 Bundler.require
 
 Motion::Project::App.setup do |app|
