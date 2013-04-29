@@ -75,13 +75,16 @@ class RosterViewController < UIViewController
   end
 
   def open_add_player
-    options = { :title => "Authorization" }
-    alert = BW::UIAlertView.login_and_password_input(options).on_click do |alert|
-      alert.login_text_field.text    #=> "La Forge"
-      alert.password_text_field.text #=> "Theta2997"
-    end
-
+    alert = UIAlertView.alloc.initWithTitle("Add Player", message: "What is the player's name?", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Ok", nil)
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput
     alert.show
+  end
+  
+  def alertView(alertView, clickedButtonAtIndex: buttonIndex)
+    if buttonIndex == 1
+      Player.create(:player_name => alertView.textFieldAtIndex(0).text)
+      @player_viewer.reloadData
+    end
   end
   
 end

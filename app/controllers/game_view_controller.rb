@@ -5,7 +5,6 @@ class GameViewController < UIViewController
     super
     self.title = "Game Record"
     view.backgroundColor = :black.uicolor
-    # addGame
     layout_views
     reset_menu
   end
@@ -163,8 +162,9 @@ class GameViewController < UIViewController
   
   # For the player picking Table
   def tableView(tableView, numberOfRowsInSection: section)
-    @players_team1 = Player.where(:team).eq(1).all
-    @players_team2 = Player.where(:team).eq(2).all
+    current_game = Game.first 
+    @players_team1 = current_game.team1
+    @players_team2 = current_game.team2
     if section == 0
       return @players_team1.count
     else
@@ -212,14 +212,7 @@ class GameViewController < UIViewController
       return "Team 2"
     end
   end
-  
-  # Helper functions that help record games 
-  def addGame
-    Player.create(:player_name => "Jon", :team => 1)
-    Player.create(:player_name => "Paul", :team => 1)
-    Player.create(:player_name => "Rick", :team => 2)
-    Player.create(:player_name => "Carl", :team => 2)
-  end
+
   
   # Resets the menu, updates the labels 
   def process_data(sender)
@@ -268,7 +261,8 @@ class GameViewController < UIViewController
   end
     
   def new_game
-    UIActionSheet.alert 'Old game will be saved.', buttons: ['Cancel', nil, 'Okay'], cancel: proc {puts "boo"}, success: proc { puts "hello" }
+    UIActionSheet.alert 'Old game will be saved.', buttons: ['Cancel', nil, 'Okay'], cancel: proc {puts "boo"}, success: proc { new_game = NewgameViewController.new
+    present_modal(UINavigationController.alloc.initWithRootViewController(new_game)) }
           # when you create new game, saves the old game to memory by copying all the player stats to memory and then opens a picker to reassign the players by acquiring each of the players and then editing their :team
   end
   

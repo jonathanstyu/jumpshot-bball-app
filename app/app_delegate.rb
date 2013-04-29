@@ -1,11 +1,8 @@
 class AppDelegate
   def application(application, didFinishLaunchingWithOptions:launchOptions)
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
-    
-    # Handles the different behaviors of the sliding panels 
-    # viewController = JASidePanelController.alloc.init
-    # viewController.shouldDelegateAutorotateToVisiblePanel = false
-    game_view = UINavigationController.alloc.initWithRootViewController(GameViewController.alloc.init)
+
+    game_view = UINavigationController.alloc.initWithRootViewController(NewgameViewController.alloc.init)
     game_view.title = "Game"
     box_view = UINavigationController.alloc.initWithRootViewController(BoxscoreViewController.alloc.init)
     box_view.title = "Box Score"
@@ -20,11 +17,21 @@ class AppDelegate
     @window.rootViewController = tab_controller
     @window.makeKeyAndVisible
         
+    addGame
+    
     true
   end
   
   def shouldAutorotate
     return NO 
+  end
+
+  # Helper functions that help record games 
+  def addGame
+    Player.create(:player_name => "Jon", :team => 1)
+    Player.create(:player_name => "Paul", :team => 1)
+    Player.create(:player_name => "Rick", :team => 2)
+    Player.create(:player_name => "Carl", :team => 2)
   end
   
 end

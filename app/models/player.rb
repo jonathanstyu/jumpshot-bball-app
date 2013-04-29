@@ -4,7 +4,7 @@ class Player
   
   columns :player_name => :string, 
   :position => {:type => :string, :default => "Guard"}, 
-  :team => :int, 
+  :team => {:type => :int, :default => 0}, 
   :points => {:type => :int, :default => 0}, 
   :rebounds => {:type => :int, :default => 0}, 
   :assists => {:type => :int, :default => 0}, 
