@@ -1,12 +1,19 @@
 class GameViewController < UIViewController
   include SugarCube::Modal 
+  attr_accessor :current_game
   
   def viewDidLoad
     super
-    self.title = "Game Record"
     view.backgroundColor = :black.uicolor
     layout_views
     reset_menu
+    create_performances
+  end
+  
+  def initWithGame(game)
+    initWithNibName(nil, bundle:nil)
+    self.current_game = game
+    self
   end
 
   def viewDidUnload
@@ -19,7 +26,7 @@ class GameViewController < UIViewController
   end
   
   def layout_views
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem.titled("New") { new_game }
+    # self.navigationItem.rightBarButtonItem = UIBarButtonItem.titled("New") { new_game }
     left_frame = CGRect.make(x: 0, y: 0, width: view.bounds.width * 0.6, height: view.bounds.height)
     right_frame = CGRect.make(x: left_frame.width, y: 0, width: view.bounds.width * 0.4, height: view.bounds.height)
     
@@ -142,34 +149,14 @@ class GameViewController < UIViewController
     block_button.addTarget(self, action: "process_data:", forControlEvents: UIControlEventTouchUpInside)
     @buttons << block_button
     
-    # Ends Game and Saves to Memory
-    end_game = FlatPillButton.new 
-    end_game.frame = block_button.frame.below(60).taller(10).wider(15).left(10)
-    end_game.font = "Avenir-Black".uifont(20)
-    end_game.setTitle("End Game", forState: UIControlStateNormal)
-    end_game.setTitleColor(0xff0000.uicolor, forState:UIControlStateNormal)
-    end_game.addTarget(self, action: "end_game", forControlEvents: UIControlEventTouchUpInside)
-    left_scroll << end_game
-    
     # Adds the button to the scroll 
     @buttons.each {|button| 
        left_scroll << button }
   end
-
-  def shouldAutorotate
-    NO
-  end
   
   # For the player picking Table
   def tableView(tableView, numberOfRowsInSection: section)
-    current_game = Game.first 
-    @players_team1 = current_game.team1
-    @players_team2 = current_game.team2
-    if section == 0
-      return @players_team1.count
-    else
-      return @players_team2.count
-    end
+    return @players_teams[section].count
   end
   
   def tableView(tableView, cellForRowAtIndexPath: indexPath)
@@ -177,27 +164,17 @@ class GameViewController < UIViewController
     cell = tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier) || begin
       cell = UITableViewCell.alloc.initWithStyle(UITableViewCellStyleDefault, reuseIdentifier:@reuseIdentifier)
       cell
-    end
-    if indexPath.section == 0      
-      cell.text = @players_team1[indexPath.row].player_name
+    end    
+      cell.text = @players_teams[indexPath.section][indexPath.row].player_name
       cell.textColor = :white.uicolor
       cell.font = "Avenir-Black".uifont(16)
-    else
-      cell.text = @players_team2[indexPath.row].player_name
-      cell.textColor = :white.uicolor
-      cell.font = "Avenir-Black".uifont(16)
-    end
-    cell
+      cell
   end
   
   def tableView(tableView, didSelectRowAtIndexPath: indexPath)
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    if indexPath.section == 0
-      @data_tag[:player] = @players_team1[indexPath.row]
-    else
-      @data_tag[:player] = @players_team2[indexPath.row]
-    end
-    @buttons.each {|button| button.enabled = true }
+      @data_tag[:player] = @players_teams[indexPath.section][indexPath.row]
+      @buttons.each {|button| button.enabled = true }
   end
   
   # weird implementation of the tableview function
@@ -218,30 +195,44 @@ class GameViewController < UIViewController
   def process_data(sender)
     action_tag = sender.tag 
     accessed_player = @data_tag[:player]
+    player_performance = Performance.where(:player_id).eq(accessed_player.id).and(:game_id).eq(current_game.id).first
     if action_tag == 1
-      accessed_player.points += 2
-      accessed_player.total_field_goals += 1
-      accessed_player.made_field_goals += 1
+      player_performance.points += 2
+      player_performance.total_field_goals += 1
+      player_performance.made_field_goals += 1
     elsif action_tag == 3
-      accessed_player.rebounds += 1
+      player_performance.rebounds += 1
     elsif action_tag == 4
-      accessed_player.assists += 1 
+      player_performance.assists += 1 
     elsif action_tag == 5
-      accessed_player.points += 3
-      accessed_player.total_field_goals += 1
-      accessed_player.made_field_goals += 1
+      player_performance.points += 3
+      player_performance.total_field_goals += 1
+      player_performance.made_field_goals += 1
     elsif action_tag == 2
-      accessed_player.total_field_goals += 1
+      player_performance.total_field_goals += 1
     elsif action_tag == 6
-      accessed_player.steals += 1
+      player_performance.steals += 1
     elsif action_tag == 7
-      accessed_player.blocks += 1
+      player_performance.blocks += 1
     elsif action_tag == 8
-      accessed_player.total_field_goals += 1
+      player_performance.total_field_goals += 1
     end
     @team1_label.text = "#{tally_points(1)}"
     @team2_label.text = "#{tally_points(2)}"
     reset_menu
+  end
+  
+  def create_performances
+    @players_teams = []
+    @players_teams[0] = current_game.team_1
+    @players_teams[1] = current_game.team_2
+    
+    @players_teams.each do |teams|
+      teams.each do |player|
+        player.performances.create(:player_id => player.id, :game_id => current_game.id)
+      end
+    end
+    
   end
   
   # Clears up the menu to prepare for the next number 
@@ -252,10 +243,17 @@ class GameViewController < UIViewController
   
   # Tallies up all the points on a team
   def tally_points(team_name)
-    players_on_team = Player.where(:team).eq(team_name).all
     total = 0
-    players_on_team.each do |player|
-      total += player.points
+    if team_name == 1
+      @players_teams[0].each do |player|
+        individual_performance = Performance.where(:player_id).eq(player.id).and(:game_id).eq(current_game.id).first
+        total += individual_performance.points
+      end
+    else
+      @players_teams[1].each do |player|
+        individual_performance = Performance.where(:player_id).eq(player.id).and(:game_id).eq(current_game.id).first
+        total += individual_performance.points
+      end
     end
     return total
   end

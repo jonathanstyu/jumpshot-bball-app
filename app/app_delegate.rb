@@ -16,22 +16,16 @@ class AppDelegate
     tab_controller.viewControllers = [game_view, box_view, roster_view, settings_view]
     @window.rootViewController = tab_controller
     @window.makeKeyAndVisible
-        
-    addGame
     
     true
-  end
-  
-  def shouldAutorotate
-    return NO 
   end
 
   # Helper functions that help record games 
   def addGame
-    Player.create(:player_name => "Jon", :team => 1)
-    Player.create(:player_name => "Paul", :team => 1)
-    Player.create(:player_name => "Rick", :team => 2)
-    Player.create(:player_name => "Carl", :team => 2)
+    Player.create(:player_name => "Jon")
+    Player.create(:player_name => "Paul")
+    Player.create(:player_name => "Rick")
+    Player.create(:player_name => "Carl")
   end
   
 end

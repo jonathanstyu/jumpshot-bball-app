@@ -3,7 +3,9 @@ class Game
   include MotionModel::ArrayModelAdapter
   
   columns :date_played => :date, 
-  :team_1 => :array, 
-  :team_2 => :array
+  :team_1 => {:type => :array, :default => []}, 
+  :team_2 => {:type => :array, :default => []}
+  has_many :performances
+  
   
 end

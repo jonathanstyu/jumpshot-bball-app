@@ -82,7 +82,8 @@ class RosterViewController < UIViewController
   
   def alertView(alertView, clickedButtonAtIndex: buttonIndex)
     if buttonIndex == 1
-      Player.create(:player_name => alertView.textFieldAtIndex(0).text)
+      new_player = Player.create(:player_name => alertView.textFieldAtIndex(0).text)
+      # new_player.serialize_to_file('players.dat')
       @player_viewer.reloadData
     end
   end

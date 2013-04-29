@@ -1,5 +1,7 @@
 class NewgameViewController < UIViewController
   include SugarCube::Modal 
+  # attr_accessor :game
+  
   def viewDidLoad
     super
     self.title = "New Game Setup"
@@ -14,10 +16,6 @@ class NewgameViewController < UIViewController
 
   def shouldAutorotateToInterfaceOrientation(interfaceOrientation)
     interfaceOrientation == UIInterfaceOrientationPortrait
-  end
-  
-  def shouldAutorotate
-    NO
   end
   
   def layout_views
@@ -48,7 +46,7 @@ class NewgameViewController < UIViewController
   end
   
   def tableView(tableView, numberOfRowsInSection: section)
-    openroster = Player.all
+    openroster = Array.new(Player.all)
     players_team1 = []
     players_team2 = []
     @players = [openroster, players_team1, players_team2]
@@ -104,9 +102,9 @@ class NewgameViewController < UIViewController
       bad_input = UIAlertView.alloc.initWithTitle("Alert", message: "Game start failed!", delegate: self, cancelButtonTitle: "Okay", otherButtonTitles: nil)
       bad_input.show
     else
-      Game.create(:date_played => Time.new, :team1 => @players[1], :team2 => @players[2])
-      game_play = GameViewController.new
-      nav_cltr << game_play
+      set_up = Game.create(:date_played => Time.new, :team_1 => @players[1], :team_2 => @players[2])
+      game_play = GameViewController.alloc.initWithGame(set_up)
+      self.navigationController.pushViewController(game_play, animated: true)
     end
   end
   
