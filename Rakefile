@@ -5,6 +5,7 @@ require 'motion/project'
 require 'bundler'
 require 'sugarcube-gestures'
 require 'motion-cocoapods'
+require 'motion_model'
 require 'bubble-wrap'
 require 'bubble-wrap/ui'
 Bundler.require

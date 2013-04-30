@@ -17,34 +17,23 @@ class AppDelegate
     @window.rootViewController = tab_controller
     @window.makeKeyAndVisible
     
-    addGame
+    set_up_local_data
     
     true
   end
 
   # Helper functions that help record games 
-  def addGame
-    jon = Player.create(:player_name => "Jon")
-    paul = Player.create(:player_name => "Paul")
-    rick = Player.create(:player_name => "Rick")
-    matt = Player.create(:player_name => "Matt")
-    game1 = Game.create(:date_played => Time.new, :team_1 => [jon, paul], :team_2 => [rick, matt])
-    game2 = Game.create(:date_played => Time.new, :team_1 => [paul, matt], :team_2 => [rick, jon])
-    game1.create_performances
-    game2.create_performances
+  def set_up_local_data
+    Player.deserialize_from_file('players.dat')
+    Game.deserialize_from_file('games.dat')
+    Performance.deserialize_from_file('performance.dat')
+  end
+  
+  def applicationWillResignActive(application)
+    Game.serialize_to_file('games.dat')
+    Performance.serialize_to_file('performance.dat')
+    Player.serialize_to_file('players.dat')
   end
   
 end
 
-class Kernel
-  
-  def document(filename)
-    @docs ||= NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true)[0]
-    @docs.stringByAppendingPathComponent(filename)
-  end
-  
-  def exists(filename)
-    NSFileManager.defaultManager.fileExistsAtPath(filename)
-  end
-  
-end

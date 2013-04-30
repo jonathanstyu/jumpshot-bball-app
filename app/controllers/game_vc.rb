@@ -195,7 +195,7 @@ class GameViewController < UIViewController
   def process_data(sender)
     action_tag = sender.tag 
     accessed_player = @data_tag[:player]
-    player_performance = Performance.where(:player_id).eq(accessed_player.id).and(:game_id).eq(current_game.id).first
+    player_performance = current_game.performances.where(:player_dat).eq(accessed_player.id).first
     if action_tag == 1
       player_performance.made_fg
     elsif action_tag == 3
@@ -230,12 +230,12 @@ class GameViewController < UIViewController
     total = 0
     if team_name == 1
       @players_teams[0].each do |player|
-        individual_performance = Performance.where(:player_id).eq(player.id).and(:game_id).eq(current_game.id).first
+        individual_performance = current_game.performances.where(:player_dat).eq(player.id).first
         total += individual_performance.points
       end
     else
       @players_teams[1].each do |player|
-        individual_performance = Performance.where(:player_id).eq(player.id).and(:game_id).eq(current_game.id).first
+        individual_performance = current_game.performances.where(:player_dat).eq(player.id).first
         total += individual_performance.points
       end
     end

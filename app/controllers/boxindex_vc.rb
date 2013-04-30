@@ -19,6 +19,10 @@ class BoxindexViewController < UITableViewController
     return @games.count
   end
   
+  def viewDidAppear(animated)
+    tableView.reloadData 
+  end
+  
   def tableView(tableView, cellForRowAtIndexPath: indexPath)
     @reuseIdentifier ||= "CELL_IDENTIFIER"
     cell = tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier) || begin
@@ -26,7 +30,7 @@ class BoxindexViewController < UITableViewController
       cell
     end
     selected_game = @games[indexPath.row]
-    cell.text = selected_game.date_played.strftime("%m - %d - %Y")
+    cell.text = selected_game.date_played
     cell.detailTextLabel.text = "Location"
     cell
   end

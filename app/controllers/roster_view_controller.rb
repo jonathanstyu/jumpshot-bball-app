@@ -33,23 +33,6 @@ class RosterViewController < UIViewController
     view << @player_viewer
   end
   
-  # helper methods for persisting
-  # def plist
-  #   document('bball_players.plist')
-  # end
-  # 
-  # def persist
-  #   @players.writeToFile(plist, atomically: true)
-  # end
-  # 
-  # def load_players
-  #   if exists(plist)
-  #     @players = NSArray.alloc.initWithContentsOfFile(plist)
-  #   else
-  #     @players = []
-  #   end
-  # end
-  
   # Info for the table 
   def tableView(tableView, numberOfRowsInSection: section)
     @players = Player.all 
@@ -83,7 +66,6 @@ class RosterViewController < UIViewController
   def alertView(alertView, clickedButtonAtIndex: buttonIndex)
     if buttonIndex == 1
       new_player = Player.create(:player_name => alertView.textFieldAtIndex(0).text)
-      # new_player.serialize_to_file('players.dat')
       @player_viewer.reloadData
     end
   end

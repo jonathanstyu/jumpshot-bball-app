@@ -1,9 +1,9 @@
 class Performance
   include MotionModel::Model
-  include MotionModel::ArrayModelAdapter
+  # include MotionModel::ArrayModelAdapter
   
-  columns :player_id => {:type => :int, :default => 0}, 
-  :game_id => {:type => :int, :default => 0}, 
+  columns :player_dat => {:type => :int, :default => 0}, 
+  :game_dat => {:type => :int, :default => 0}, 
   :points => {:type => :int, :default => 0}, 
   :rebounds => {:type => :int, :default => 0}, 
   :assists => {:type => :int, :default => 0}, 

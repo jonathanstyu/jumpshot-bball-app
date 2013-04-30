@@ -4,7 +4,7 @@ class NewgameViewController < UIViewController
   
   def viewDidLoad
     super
-    self.title = "New Game Setup"
+    self.title = "Setup"
     view.backgroundColor = "subtle_dots.png".uicolor
     layout_views
   end
@@ -102,7 +102,8 @@ class NewgameViewController < UIViewController
       bad_input = UIAlertView.alloc.initWithTitle("Alert", message: "Game start failed!", delegate: self, cancelButtonTitle: "Okay", otherButtonTitles: nil)
       bad_input.show
     else
-      set_up = Game.create(:date_played => Time.new, :team_1 => @players[1], :team_2 => @players[2])
+      set_up = Game.create(:team_1 => @players[1], :team_2 => @players[2])
+      set_up.create_performances
       game_play = GameViewController.alloc.initWithGame(set_up)
       self.navigationController.pushViewController(game_play, animated: true)
     end

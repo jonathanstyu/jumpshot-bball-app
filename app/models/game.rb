@@ -1,8 +1,8 @@
 class Game
   include MotionModel::Model
-  include MotionModel::ArrayModelAdapter
+  # include MotionModel::ArrayModelAdapter
   
-  columns :date_played => :date, 
+  columns :date_played => {:type => :string, :default => Time.new.strftime("%m - %d - %Y")}, 
   :team_1 => {:type => :array, :default => []}, 
   :team_2 => {:type => :array, :default => []}
   has_many :performances
@@ -29,7 +29,7 @@ class Game
     
     @players_teams.each do |teams|
       teams.each do |player|
-        self.performances.create(:player_id => player.id, :game_id => self.id)
+        self.performances.create(:player_dat => player.id, :game_dat => self.id)
       end
     end
   end
@@ -49,7 +49,7 @@ class Game
     
     @players_teams.each_with_index do |teams, index|
       teams.each do |player|
-        team_performances[index] << self.performances.where(:player_id).eq(player.id).first
+        team_performances[index] << self.performances.where(:player_dat).eq(player.id).first
       end
     end
     return team_performances

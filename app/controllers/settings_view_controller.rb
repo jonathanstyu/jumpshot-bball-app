@@ -10,7 +10,6 @@ class SettingsViewController < UIViewController
 
   def viewDidUnload
     super
-    # Release any retained subviews of the main view.
   end
 
   def shouldAutorotateToInterfaceOrientation(interfaceOrientation)
