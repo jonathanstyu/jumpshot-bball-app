@@ -65,12 +65,12 @@ class RosterViewController < UIViewController
     selected_player = @players[indexPath.row]
     cell.text = selected_player.player_name  
     cell.detailTextLabel.text = "Guard"
-    cell.AccessoryType = UITableViewCellAccessoryDetailDisclosureButton
     cell
   end
   
-  def tableView(tableView, accessoryButtonTappedForRowWithIndexPath: indexPath)
-    player_panel = PlayerEditViewController.new
+  def tableView(tableView, didSelectRowAtIndexPath: indexPath)
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    player_panel = ViewplayerViewController.alloc.initWithPlayer(@players[indexPath.row])
     self.navigationController.pushViewController(player_panel, animated: true)
   end
 

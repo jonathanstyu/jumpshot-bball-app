@@ -4,8 +4,8 @@ class AppDelegate
 
     game_view = UINavigationController.alloc.initWithRootViewController(NewgameViewController.alloc.init)
     game_view.title = "Game"
-    box_view = UINavigationController.alloc.initWithRootViewController(BoxscoreViewController.alloc.init)
-    box_view.title = "Box Score"
+    box_view = UINavigationController.alloc.initWithRootViewController(BoxindexViewController.alloc.init)
+    box_view.title = "Box Scores"
     roster_view = UINavigationController.alloc.initWithRootViewController(RosterViewController.alloc.init)
     roster_view.title = "Roster"
     settings_view = UINavigationController.alloc.initWithRootViewController(SettingsViewController.alloc.init)
@@ -17,15 +17,21 @@ class AppDelegate
     @window.rootViewController = tab_controller
     @window.makeKeyAndVisible
     
+    addGame
+    
     true
   end
 
   # Helper functions that help record games 
   def addGame
-    Player.create(:player_name => "Jon")
-    Player.create(:player_name => "Paul")
-    Player.create(:player_name => "Rick")
-    Player.create(:player_name => "Carl")
+    jon = Player.create(:player_name => "Jon")
+    paul = Player.create(:player_name => "Paul")
+    rick = Player.create(:player_name => "Rick")
+    matt = Player.create(:player_name => "Matt")
+    game1 = Game.create(:date_played => Time.new, :team_1 => [jon, paul], :team_2 => [rick, matt])
+    game2 = Game.create(:date_played => Time.new, :team_1 => [paul, matt], :team_2 => [rick, jon])
+    game1.create_performances
+    game2.create_performances
   end
   
 end

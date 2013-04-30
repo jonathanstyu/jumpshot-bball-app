@@ -7,12 +7,12 @@ class GameViewController < UIViewController
     view.backgroundColor = :black.uicolor
     layout_views
     reset_menu
-    create_performances
   end
   
   def initWithGame(game)
     initWithNibName(nil, bundle:nil)
     self.current_game = game
+    @players_teams = current_game.create_index
     self
   end
 
@@ -197,17 +197,13 @@ class GameViewController < UIViewController
     accessed_player = @data_tag[:player]
     player_performance = Performance.where(:player_id).eq(accessed_player.id).and(:game_id).eq(current_game.id).first
     if action_tag == 1
-      player_performance.points += 2
-      player_performance.total_field_goals += 1
-      player_performance.made_field_goals += 1
+      player_performance.made_fg
     elsif action_tag == 3
       player_performance.rebounds += 1
     elsif action_tag == 4
       player_performance.assists += 1 
     elsif action_tag == 5
-      player_performance.points += 3
-      player_performance.total_field_goals += 1
-      player_performance.made_field_goals += 1
+      player_performance.made_3fg
     elsif action_tag == 2
       player_performance.total_field_goals += 1
     elsif action_tag == 6
@@ -221,19 +217,7 @@ class GameViewController < UIViewController
     @team2_label.text = "#{tally_points(2)}"
     reset_menu
   end
-  
-  def create_performances
-    @players_teams = []
-    @players_teams[0] = current_game.team_1
-    @players_teams[1] = current_game.team_2
-    
-    @players_teams.each do |teams|
-      teams.each do |player|
-        player.performances.create(:player_id => player.id, :game_id => current_game.id)
-      end
-    end
-    
-  end
+
   
   # Clears up the menu to prepare for the next number 
   def reset_menu

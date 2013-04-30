@@ -15,4 +15,16 @@ class Performance
   belongs_to :player
   belongs_to :game
   
+  def made_fg
+    self.total_field_goals += 1
+    self.made_field_goals += 1 
+    self.points += 2
+  end
+  
+  def made_3fg
+    self.total_field_goals += 1
+    self.made_field_goals += 1 
+    self.points += 3
+  end
+  
 end
