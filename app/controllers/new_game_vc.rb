@@ -4,7 +4,7 @@ class NewgameViewController < UIViewController
   
   def viewDidLoad
     super
-    self.title = "Setup"
+    self.title = "New Game"
     view.backgroundColor = "subtle_dots.png".uicolor
     layout_views
   end
@@ -91,6 +91,14 @@ class NewgameViewController < UIViewController
     player_to_move = @players[fromIndexPath.section][fromIndexPath.row]
     @players[toIndexPath.section] << player_to_move 
     @players[fromIndexPath.section].delete(player_to_move)
+  end
+  
+  def tableView(tableView, editingStyleForRowAtIndexPath: indexPath)
+    return UITableViewCellEditingStyleNone
+  end
+  
+  def tableView(tableView, shouldIndentWhileEditingRowAtIndexPath: indexPath)
+    return false
   end
   
   def start_assignment

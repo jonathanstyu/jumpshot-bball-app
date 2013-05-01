@@ -4,12 +4,20 @@ class AppDelegate
 
     game_view = UINavigationController.alloc.initWithRootViewController(NewgameViewController.alloc.init)
     game_view.title = "Game"
+    game_view.tabBarItem.setFinishedSelectedImage("bball.png".uiimage, withFinishedUnselectedImage:"bball.png".uiimage)
+    
     box_view = UINavigationController.alloc.initWithRootViewController(BoxindexViewController.alloc.init)
     box_view.title = "Box Scores"
+    box_view.tabBarItem.setFinishedSelectedImage("box.png".uiimage, withFinishedUnselectedImage:"box.png".uiimage)
+    
     roster_view = UINavigationController.alloc.initWithRootViewController(RosterViewController.alloc.init)
     roster_view.title = "Roster"
+    roster_view.tabBarItem.setFinishedSelectedImage("people.png".uiimage, withFinishedUnselectedImage:"people.png".uiimage)
+    
     settings_view = UINavigationController.alloc.initWithRootViewController(SettingsViewController.alloc.init)
     settings_view.title = "Settings"
+    settings_view.tabBarItem.setFinishedSelectedImage("settings.png".uiimage, withFinishedUnselectedImage:"settings.png".uiimage)
+    
 
     UINavigationBar.appearance.tintColor = :black.uicolor
     tab_controller = UITabBarController.alloc.init
@@ -30,6 +38,12 @@ class AppDelegate
   end
   
   def applicationWillResignActive(application)
+    Game.serialize_to_file('games.dat')
+    Performance.serialize_to_file('performance.dat')
+    Player.serialize_to_file('players.dat')
+  end
+  
+  def applicationWillTerminate(application)
     Game.serialize_to_file('games.dat')
     Performance.serialize_to_file('performance.dat')
     Player.serialize_to_file('players.dat')

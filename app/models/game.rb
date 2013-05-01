@@ -40,19 +40,5 @@ class Game
     @players_teams[1] = self.team_2
     return @players_teams
   end
-  
-  def return_team_performances
-    @players_teams = []
-    @players_teams[0] = self.team_1
-    @players_teams[1] = self.team_2
-    team_performances = [[],[]]
     
-    @players_teams.each_with_index do |teams, index|
-      teams.each do |player|
-        team_performances[index] << self.performances.where(:player_dat).eq(player.id).first
-      end
-    end
-    return team_performances
-  end
-  
 end

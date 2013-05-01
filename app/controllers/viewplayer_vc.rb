@@ -31,7 +31,7 @@ class ViewplayerViewController < UIViewController
   end
   
   def tableView(tableView, numberOfRowsInSection: section)
-    @performances = player.performances.all 
+    @performances = Performance.where(:player_dat).eq(player.id).all
     return @performances.count
   end
   
@@ -43,7 +43,7 @@ class ViewplayerViewController < UIViewController
       cell
     end
     performance = @performances[indexPath.row]
-    cell.date_label.text = Game.where(:id).eq(performance.game_id).all[0].date_played.strftime("%m - %d - %Y")
+    cell.date_label.text = Game.where(:id).eq(performance.game_id).all[0].date_played
     cell.points_label.text = performance.points.to_s
     cell.fg_label.text = "#{performance.made_field_goals.to_s}/#{performance.total_field_goals.to_s}"
     cell.rebounds_label.text = performance.rebounds.to_s

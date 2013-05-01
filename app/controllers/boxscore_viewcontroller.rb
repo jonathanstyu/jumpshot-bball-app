@@ -1,19 +1,14 @@
-class BoxscoreViewController < UIViewController
+class BoxscoreViewController < UITableViewController
   attr_accessor :game
   
   def viewDidLoad
     super
     self.title = "Box Score"
-    view.backgroundColor = :white.uicolor
-    
-    label_frame = CGRect.make(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+    tableView.backgroundColor = :white.uicolor
+    tableView.separatorColor = :black.uicolor
+    tableView.rowHeight = 135
+    tableView.dataSource = tableView.delegate = self
 
-    @table = UITableView.alloc.initWithFrame label_frame
-    @table.backgroundColor = :clear.uicolor
-    @table.separatorColor = :white.uicolor
-    @table.rowHeight = 135
-    @table.delegate = @table.dataSource = self
-    view << @table 
   end
   
   def initWithGame(game)
@@ -31,8 +26,8 @@ class BoxscoreViewController < UIViewController
   end
   
   def tableView(tableView, numberOfRowsInSection: section)
-    @performances = game.return_team_performances
-    return @performances[section].count
+    @performances = Performance.where(:game_dat).eq(game.id).all
+    return (@performances.count / 2)
   end
   
   def numberOfSectionsInTableView(tableView)
@@ -54,9 +49,12 @@ class BoxscoreViewController < UIViewController
       cell.createLabels
       cell
     end
-    performance = @performances[indexPath.section][indexPath.row]
+  
     players = [game.team_1, game.team_2]
-    cell.date_label.text = players[indexPath.section][indexPath.row].player_name
+    selected_player = players[indexPath.section][indexPath.row]
+    performance = Performance.where(:game_dat).eq(game.id).and(:player_dat).eq(selected_player.id).first
+    
+    cell.date_label.text = selected_player.player_name
     cell.points_label.text = performance.points.to_s
     cell.fg_label.text = "#{performance.made_field_goals.to_s}/#{performance.total_field_goals.to_s}"
     cell.rebounds_label.text = performance.rebounds.to_s
@@ -69,8 +67,6 @@ class BoxscoreViewController < UIViewController
   
   def tableView(tableView, didSelectRowAtIndexPath: indexPath)
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    player_panel = ViewplayerViewController.alloc.initWithPlayer(@players[indexPath.row])
-    self.navigationController.pushViewController(player_panel, animated: true)
   end
   
 end

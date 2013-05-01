@@ -4,6 +4,7 @@ class GameViewController < UIViewController
   
   def viewDidLoad
     super
+    self.title = "Game"
     view.backgroundColor = :black.uicolor
     layout_views
     reset_menu
