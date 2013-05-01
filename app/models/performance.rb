@@ -11,7 +11,8 @@ class Performance
   :blocks => {:type => :int, :default => 0}, 
   :turnovers => {:type => :int, :default => 0}, 
   :made_field_goals => {:type => :int, :default => 0}, 
-  :total_field_goals => {:type => :int, :default => 0}
+  :total_field_goals => {:type => :int, :default => 0},
+  :game_name => {:type => :string, :default => "Game Deleted"}
   
   belongs_to :player
   belongs_to :game

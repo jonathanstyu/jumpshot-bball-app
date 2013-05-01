@@ -16,6 +16,6 @@ Motion::Project::App.setup do |app|
   app.prerendered_icon = true
   app.device_family = [:iphone, :ipad]
   app.pods do 
-    pod 'SVPullToRefresh'
+    # pod 'SVPullToRefresh'
   end
 end

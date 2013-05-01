@@ -2,7 +2,7 @@ class BoxindexViewController < UITableViewController
   def viewDidLoad
     super
     self.title = "Box Scores"
-    # self.navigationItem.leftBarButtonItem = UIBarButtonItem.done {self.dismissViewControllerAnimated true, completion: nil}
+    self.navigationItem.leftBarButtonItem = self.editButtonItem
   end
 
   def viewDidUnload
@@ -15,7 +15,7 @@ class BoxindexViewController < UITableViewController
   end
   
   def tableView(tableView, numberOfRowsInSection: section)
-    @games = Game.all.reverse
+    @games = Game.all
     return @games.count
   end
   
@@ -40,4 +40,17 @@ class BoxindexViewController < UITableViewController
     game_panel = BoxscoreViewController.alloc.initWithGame(@games[indexPath.row])
     self.navigationController.pushViewController(game_panel, animated: true)
   end
+  
+  def tableView(tableView, commitEditingStyle: editing_style, forRowAtIndexPath: indexPath)
+    if editing_style == UITableViewCellEditingStyleDelete
+      @games.delete_at(indexPath.row)
+      tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimationAutomatic)
+    end
+  end
+  
+  def setEditing(is_editing, animated: is_animated)
+    tableView.setEditing(is_editing, animated: is_animated)
+    super
+  end
+  
 end

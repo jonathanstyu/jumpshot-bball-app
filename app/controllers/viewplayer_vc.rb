@@ -51,7 +51,8 @@ class ViewplayerViewController < UIViewController
       cell
     end
     performance = @performances[indexPath.row]
-    cell.date_label.text = Game.where(:id).eq(performance.game_id).all[0].date_played
+
+    cell.date_label.text = performance.game_name
     cell.points_label.text = performance.points.to_s
     cell.fg_label.text = "#{performance.made_field_goals.to_s}/#{performance.total_field_goals.to_s}"
     cell.rebounds_label.text = performance.rebounds.to_s

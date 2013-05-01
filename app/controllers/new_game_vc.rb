@@ -5,7 +5,7 @@ class NewgameViewController < UIViewController
   def viewDidLoad
     super
     self.title = "New Game"
-    view.backgroundColor = "subtle_dots.png".uicolor
+    view.backgroundColor = :white.uicolor
     layout_views
   end
 
@@ -21,17 +21,19 @@ class NewgameViewController < UIViewController
   def layout_views
     # self.navigationItem.leftBarButtonItem = UIBarButtonItem.cancel {self.dismissViewControllerAnimated true, completion: nil}
     
-    open_edit = FlatPillButton.new
-    open_edit.frame = CGRect.make(x: 10, y: 20, width: (view.bounds.width/2 - 20), height: 30)
-    open_edit.setTitle("Assign Teams", forState: UIControlStateNormal)
-    open_edit.addTarget(self, action: "start_assignment", forControlEvents: UIControlEventTouchUpInside)
-    view << open_edit
-    
     save_players = FlatPillButton.new
-    save_players.frame = open_edit.frame.beside.right(10)
+    save_players.frame = CGRect.make(x: 10, y: 20, width: (view.bounds.width/2 - 20), height: 30)
     save_players.setTitle("Start Game", forState: UIControlStateNormal)
     save_players.addTarget(self, action: "save_players", forControlEvents: UIControlEventTouchUpInside)
     view << save_players
+    
+    open_edit = FlatPillButton.new
+    open_edit.frame = save_players.frame.beside.right(10)
+    open_edit.setTitle("Assign Teams", forState: UIControlStateNormal)
+    open_edit.setTitle("Disabled", forState: UIControlStateDisabled)
+    open_edit.addTarget(self, action: "later", forControlEvents: UIControlEventTouchUpInside)
+    open_edit.enabled = false
+    view << open_edit
     
     @player_viewer = UITableView.new
     @player_viewer.frame = CGRect.make(x: 0, y: 70, width: view.bounds.width, height: view.bounds.height)
@@ -43,6 +45,7 @@ class NewgameViewController < UIViewController
   
   def viewDidAppear(animated)
     @player_viewer.reloadData
+    @player_viewer.setEditing(true, animated: true)
   end
   
   def tableView(tableView, numberOfRowsInSection: section)
@@ -100,11 +103,7 @@ class NewgameViewController < UIViewController
   def tableView(tableView, shouldIndentWhileEditingRowAtIndexPath: indexPath)
     return false
   end
-  
-  def start_assignment
-    @player_viewer.setEditing(true, animated: true)
-  end
-    
+      
   def save_players  
     if @players[1].count == 0 || @players[2].count == 0
       bad_input = UIAlertView.alloc.initWithTitle("Alert", message: "A team has no players!", delegate: self, cancelButtonTitle: "Okay", otherButtonTitles: nil)

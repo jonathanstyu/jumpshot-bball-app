@@ -32,7 +32,7 @@ class Game
     
     @players_teams.each do |teams|
       teams.each do |player|
-        self.performances.create(:player_dat => player.id, :game_dat => self.id)
+        self.performances.create(:player_dat => player.id, :game_dat => self.id, :game_name => self.date_played)
       end
     end
   end
