@@ -1,0 +1,72 @@
+class BoxscoreViewController < UITableViewController
+  attr_accessor :game
+  
+  def viewDidLoad
+    super
+    self.title = "Box Score"
+    tableView.backgroundColor = :white.uicolor
+    tableView.separatorColor = :black.uicolor
+    tableView.rowHeight = 135
+    tableView.dataSource = tableView.delegate = self
+
+  end
+  
+  def initWithGame(game)
+    self.game = game
+    self
+  end
+
+  def viewDidUnload
+    super
+    # Release any retained subviews of the main view.
+  end
+
+  def shouldAutorotateToInterfaceOrientation(interfaceOrientation)
+    interfaceOrientation == UIInterfaceOrientationPortrait
+  end
+  
+  def tableView(tableView, numberOfRowsInSection: section)
+    @performances = Performance.where(:game_dat).eq(game.id).all
+    return (@performances.count / 2)
+  end
+  
+  def numberOfSectionsInTableView(tableView)
+    2
+  end
+  
+  def tableView(tableView, titleForHeaderInSection: section)
+    if section == 0
+      return "Team 1"
+    else
+      return "Team 2"
+    end
+  end
+  
+  def tableView(tableView, cellForRowAtIndexPath: indexPath)
+    @reuseIdentifier ||= "CELL_IDENTIFIER"
+    cell = tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier) || begin
+      cell = ProfileCell.alloc.initWithStyle(UITableViewCellStyleValue1, reuseIdentifier:@reuseIdentifier)
+      cell.createLabels
+      cell
+    end
+  
+    players = [game.team_1, game.team_2]
+    selected_player = players[indexPath.section][indexPath.row]
+    performance = Performance.where(:game_dat).eq(game.id).and(:player_dat).eq(selected_player.id).first
+    
+    cell.date_label.text = selected_player.player_name
+    cell.points_label.text = performance.points.to_s
+    cell.fg_label.text = "#{performance.made_field_goals.to_s}/#{performance.total_field_goals.to_s}"
+    cell.rebounds_label.text = performance.rebounds.to_s
+    cell.assists_label.text = performance.assists.to_s
+    cell.steals_label.text = performance.steals.to_s
+    cell.blocks_label.text = performance.blocks.to_s
+
+    cell
+  end
+  
+  def tableView(tableView, didSelectRowAtIndexPath: indexPath)
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+  end
+  
+end

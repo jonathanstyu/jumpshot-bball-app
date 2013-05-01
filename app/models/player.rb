@@ -1,8 +1,10 @@
 class Player
   include MotionModel::Model
-  include MotionModel::ArrayModelAdapter
+  # include MotionModel::ArrayModelAdapter
   
-  columns :player_name => :string
-  belongs_to :game
+  columns :player_name => {:type => :string, :default => "Johnny Appleseed"},
+  :position => {:type => :string, :default => "Guard"}
+  
+  has_many :performances
   
 end
