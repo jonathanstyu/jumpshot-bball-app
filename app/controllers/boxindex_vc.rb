@@ -15,7 +15,7 @@ class BoxindexViewController < UITableViewController
   end
   
   def tableView(tableView, numberOfRowsInSection: section)
-    @games = Game.all 
+    @games = Game.all.reverse
     return @games.count
   end
   

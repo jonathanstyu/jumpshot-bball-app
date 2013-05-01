@@ -9,6 +9,7 @@ class Performance
   :assists => {:type => :int, :default => 0}, 
   :steals => {:type => :int, :default => 0}, 
   :blocks => {:type => :int, :default => 0}, 
+  :turnovers => {:type => :int, :default => 0}, 
   :made_field_goals => {:type => :int, :default => 0}, 
   :total_field_goals => {:type => :int, :default => 0}
   
@@ -18,13 +19,22 @@ class Performance
   def made_fg
     self.total_field_goals += 1
     self.made_field_goals += 1 
-    self.points += 2
+    if App::Persistence['12pts'] == true
+      self.points += 2
+    else
+      self.points += 1
+    end
   end
   
   def made_3fg
     self.total_field_goals += 1
     self.made_field_goals += 1 
-    self.points += 3
+    if App::Persistence['12pts'] == true
+      self.points += 3
+    else
+      self.points += 2
+    end
+
   end
   
 end

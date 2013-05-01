@@ -2,26 +2,29 @@ class Game
   include MotionModel::Model
   # include MotionModel::ArrayModelAdapter
   
-  columns :date_played => {:type => :string, :default => Time.new.strftime("%m - %d - %Y")}, 
+  columns :date_played => {:type => :string, :default => Time.new.strftime("%m-%d-%Y")}, 
   :team_1 => {:type => :array, :default => []}, 
   :team_2 => {:type => :array, :default => []}
   has_many :performances
   
-  def tally_scores
-    scores = []
-    @players_teams = []
-    @players_teams[0] = self.team_1
-    @players_teams[1] = self.team_2
-    
-    @players_teams.each_with_index do |team, index|
-      team.each do |player|
-        individual_performance = Performance.where(:player_id).eq(player.id).and(:game_id).eq(self.id).first
-        scores[index] += individual_performance.points
+  # Helps calculate the point total for each team 
+  def tally_points(team_name)
+    total = 0
+    if team_name == 1
+      team_1.each do |player|
+        individual_performance = self.performances.where(:player_dat).eq(player.id).first
+        total += individual_performance.points
+      end
+    else
+      team_2.each do |player|
+        individual_performance = self.performances.where(:player_dat).eq(player.id).first
+        total += individual_performance.points
       end
     end
-    return scores
+    return total
   end
   
+  # setter method to help create subservient performances under an individual game
   def create_performances
     @players_teams = []
     @players_teams[0] = self.team_1
@@ -34,6 +37,7 @@ class Game
     end
   end
   
+  # setter method to help set up the right array structure for a sectioned table
   def create_index
     @players_teams = []
     @players_teams[0] = self.team_1

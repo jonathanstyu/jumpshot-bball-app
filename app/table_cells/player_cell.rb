@@ -9,6 +9,9 @@ class PlayerCell < UITableViewCell
   # Reference for how these cells were programmatically set up >> https://gist.github.com/adelevie/4098535
   
   def createLabels
+    ipad_font = :bold.uifont(17)
+    iphone_font = :bold.uifont(17)
+    
     @name_label = UILabel.new
     @name_label.textAlignment = :left.uialignment
     @name_label.font = :bold.uifont(17)

@@ -106,9 +106,13 @@ class NewgameViewController < UIViewController
   end
     
   def save_players  
-    if @players[1].count != @players[2].count || @players[1].count == 0
-      bad_input = UIAlertView.alloc.initWithTitle("Alert", message: "Game start failed!", delegate: self, cancelButtonTitle: "Okay", otherButtonTitles: nil)
+    if @players[1].count == 0 || @players[2].count == 0
+      bad_input = UIAlertView.alloc.initWithTitle("Alert", message: "A team has no players!", delegate: self, cancelButtonTitle: "Okay", otherButtonTitles: nil)
       bad_input.show
+    elsif @players[1].count != @players[2].count && App::Persistence['teamnumb'] == false
+      # If setting says that uneven teams are allowed then this allows 
+      unequal_teams = UIAlertView.alloc.initWithTitle("Alert", message: "Teams are unequal!", delegate: self, cancelButtonTitle: "Okay", otherButtonTitles: nil)
+      unequal_teams.show
     else
       set_up = Game.create(:team_1 => @players[1], :team_2 => @players[2])
       set_up.create_performances

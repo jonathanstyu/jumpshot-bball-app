@@ -27,27 +27,37 @@ class GameViewController < UIViewController
   end
   
   def layout_views
-    # self.navigationItem.rightBarButtonItem = UIBarButtonItem.titled("New") { new_game }
     left_frame = CGRect.make(x: 0, y: 0, width: view.bounds.width * 0.6, height: view.bounds.height)
     right_frame = CGRect.make(x: left_frame.width, y: 0, width: view.bounds.width * 0.4, height: view.bounds.height)
     
+    if Device.ipad?
+      score_font = :bold.uifont(60)
+      label_font = :bold.uifont(17)
+      button_cell_height = (left_frame.height * 0.05)      
+    else
+      score_font = :bold.uifont(35)
+      label_font = :bold.uifont(12)
+      button_cell_height = (left_frame.height * 0.1)      
+    end
+    
+    
     team1_name = UILabel.new
-    team1_name.frame = CGRect.make(x: 0, y: 0, width: left_frame.width / 2, height: 25)
+    team1_name.frame = CGRect.make(x: 0, y: 0, width: left_frame.width / 2, height: left_frame.height * 0.05 )
     team1_name.text = "Team 1"
     team1_name.backgroundColor = "subtle_dots.png".uicolor
     team1_name.textAlignment = :center.uialignment
     team1_name.textColor = :black.uicolor
-    team1_name.font = :bold.uifont(12)
+    team1_name.font = label_font
     view << team1_name
     
     @team1_label = UILabel.new
-    @team1_label.frame = team1_name.frame.below.height(60)
+    @team1_label.frame = team1_name.frame.below.height(left_frame.height * 0.1)
     @team1_label.text = "0"
     @team1_label.backgroundColor = :black.uicolor
     @team1_label.textAlignment = :center.uialignment
     @team1_label.textColor = :white.uicolor
-    @team1_label.font = :bold.uifont(40)
-    view << @team1_label
+    @team1_label.font = score_font
+      view << @team1_label
     
     team2_name = UILabel.new
     team2_name.frame = team1_name.frame.beside
@@ -80,6 +90,7 @@ class GameViewController < UIViewController
     @player_table.frame = CGRect.make(x: left_frame.width, y: 0, width: right_frame.width, height: view.bounds.height - 50)
     @player_table.backgroundColor = :clear.uicolor
     @player_table.separatorColor = :white.uicolor
+    @player_table.rowHeight = 100 if Device.ipad?
     @player_table.dataSource = @player_table.delegate = self 
     view << @player_table
     
@@ -87,7 +98,7 @@ class GameViewController < UIViewController
     @buttons = []
     
     made_fg_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-    made_fg_button.frame = CGRect.make(x: 20, y: 25, width: (left_frame.width * 0.8), height: 35)
+    made_fg_button.frame = CGRect.make(x: (left_frame.width * 0.1), y: 15, width: (left_frame.width * 0.8), height: button_cell_height )
     made_fg_button.font = "Avenir-Black".uifont(18.0)
     made_fg_button.setTitle("Made FG", forState: UIControlStateNormal)
     made_fg_button.tag = 1
@@ -108,7 +119,7 @@ class GameViewController < UIViewController
     made_3fg_button.setTitle("Made 3FG", forState: UIControlStateNormal)
     made_3fg_button.tag = 5
     made_3fg_button.addTarget(self, action: "process_data:", forControlEvents: UIControlEventTouchUpInside)
-    @buttons << made_3fg_button 
+    @buttons << made_3fg_button if App::Persistence['3pts'] == true
 
     missed_3fg_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
     missed_3fg_button.frame = made_3fg_button.frame.below(20)
@@ -116,7 +127,7 @@ class GameViewController < UIViewController
     missed_3fg_button.setTitle("Missed 3FG", forState: UIControlStateNormal)
     missed_3fg_button.tag = 8
     missed_3fg_button.addTarget(self, action: "process_data:", forControlEvents: UIControlEventTouchUpInside)
-    @buttons << missed_3fg_button
+    @buttons << missed_3fg_button if App::Persistence['3pts'] == true
     
     rebound_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
     rebound_button.frame = missed_3fg_button.frame.below(20)
@@ -150,6 +161,14 @@ class GameViewController < UIViewController
     block_button.addTarget(self, action: "process_data:", forControlEvents: UIControlEventTouchUpInside)
     @buttons << block_button
     
+    turnover_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+    turnover_button.frame = block_button.frame.below(20)
+    turnover_button.font = "Avenir-Black".uifont(18.0)
+    turnover_button.setTitle("Turnover", forState: UIControlStateNormal)
+    turnover_button.tag = 9
+    turnover_button.addTarget(self, action: "process_data:", forControlEvents: UIControlEventTouchUpInside)
+    @buttons << turnover_button
+    
     # Adds the button to the scroll 
     @buttons.each {|button| 
        left_scroll << button }
@@ -168,7 +187,7 @@ class GameViewController < UIViewController
     end    
       cell.text = @players_teams[indexPath.section][indexPath.row].player_name
       cell.textColor = :white.uicolor
-      cell.font = "Avenir-Black".uifont(16)
+      cell.font = Device.ipad? ? "Avenir-Black".uifont(25) : "Avenir-Black".uifont(16)
       cell
   end
   
@@ -213,9 +232,11 @@ class GameViewController < UIViewController
       player_performance.blocks += 1
     elsif action_tag == 8
       player_performance.total_field_goals += 1
+    elsif action_tag == 9
+      player_performance.turnovers += 1
     end
-    @team1_label.text = "#{tally_points(1)}"
-    @team2_label.text = "#{tally_points(2)}"
+    @team1_label.text = "#{current_game.tally_points(1)}"
+    @team2_label.text = "#{current_game.tally_points(2)}"
     reset_menu
   end
 
@@ -225,28 +246,10 @@ class GameViewController < UIViewController
     @data_tag = {}
     @buttons.each {|button| button.enabled = false }
   end
-  
-  # Tallies up all the points on a team
-  def tally_points(team_name)
-    total = 0
-    if team_name == 1
-      @players_teams[0].each do |player|
-        individual_performance = current_game.performances.where(:player_dat).eq(player.id).first
-        total += individual_performance.points
-      end
-    else
-      @players_teams[1].each do |player|
-        individual_performance = current_game.performances.where(:player_dat).eq(player.id).first
-        total += individual_performance.points
-      end
-    end
-    return total
-  end
     
-  def new_game
-    UIActionSheet.alert 'Old game will be saved.', buttons: ['Cancel', nil, 'Okay'], cancel: proc {puts "boo"}, success: proc { new_game = NewgameViewController.new
-    present_modal(UINavigationController.alloc.initWithRootViewController(new_game)) }
-          # when you create new game, saves the old game to memory by copying all the player stats to memory and then opens a picker to reassign the players by acquiring each of the players and then editing their :team
-  end
+  # def new_game
+  #   UIActionSheet.alert 'Old game will be saved.', buttons: ['Cancel', nil, 'Okay'], cancel: proc {puts "boo"}, success: proc { new_game = NewgameViewController.new
+  #   present_modal(UINavigationController.alloc.initWithRootViewController(new_game)) }
+  # end
   
 end

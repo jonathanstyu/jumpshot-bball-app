@@ -26,6 +26,7 @@ class AppDelegate
     @window.makeKeyAndVisible
     
     set_up_local_data
+    set_up_settings
     
     true
   end
@@ -35,6 +36,12 @@ class AppDelegate
     Player.deserialize_from_file('players.dat')
     Game.deserialize_from_file('games.dat')
     Performance.deserialize_from_file('performance.dat')
+  end
+  
+  def set_up_settings
+    App::Persistence['3pts'] = true
+    App::Persistence['12pts'] = true
+    App::Persistence['teamnumb'] = false
   end
   
   def applicationWillResignActive(application)
