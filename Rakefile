@@ -14,8 +14,8 @@ Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   app.name = 'JumpShot'
   app.prerendered_icon = true
-  app.device_family = [:ipad, :iphone]
+  app.device_family = [:iphone, :ipad]
   app.pods do 
-    # pod 'SVPullToRefresh'
+    pod 'SVPullToRefresh'
   end
 end

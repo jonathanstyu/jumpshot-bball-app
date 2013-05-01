@@ -1,463 +1,174 @@
 <?xml version='1.0'?>
 <signatures version='1.0'>
-<enum name='JASidePanelCenterVisible' value='1'/>
-<enum name='JASidePanelLeftVisible' value='2'/>
-<enum name='JASidePanelMultipleActive' value='1'/>
-<enum name='JASidePanelRightVisible' value='3'/>
-<enum name='JASidePanelSingleActive' value='0'/>
-<enum name='SVInfiniteScrollingStateAll' value='10'/>
-<enum name='SVInfiniteScrollingStateLoading' value='2'/>
-<enum name='SVInfiniteScrollingStateStopped' value='0'/>
-<enum name='SVInfiniteScrollingStateTriggered' value='1'/>
-<enum name='SVPullToRefreshStateAll' value='10'/>
-<enum name='SVPullToRefreshStateLoading' value='2'/>
-<enum name='SVPullToRefreshStateStopped' value='0'/>
-<enum name='SVPullToRefreshStateTriggered' value='1'/>
-<class name='JASidePanelController'>
-<method selector='allowLeftOverpan'>
-<retval declared_type='BOOL' type='B'/>
-</method>
-<method selector='allowLeftSwipe'>
-<retval declared_type='BOOL' type='B'/>
-</method>
-<method selector='allowRightOverpan'>
-<retval declared_type='BOOL' type='B'/>
-</method>
-<method selector='allowRightSwipe'>
-<retval declared_type='BOOL' type='B'/>
-</method>
-<method selector='bounceDuration'>
-<retval declared_type='CGFloat' type='f'/>
-</method>
-<method selector='bounceOnSidePanelClose'>
-<retval declared_type='BOOL' type='B'/>
-</method>
-<method selector='bounceOnSidePanelOpen'>
-<retval declared_type='BOOL' type='B'/>
-</method>
-<method selector='bouncePercentage'>
-<retval declared_type='CGFloat' type='f'/>
-</method>
-<method selector='canUnloadLeftPanel'>
-<retval declared_type='BOOL' type='B'/>
-</method>
-<method selector='canUnloadRightPanel'>
-<retval declared_type='BOOL' type='B'/>
-</method>
-<method selector='centerPanel'>
-<retval declared_type='UIViewController*' type='@'/>
-</method>
-<method selector='centerPanelContainer'>
-<retval declared_type='UIView*' type='@'/>
-</method>
-<method selector='centerPanelHidden'>
-<retval declared_type='BOOL' type='B'/>
-</method>
-<method class_method='true' selector='defaultImage'>
-<retval declared_type='UIImage*' type='@'/>
-</method>
-<method selector='leftButtonForCenterPanel'>
-<retval declared_type='UIBarButtonItem*' type='@'/>
-</method>
-<method selector='leftFixedWidth'>
-<retval declared_type='CGFloat' type='f'/>
-</method>
-<method selector='leftGapPercentage'>
-<retval declared_type='CGFloat' type='f'/>
-</method>
-<method selector='leftPanel'>
-<retval declared_type='UIViewController*' type='@'/>
-</method>
-<method selector='leftPanelContainer'>
-<retval declared_type='UIView*' type='@'/>
-</method>
-<method selector='leftVisibleWidth'>
-<retval declared_type='CGFloat' type='f'/>
-</method>
-<method selector='maximumAnimationDuration'>
-<retval declared_type='CGFloat' type='f'/>
-</method>
-<method selector='minimumMovePercentage'>
-<retval declared_type='CGFloat' type='f'/>
-</method>
-<method selector='panningLimitedToTopViewController'>
-<retval declared_type='BOOL' type='B'/>
-</method>
-<method selector='recognizesPanGesture'>
-<retval declared_type='BOOL' type='B'/>
-</method>
-<method selector='rightFixedWidth'>
-<retval declared_type='CGFloat' type='f'/>
-</method>
-<method selector='rightGapPercentage'>
-<retval declared_type='CGFloat' type='f'/>
-</method>
-<method selector='rightPanel'>
-<retval declared_type='UIViewController*' type='@'/>
-</method>
-<method selector='rightPanelContainer'>
-<retval declared_type='UIView*' type='@'/>
-</method>
-<method selector='rightVisibleWidth'>
-<retval declared_type='CGFloat' type='f'/>
-</method>
-<method selector='setAllowLeftOverpan:'>
-<arg name='allowLeftOverpan' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setAllowLeftSwipe:'>
-<arg name='allowLeftSwipe' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setAllowRightOverpan:'>
-<arg name='allowRightOverpan' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setAllowRightSwipe:'>
-<arg name='allowRightSwipe' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setBounceDuration:'>
-<arg name='bounceDuration' declared_type='CGFloat' index='0' type='f'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setBounceOnSidePanelClose:'>
-<arg name='bounceOnSidePanelClose' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setBounceOnSidePanelOpen:'>
-<arg name='bounceOnSidePanelOpen' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setBouncePercentage:'>
-<arg name='bouncePercentage' declared_type='CGFloat' index='0' type='f'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setCanUnloadLeftPanel:'>
-<arg name='canUnloadLeftPanel' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setCanUnloadRightPanel:'>
-<arg name='canUnloadRightPanel' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setCenterPanel:'>
-<arg name='centerPanel' declared_type='UIViewController*' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setCenterPanelContainer:'>
-<arg name='centerPanelContainer' declared_type='UIView*' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setCenterPanelHidden:'>
-<arg name='centerPanelHidden' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setCenterPanelHidden:animated:duration:'>
-<arg name='centerPanelHidden' declared_type='BOOL' index='0' type='B'/>
-<arg name='animated' declared_type='BOOL' index='1' type='B'/>
-<arg name='duration' declared_type='NSTimeInterval' index='2' type='d'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setLeftFixedWidth:'>
-<arg name='leftFixedWidth' declared_type='CGFloat' index='0' type='f'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setLeftGapPercentage:'>
-<arg name='leftGapPercentage' declared_type='CGFloat' index='0' type='f'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setLeftPanel:'>
-<arg name='leftPanel' declared_type='UIViewController*' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setLeftPanelContainer:'>
-<arg name='leftPanelContainer' declared_type='UIView*' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setMaximumAnimationDuration:'>
-<arg name='maximumAnimationDuration' declared_type='CGFloat' index='0' type='f'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setMinimumMovePercentage:'>
-<arg name='minimumMovePercentage' declared_type='CGFloat' index='0' type='f'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setPanningLimitedToTopViewController:'>
-<arg name='panningLimitedToTopViewController' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setRecognizesPanGesture:'>
-<arg name='recognizesPanGesture' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setRightFixedWidth:'>
-<arg name='rightFixedWidth' declared_type='CGFloat' index='0' type='f'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setRightGapPercentage:'>
-<arg name='rightGapPercentage' declared_type='CGFloat' index='0' type='f'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setRightPanel:'>
-<arg name='rightPanel' declared_type='UIViewController*' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setRightPanelContainer:'>
-<arg name='rightPanelContainer' declared_type='UIView*' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setShouldDelegateAutorotateToVisiblePanel:'>
-<arg name='shouldDelegateAutorotateToVisiblePanel' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setShouldResizeLeftPanel:'>
-<arg name='shouldResizeLeftPanel' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setShouldResizeRightPanel:'>
-<arg name='shouldResizeRightPanel' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setStyle:'>
-<arg name='style' declared_type='JASidePanelStyle' index='0' type='i'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='setVisiblePanel:'>
-<arg name='visiblePanel' declared_type='UIViewController*' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='shouldDelegateAutorotateToVisiblePanel'>
-<retval declared_type='BOOL' type='B'/>
-</method>
-<method selector='shouldResizeLeftPanel'>
-<retval declared_type='BOOL' type='B'/>
-</method>
-<method selector='shouldResizeRightPanel'>
-<retval declared_type='BOOL' type='B'/>
-</method>
-<method selector='showCenterPanel:'>
-<arg name='animated' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='showCenterPanelAnimated:'>
-<arg name='animated' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='showLeftPanel:'>
-<arg name='animated' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='showLeftPanelAnimated:'>
-<arg name='animated' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='showRightPanel:'>
-<arg name='animated' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='showRightPanelAnimated:'>
-<arg name='animated' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='state'>
-<retval declared_type='JASidePanelState' type='i'/>
-</method>
-<method selector='style'>
-<retval declared_type='JASidePanelStyle' type='i'/>
-</method>
-<method selector='styleContainer:animate:duration:'>
-<arg name='container' declared_type='UIView*' index='0' type='@'/>
-<arg name='animate' declared_type='BOOL' index='1' type='B'/>
-<arg name='duration' declared_type='NSTimeInterval' index='2' type='d'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='stylePanel:'>
-<arg name='panel' declared_type='UIView*' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='toggleLeftPanel:'>
-<arg name='sender' declared_type='id' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='toggleRightPanel:'>
-<arg name='sender' declared_type='id' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='visiblePanel'>
-<retval declared_type='UIViewController*' type='@'/>
-</method>
-</class>
+<enum value='10' name='SVInfiniteScrollingStateAll'/>
+<enum value='2' name='SVInfiniteScrollingStateLoading'/>
+<enum value='0' name='SVInfiniteScrollingStateStopped'/>
+<enum value='1' name='SVInfiniteScrollingStateTriggered'/>
+<enum value='10' name='SVPullToRefreshStateAll'/>
+<enum value='2' name='SVPullToRefreshStateLoading'/>
+<enum value='0' name='SVPullToRefreshStateStopped'/>
+<enum value='1' name='SVPullToRefreshStateTriggered'/>
 <class name='SVInfiniteScrollingView'>
 <method selector='activityIndicatorViewStyle'>
-<retval declared_type='UIActivityIndicatorViewStyle' type='i'/>
+<retval type='i' declared_type='UIActivityIndicatorViewStyle'/>
 </method>
 <method selector='enabled'>
-<retval declared_type='BOOL' type='B'/>
+<retval type='B' declared_type='BOOL'/>
 </method>
 <method selector='setActivityIndicatorViewStyle:'>
-<arg name='activityIndicatorViewStyle' declared_type='UIActivityIndicatorViewStyle' index='0' type='i'/>
-<retval declared_type='void' type='v'/>
+<arg type='i' index='0' declared_type='UIActivityIndicatorViewStyle' name='activityIndicatorViewStyle'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='setCustomView:forState:'>
-<arg name='view' declared_type='UIView*' index='0' type='@'/>
-<arg name='state' declared_type='SVInfiniteScrollingState' index='1' type='I'/>
-<retval declared_type='void' type='v'/>
+<arg type='@' index='0' declared_type='UIView*' name='view'/>
+<arg type='I' index='1' declared_type='SVInfiniteScrollingState' name='state'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='setEnabled:'>
-<arg name='enabled' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
+<arg type='B' index='0' declared_type='BOOL' name='enabled'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='startAnimating'>
-<retval declared_type='void' type='v'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='state'>
-<retval declared_type='SVInfiniteScrollingState' type='I'/>
+<retval type='I' declared_type='SVInfiniteScrollingState'/>
 </method>
 <method selector='stopAnimating'>
-<retval declared_type='void' type='v'/>
+<retval type='v' declared_type='void'/>
 </method>
 </class>
 <class name='SVPullToRefreshView'>
 <method selector='activityIndicatorViewStyle'>
-<retval declared_type='UIActivityIndicatorViewStyle' type='i'/>
+<retval type='i' declared_type='UIActivityIndicatorViewStyle'/>
 </method>
 <method selector='arrowColor'>
-<retval declared_type='UIColor*' type='@'/>
+<retval type='@' declared_type='UIColor*'/>
 </method>
 <method selector='dateFormatter'>
-<retval declared_type='NSDateFormatter*' type='@'/>
+<retval type='@' declared_type='NSDateFormatter*'/>
 </method>
 <method selector='dateLabel'>
-<retval declared_type='UILabel*' type='@'/>
+<retval type='@' declared_type='UILabel*'/>
 </method>
 <method selector='lastUpdatedDate'>
-<retval declared_type='NSDate*' type='@'/>
+<retval type='@' declared_type='NSDate*'/>
 </method>
 <method selector='setActivityIndicatorViewStyle:'>
-<arg name='activityIndicatorViewStyle' declared_type='UIActivityIndicatorViewStyle' index='0' type='i'/>
-<retval declared_type='void' type='v'/>
+<arg type='i' index='0' declared_type='UIActivityIndicatorViewStyle' name='activityIndicatorViewStyle'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='setArrowColor:'>
-<arg name='arrowColor' declared_type='UIColor*' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
+<arg type='@' index='0' declared_type='UIColor*' name='arrowColor'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='setCustomView:forState:'>
-<arg name='view' declared_type='UIView*' index='0' type='@'/>
-<arg name='state' declared_type='SVPullToRefreshState' index='1' type='I'/>
-<retval declared_type='void' type='v'/>
+<arg type='@' index='0' declared_type='UIView*' name='view'/>
+<arg type='I' index='1' declared_type='SVPullToRefreshState' name='state'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='setDateFormatter:'>
-<arg name='dateFormatter' declared_type='NSDateFormatter*' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
+<arg type='@' index='0' declared_type='NSDateFormatter*' name='dateFormatter'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='setDateLabel:'>
-<arg name='dateLabel' declared_type='UILabel*' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
+<arg type='@' index='0' declared_type='UILabel*' name='dateLabel'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='setLastUpdatedDate:'>
-<arg name='lastUpdatedDate' declared_type='NSDate*' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
+<arg type='@' index='0' declared_type='NSDate*' name='lastUpdatedDate'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='setSubtitle:forState:'>
-<arg name='subtitle' declared_type='NSString*' index='0' type='@'/>
-<arg name='state' declared_type='SVPullToRefreshState' index='1' type='I'/>
-<retval declared_type='void' type='v'/>
+<arg type='@' index='0' declared_type='NSString*' name='subtitle'/>
+<arg type='I' index='1' declared_type='SVPullToRefreshState' name='state'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='setSubtitleLabel:'>
-<arg name='subtitleLabel' declared_type='UILabel*' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
+<arg type='@' index='0' declared_type='UILabel*' name='subtitleLabel'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='setTextColor:'>
-<arg name='textColor' declared_type='UIColor*' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
+<arg type='@' index='0' declared_type='UIColor*' name='textColor'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='setTitle:forState:'>
-<arg name='title' declared_type='NSString*' index='0' type='@'/>
-<arg name='state' declared_type='SVPullToRefreshState' index='1' type='I'/>
-<retval declared_type='void' type='v'/>
+<arg type='@' index='0' declared_type='NSString*' name='title'/>
+<arg type='I' index='1' declared_type='SVPullToRefreshState' name='state'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='setTitleLabel:'>
-<arg name='titleLabel' declared_type='UILabel*' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
+<arg type='@' index='0' declared_type='UILabel*' name='titleLabel'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='startAnimating'>
-<retval declared_type='void' type='v'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='state'>
-<retval declared_type='SVPullToRefreshState' type='I'/>
+<retval type='I' declared_type='SVPullToRefreshState'/>
 </method>
 <method selector='stopAnimating'>
-<retval declared_type='void' type='v'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='subtitleLabel'>
-<retval declared_type='UILabel*' type='@'/>
+<retval type='@' declared_type='UILabel*'/>
 </method>
 <method selector='textColor'>
-<retval declared_type='UIColor*' type='@'/>
+<retval type='@' declared_type='UIColor*'/>
 </method>
 <method selector='titleLabel'>
-<retval declared_type='UILabel*' type='@'/>
+<retval type='@' declared_type='UILabel*'/>
 </method>
 <method selector='triggerRefresh'>
-<retval declared_type='void' type='v'/>
+<retval type='v' declared_type='void'/>
 </method>
 </class>
 <class name='UIScrollView'>
 <method selector='addInfiniteScrollingWithActionHandler:'>
-<arg name='actionHandler' function_pointer='true' declared_type='void (^)(void)' index='0' type='@?'>
-<retval declared_type='void' type='v'/>
+<arg function_pointer='true' type='@?' index='0' declared_type='void (^)(void)' name='actionHandler'>
+<retval type='v' declared_type='void'/>
 </arg>
-<retval declared_type='void' type='v'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='addPullToRefreshWithActionHandler:'>
-<arg name='actionHandler' function_pointer='true' declared_type='void (^)(void)' index='0' type='@?'>
-<retval declared_type='void' type='v'/>
+<arg function_pointer='true' type='@?' index='0' declared_type='void (^)(void)' name='actionHandler'>
+<retval type='v' declared_type='void'/>
 </arg>
-<retval declared_type='void' type='v'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='infiniteScrollingView'>
-<retval declared_type='SVInfiniteScrollingView*' type='@'/>
+<retval type='@' declared_type='SVInfiniteScrollingView*'/>
 </method>
 <method selector='pullToRefreshView'>
-<retval declared_type='SVPullToRefreshView*' type='@'/>
+<retval type='@' declared_type='SVPullToRefreshView*'/>
 </method>
 <method selector='setInfiniteScrollingView:'>
-<arg name='infiniteScrollingView' declared_type='SVInfiniteScrollingView*' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
+<arg type='@' index='0' declared_type='SVInfiniteScrollingView*' name='infiniteScrollingView'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='setPullToRefreshView:'>
-<arg name='pullToRefreshView' declared_type='SVPullToRefreshView*' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
+<arg type='@' index='0' declared_type='SVPullToRefreshView*' name='pullToRefreshView'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='setShowsInfiniteScrolling:'>
-<arg name='showsInfiniteScrolling' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
+<arg type='B' index='0' declared_type='BOOL' name='showsInfiniteScrolling'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='setShowsPullToRefresh:'>
-<arg name='showsPullToRefresh' declared_type='BOOL' index='0' type='B'/>
-<retval declared_type='void' type='v'/>
+<arg type='B' index='0' declared_type='BOOL' name='showsPullToRefresh'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='showsInfiniteScrolling'>
-<retval declared_type='BOOL' type='B'/>
+<retval type='B' declared_type='BOOL'/>
 </method>
 <method selector='showsPullToRefresh'>
-<retval declared_type='BOOL' type='B'/>
+<retval type='B' declared_type='BOOL'/>
 </method>
 <method selector='triggerInfiniteScrolling'>
-<retval declared_type='void' type='v'/>
+<retval type='v' declared_type='void'/>
 </method>
 <method selector='triggerPullToRefresh'>
-<retval declared_type='void' type='v'/>
-</method>
-</class>
-<class name='UIViewController'>
-<method selector='setSidePanelController:'>
-<arg name='sidePanelController' declared_type='JASidePanelController*' index='0' type='@'/>
-<retval declared_type='void' type='v'/>
-</method>
-<method selector='sidePanelController'>
-<retval declared_type='JASidePanelController*' type='@'/>
+<retval type='v' declared_type='void'/>
 </method>
 </class>
 </signatures>

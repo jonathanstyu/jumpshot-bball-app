@@ -25,12 +25,17 @@ class ViewplayerViewController < UIViewController
     name_label.backgroundColor = :clear.uicolor 
     view << name_label
     
-    performance_table = UITableView.new 
-    performance_table.frame = CGRect.make(x: 0, y: scr_width / 6, width: scr_width, height: scr_height - name_label.frame.height)
-    performance_table.delegate = performance_table.dataSource = self
-    performance_table.rowHeight = 130
-    performance_table.backgroundColor = :clear.uicolor
-    view << performance_table
+    @performance_table = UITableView.new 
+    @performance_table.frame = CGRect.make(x: 0, y: scr_width / 6, width: scr_width, height: scr_height - name_label.frame.height)
+    @performance_table.delegate = @performance_table.dataSource = self
+    @performance_table.rowHeight = 130
+    @performance_table.backgroundColor = :clear.uicolor
+    @performance_table.addPullToRefreshWithActionHandler(
+    Proc.new do 
+      loadData
+    end
+    )
+    view << @performance_table
   end
   
   def tableView(tableView, numberOfRowsInSection: section)
@@ -65,4 +70,12 @@ class ViewplayerViewController < UIViewController
   def shouldAutorotateToInterfaceOrientation(interfaceOrientation)
     interfaceOrientation == UIInterfaceOrientationPortrait
   end
+  
+  def loadData
+    Dispatch::Queue.main.after(2) {
+      @performance_table.reloadData
+      @performance_table.pullToRefreshView.stopAnimating
+    }
+  end
+  
 end

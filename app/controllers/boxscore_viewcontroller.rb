@@ -8,6 +8,11 @@ class BoxscoreViewController < UITableViewController
     tableView.separatorColor = :black.uicolor
     tableView.rowHeight = 135
     tableView.dataSource = tableView.delegate = self
+    tableView.addPullToRefreshWithActionHandler(
+    Proc.new do 
+      loadData
+    end
+    )
 
   end
   
@@ -67,6 +72,13 @@ class BoxscoreViewController < UITableViewController
   
   def tableView(tableView, didSelectRowAtIndexPath: indexPath)
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
+  end
+  
+  def loadData
+    Dispatch::Queue.main.after(2){
+      view.reloadData
+      tableView.pullToRefreshView.stopAnimating
+    }
   end
   
 end
