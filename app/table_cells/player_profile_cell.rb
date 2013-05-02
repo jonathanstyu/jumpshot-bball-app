@@ -136,7 +136,7 @@ class ProfileCell < UITableViewCell
     boundsX = contentRect.origin.x
     widthTable = self.contentView.bounds.width
     colWidth = (widthTable) / 6
-    date_frame = CGRect.make(x: boundsX + 15, y: 20, width: widthTable/3, height: 25)
+    date_frame = CGRect.make(x: boundsX + 15, y: 10, width: widthTable/3, height: 50)
     points_frame = CGRect.make(x: widthTable * 0.45, y: 10, width: colWidth, height: 25)
     
     @date_label.frame = date_frame

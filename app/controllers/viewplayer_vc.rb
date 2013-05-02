@@ -3,8 +3,8 @@ class ViewplayerViewController < UIViewController
   
   def viewDidLoad
     super
-    self.title = "#{player.player_name}"
-    view.backgroundColor = :white.uicolor
+    self.title = "Profile"
+    view.backgroundColor = 0xf4f4f4.uicolor
     layout_views
   end
   
@@ -18,18 +18,78 @@ class ViewplayerViewController < UIViewController
     scr_width = view.bounds.width
     scr_height = view.bounds.height
     
+    if Device.ipad?
+      table_y = scr_width / 5
+      name_font = :bold.uifont(30)
+      header_font = :bold.uifont(30)
+      subtitle_font = :bold.uifont(14)
+    else
+      table_y = scr_width / 3
+      name_font = :bold.uifont(26)
+      header_font = :bold.uifont(24)
+      subtitle_font = :bold.uifont(11)
+    end
+    
     name_label = UILabel.new
-    name_label.frame = CGRect.make(x: scr_width * 0.1, y:0, width: scr_width / 2, height: scr_height / 10)
+    name_label.frame = CGRect.make(x: scr_width * 0.05, y:5, width: scr_width*0.95, height: scr_height * 0.07)
     name_label.text = player.player_name
-    name_label.font = "Avenir-Black".uifont(22)
+    name_label.font = name_font
     name_label.backgroundColor = :clear.uicolor 
     view << name_label
     
+    @pts_avg_label = UILabel.new
+    @pts_avg_label.frame = CGRect.make(x: scr_width * 0.45, y: scr_height * 0.08, width: scr_width / 6, height: 40)
+    @pts_avg_label.textAlignment = :center.uialignment
+    @pts_avg_label.backgroundColor = :clear.uicolor 
+    @pts_avg_label.text = "#{player.average(:points)}"
+    @pts_avg_label.font = header_font
+    view << @pts_avg_label
+    
+    @reb_avg_label = UILabel.new
+    @reb_avg_label.frame = @pts_avg_label.frame.beside
+    @reb_avg_label.textAlignment = :center.uialignment
+    @reb_avg_label.backgroundColor = :clear.uicolor 
+    @reb_avg_label.text = "#{player.average(:rebounds)}"
+    @reb_avg_label.font = header_font
+    view << @reb_avg_label
+    
+    @ast_avg_label = UILabel.new
+    @ast_avg_label.textAlignment = :center.uialignment
+    @ast_avg_label.frame = @reb_avg_label.frame.beside
+    @ast_avg_label.backgroundColor = :clear.uicolor 
+    @ast_avg_label.text = "#{player.average(:assists)}"
+    @ast_avg_label.font = header_font
+    view << @ast_avg_label
+    
+    pt_subtitle = UILabel.new
+    pt_subtitle.textAlignment = :center.uialignment
+    pt_subtitle.frame = @pts_avg_label.frame.below.height(17)
+    pt_subtitle.font = subtitle_font
+    pt_subtitle.backgroundColor = :clear.uicolor
+    pt_subtitle.text = "pts/game"
+    view << pt_subtitle
+
+    rb_subtitle = UILabel.new
+    rb_subtitle.textAlignment = :center.uialignment
+    rb_subtitle.frame = @reb_avg_label.frame.below.height(17)
+    rb_subtitle.font = subtitle_font
+    rb_subtitle.backgroundColor = :clear.uicolor
+    rb_subtitle.text = "reb/game"
+    view << rb_subtitle
+
+    at_subtitle = UILabel.new
+    at_subtitle.textAlignment = :center.uialignment
+    at_subtitle.frame = @ast_avg_label.frame.below.height(17)
+    at_subtitle.font = subtitle_font
+    at_subtitle.backgroundColor = :clear.uicolor
+    at_subtitle.text = "ast/game"
+    view << at_subtitle
+    
     @performance_table = UITableView.new 
-    @performance_table.frame = CGRect.make(x: 0, y: scr_width / 6, width: scr_width, height: scr_height - name_label.frame.height)
+    @performance_table.frame = CGRect.make(x: 0, y: table_y, width: scr_width, height: scr_height - name_label.frame.height)
     @performance_table.delegate = @performance_table.dataSource = self
     @performance_table.rowHeight = 130
-    @performance_table.backgroundColor = :clear.uicolor
+    @performance_table.backgroundColor = :white.uicolor
     @performance_table.addPullToRefreshWithActionHandler(
     Proc.new do 
       loadData
@@ -39,7 +99,7 @@ class ViewplayerViewController < UIViewController
   end
   
   def tableView(tableView, numberOfRowsInSection: section)
-    @performances = Performance.where(:player_dat).eq(player.id).all.reverse
+    @performances = player.return_performances
     return @performances.count
   end
   
@@ -76,6 +136,9 @@ class ViewplayerViewController < UIViewController
     Dispatch::Queue.main.after(2) {
       @performance_table.reloadData
       @performance_table.pullToRefreshView.stopAnimating
+      @pts_avg_label.text = "#{player.average(:points)}"
+      @reb_avg_label.text = "#{player.average(:rebounds)}"
+      @ast_avg_label.text = "#{player.average(:assists)}"
     }
   end
   

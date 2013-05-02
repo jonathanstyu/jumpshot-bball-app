@@ -56,10 +56,12 @@ class BoxscoreViewController < UITableViewController
     end
   
     players = [game.team_1, game.team_2]
-    selected_player = players[indexPath.section][indexPath.row]
-    performance = Performance.where(:game_dat).eq(game.id).and(:player_dat).eq(selected_player.id).first
+    @selected_player = players[indexPath.section][indexPath.row]
+    performance = Performance.where(:game_dat).eq(game.id).and(:player_dat).eq(@selected_player.id).first
     
-    cell.date_label.text = selected_player.player_name
+    cell.date_label.text = @selected_player.player_name
+    cell.date_label.lineBreakMode = NSLineBreakByWordWrapping
+    cell.date_label.numberOfLines = 0
     cell.points_label.text = performance.points.to_s
     cell.fg_label.text = "#{performance.made_field_goals.to_s}/#{performance.total_field_goals.to_s}"
     cell.rebounds_label.text = performance.rebounds.to_s
@@ -72,6 +74,8 @@ class BoxscoreViewController < UITableViewController
   
   def tableView(tableView, didSelectRowAtIndexPath: indexPath)
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    # player_panel = ViewplayerViewController.alloc.initWithPlayer(@selected_player)
+    # self.navigationController.pushViewController(player_panel, animated: true)
   end
   
   def loadData

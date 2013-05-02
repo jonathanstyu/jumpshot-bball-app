@@ -1,5 +1,6 @@
 class SettingsViewController < UIViewController
   include MotionTable::GroupedTable
+  include SugarCube::Modal
   
   def viewDidLoad
     super
@@ -10,6 +11,11 @@ class SettingsViewController < UIViewController
         {title: "3 pointers allowed", accessoryAction: :toggle_3pts, accessory: :switch, accessoryDefault: true},
         {title: "2pts / 3pts", accessoryAction: :toggle_12, accessory: :switch, accessoryDefault: true},
         {title: "Unequal teams allowed?", accessoryAction: :toggle_team_num, accessory: :switch, accessoryDefault: false}
+      ]
+    },{
+      title: "How to Use This App",
+      cells: [
+        {title: "Open Tutorial", action: :open_tutorial}
       ]
     }, {
       title: "App Made With ...", 
@@ -41,6 +47,11 @@ class SettingsViewController < UIViewController
   
   def toggle_team_num(args)
     App::Persistence['teamnumb'] = args[:value]
+  end
+  
+  def open_tutorial
+    tutorial = TutorialViewController.new
+    present_modal(tutorial)
   end
   
 end
