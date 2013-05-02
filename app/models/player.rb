@@ -3,7 +3,8 @@ class Player
   # include MotionModel::ArrayModelAdapter
   
   columns :player_name => {:type => :string, :default => "Johnny Appleseed"},
-  :position => {:type => :string, :default => "Guard"}
+  :position => {:type => :string, :default => "Guard"},
+  :image => {:type => :string, :default => "blank_profile.png"} 
   
   has_many :performances
   
@@ -23,5 +24,5 @@ class Player
       return (avge/performances.count).to_f
     end
   end
-  
+    
 end

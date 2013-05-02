@@ -14,7 +14,7 @@ class ProfileCell < UITableViewCell
       subtitle_font = :bold.uifont(12)
     else
       name_font = :bold.uifont(17)
-      digit_font = :bold.uifont(25)
+      digit_font = :bold.uifont(20)
       subtitle_font = :bold.uifont(11)
     end
         
@@ -32,7 +32,7 @@ class ProfileCell < UITableViewCell
     
     @fg_label = UILabel.new
     @fg_label.textAlignment = :center.uialignment
-    @fg_label.font = :bold.uifont(22)
+    @fg_label.font = digit_font
     @fg_label.backgroundColor = :clear.uicolor
     @fg_label.textColor = :black.uicolor
     

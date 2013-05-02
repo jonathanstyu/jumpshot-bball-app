@@ -67,9 +67,11 @@ class RosterViewController < UIViewController
   end
 
   def open_add_player
-    alert = UIAlertView.alloc.initWithTitle("Add Player", message: "What is the player's name?", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Ok", nil)
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput
-    alert.show
+      UIActionSheet.alert('Add from where?', buttons: ['Cancel', nil, 'Facebook', 'Manually']) {
+        |pressed| 
+        self.manual_player_add if pressed == 'Manually'
+      }
+    
   end
   
   def alertView(alertView, clickedButtonAtIndex: buttonIndex)
@@ -82,6 +84,12 @@ class RosterViewController < UIViewController
   def setEditing(is_editing, animated: is_animated)
     @player_viewer.setEditing(is_editing, animated: is_animated)
     super
+  end
+  
+  def manual_player_add
+    alert = UIAlertView.alloc.initWithTitle("Add Player", message: "What is the player's name?", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Ok", nil)
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput
+    alert.show
   end
   
 end

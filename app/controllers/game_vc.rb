@@ -246,10 +246,6 @@ class GameViewController < UIViewController
     @data_tag = {}
     @buttons.each {|button| button.enabled = false }
   end
-    
-  # def new_game
-  #   UIActionSheet.alert 'Old game will be saved.', buttons: ['Cancel', nil, 'Okay'], cancel: proc {puts "boo"}, success: proc { new_game = NewgameViewController.new
-  #   present_modal(UINavigationController.alloc.initWithRootViewController(new_game)) }
-  # end
+  
   
 end

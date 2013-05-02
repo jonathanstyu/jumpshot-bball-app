@@ -21,21 +21,31 @@ class ViewplayerViewController < UIViewController
     if Device.ipad?
       table_y = scr_width / 5
       name_font = :bold.uifont(30)
-      header_font = :bold.uifont(30)
+      header_font = :bold.uifont(28)
       subtitle_font = :bold.uifont(14)
+      name_x = scr_width * 0.25
+      pic_frame = CGRect.make(x: scr_width * 0.05, y: scr_width * 0.02, width: scr_width * 0.15, height: scr_width * 0.15)
     else
       table_y = scr_width / 3
-      name_font = :bold.uifont(26)
-      header_font = :bold.uifont(24)
+      name_font = :bold.uifont(23)
+      header_font = :bold.uifont(20)
       subtitle_font = :bold.uifont(11)
+      name_x = scr_width * 0.3
+      pic_frame = CGRect.make(x: scr_width * 0.05, y: scr_width * 0.05, width: scr_width * 0.25, height: scr_width * 0.25)
     end
     
     name_label = UILabel.new
-    name_label.frame = CGRect.make(x: scr_width * 0.05, y:5, width: scr_width*0.95, height: scr_height * 0.07)
+    name_label.frame = CGRect.make(x: name_x, y:5, width: scr_width*0.95, height: scr_height * 0.07)
     name_label.text = player.player_name
     name_label.font = name_font
     name_label.backgroundColor = :clear.uicolor 
     view << name_label
+    
+    @pic_view = UIImageView.new 
+    @pic_view.frame = pic_frame 
+    @pic_view.image = "#{player.image}".uiimage
+    # @pic_view.on(:touch) {find_new_pic}
+    view << @pic_view
     
     @pts_avg_label = UILabel.new
     @pts_avg_label.frame = CGRect.make(x: scr_width * 0.45, y: scr_height * 0.08, width: scr_width / 6, height: 40)
@@ -132,6 +142,10 @@ class ViewplayerViewController < UIViewController
     interfaceOrientation == UIInterfaceOrientationPortrait
   end
   
+  def tableView(tableView, didSelectRowAtIndexPath: indexPath)
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+  end
+  
   def loadData
     Dispatch::Queue.main.after(2) {
       @performance_table.reloadData
@@ -140,6 +154,10 @@ class ViewplayerViewController < UIViewController
       @reb_avg_label.text = "#{player.average(:rebounds)}"
       @ast_avg_label.text = "#{player.average(:assists)}"
     }
+  end
+  
+  def find_new_pic
+    puts "hello"
   end
   
 end

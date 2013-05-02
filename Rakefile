@@ -14,8 +14,11 @@ Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   app.name = 'JumpShot'
   app.prerendered_icon = true
-  app.device_family = [:iphone, :ipad]
+  app.device_family = [:ipad, :iphone]
+  # app.identifier = 'com.jon.test-app'
+  # app.info_plist['CFBundleURLTypes'] = [{'CFBundleURLSchemes' => ['514585911935812']}]
   app.pods do 
     # pod 'SVPullToRefresh'
+    # pod 'Facebook-iOS-SDK'
   end
 end
