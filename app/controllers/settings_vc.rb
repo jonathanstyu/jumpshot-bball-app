@@ -21,8 +21,7 @@ class SettingsViewController < UIViewController
       title: "App Made With ...", 
       cells: [
         {title: "Rubymotion"}, 
-        {title: "Bubblewrap"},
-        {title: "Motion-Model"}
+        {title: "Motion-model"}
       ]
     }]
     self.view = self.createTableViewFromData(@grouped_table_view_data)
