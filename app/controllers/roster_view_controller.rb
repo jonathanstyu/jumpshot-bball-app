@@ -67,7 +67,7 @@ class RosterViewController < UIViewController
   end
 
   def open_add_player
-      UIActionSheet.alert('Add from where?', buttons: ['Cancel', nil, 'Facebook', 'Manually']) {
+      UIActionSheet.alert('Add from where?', buttons: ['Cancel', nil, 'Address Book', 'Manually']) {
         |pressed| 
         self.manual_player_add if pressed == 'Manually'
       }

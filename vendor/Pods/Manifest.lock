@@ -1,13 +1,10 @@
 PODS:
-  - Facebook-iOS-SDK (3.5.1)
   - SVPullToRefresh (0.4.1)
 
 DEPENDENCIES:
-  - Facebook-iOS-SDK
   - SVPullToRefresh
 
 SPEC CHECKSUMS:
-  Facebook-iOS-SDK: 0dbd897e842cefeb012ec2eb8eba659ba6b96b12
   SVPullToRefresh: 61a0e4bd12bd6f8e3465909810b0fbeb1a28d5f2
 
 COCOAPODS: 0.19.1

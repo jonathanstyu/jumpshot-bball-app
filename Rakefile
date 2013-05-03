@@ -17,12 +17,12 @@ Motion::Project::App.setup do |app|
   app.interface_orientations = [:portrait]
   
   # For facebook integration 
-  app.frameworks += %w{ AdSupport Accounts Social}
-  app.identifier = 'com.jon.test-app'
-  app.info_plist['FacebookAppID'] = 514585911935812
-  app.info_plist['CFBundleURLTypes'] = [{'CFBundleURLSchemes' => ["fb514585911935812"]}]
+  # app.frameworks += %w{ AdSupport Accounts Social}
+  # app.identifier = 'com.jon.test-app'
+  # app.info_plist['FacebookAppID'] = 514585911935812
+  # app.info_plist['CFBundleURLTypes'] = [{'CFBundleURLSchemes' => ["fb514585911935812"]}]
   app.pods do 
     pod 'SVPullToRefresh'
-    pod 'Facebook-iOS-SDK'
+    # pod 'Facebook-iOS-SDK'
   end
 end
