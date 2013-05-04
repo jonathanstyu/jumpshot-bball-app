@@ -124,11 +124,15 @@ class ViewplayerViewController < UIViewController
 
     cell.date_label.text = performance.game_name
     cell.points_label.text = performance.points.to_s
-    cell.fg_label.text = "#{performance.made_field_goals.to_s}/#{performance.total_field_goals.to_s}"
+    cell.fg_label.text = "#{performance.fg[0].to_s}/#{performance.fg[1].to_s}"
+    cell.ft_label.text = "#{performance.ft[0].to_s}/#{performance.ft[1].to_s}"
+    cell.fg3_label.text = "#{performance.threefg[0].to_s}/#{performance.threefg[1].to_s}"
     cell.rebounds_label.text = performance.rebounds.to_s
     cell.assists_label.text = performance.assists.to_s
     cell.steals_label.text = performance.steals.to_s
     cell.blocks_label.text = performance.blocks.to_s
+    cell.to_label.text = performance.turnovers.to_s
+    cell.f_label.text = performance.fouls.to_s
     
     cell
   end

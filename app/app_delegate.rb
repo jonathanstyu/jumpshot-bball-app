@@ -56,5 +56,9 @@ class AppDelegate
     Player.serialize_to_file('players.dat')
   end
   
+  def applicationWillDidBecomeActive(application)
+    set_up_local_data
+  end
+  
 end
 

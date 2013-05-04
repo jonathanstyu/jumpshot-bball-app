@@ -10,21 +10,17 @@ class Performance
   :steals => {:type => :int, :default => 0}, 
   :blocks => {:type => :int, :default => 0}, 
   :turnovers => {:type => :int, :default => 0}, 
-  :made_field_goals => {:type => :int, :default => 0}, 
-  :total_field_goals => {:type => :int, :default => 0},
+  :fg => {:type => :array, :default => [0,0]},
   :game_name => {:type => :string, :default => "Game Deleted"},
-  :made_3fg => {:type => :int, :default => 0}, 
-  :total_3fg => {:type => :int, :default => 0},
-  :made_ft => {:type => :int, :default => 0}, 
-  :total_ft => {:type => :int, :default => 0},
+  :threefg => {:type => :array, :default => [0,0]}, 
+  :ft => {:type => :array, :default => [0,0]}, 
   :fouls => {:type => :int, :default => 0}
   
-  belongs_to :player
   belongs_to :game
   
   def made_fg
-    self.total_field_goals += 1
-    self.made_field_goals += 1 
+    self.fg[1] += 1
+    self.fg[0] += 1 
     if App::Persistence['12pts'] == true
       self.points += 2
     else
@@ -32,21 +28,35 @@ class Performance
     end
   end
   
+  def missed_fg
+    self.fg[1] += 1
+  end
+  
   def made_3fg
-    self.total_field_goals += 1
-    self.made_field_goals += 1 
+    self.threefg[1] += 1
+    self.threefg[0] += 1 
+    self.fg[1] += 1
+    self.fg[0] += 1 
     if App::Persistence['12pts'] == true
       self.points += 3
     else
       self.points += 2
     end
-
+  end
+  
+  def missed_3fg
+    self.threefg[1] += 1
+    self.fg[1] += 1
   end
   
   def made_ft
-    self.total_ft += 1
-    self.made_ft += 1 
+    self.ft[0] += 1
+    self.ft[1] += 1 
     self.points += 1
+  end
+  
+  def missed_ft
+    self.ft[1] += 1 
   end
   
 end

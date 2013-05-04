@@ -6,6 +6,10 @@ class ProfileCell < UITableViewCell
   attr_accessor :assists_label
   attr_accessor :steals_label
   attr_accessor :blocks_label
+  attr_accessor :ft_label
+  attr_accessor :fg3_label
+  attr_accessor :to_label
+  attr_accessor :f_label
   
   def createLabels
     if Device.ipad?
@@ -13,9 +17,9 @@ class ProfileCell < UITableViewCell
       digit_font = :bold.uifont(30)
       subtitle_font = :bold.uifont(12)
     else
-      name_font = :bold.uifont(17)
-      digit_font = :bold.uifont(20)
-      subtitle_font = :bold.uifont(11)
+      name_font = :bold.uifont(15)
+      digit_font = :bold.uifont(18)
+      subtitle_font = :bold.uifont(9)
     end
         
     @date_label = UILabel.new
@@ -35,6 +39,18 @@ class ProfileCell < UITableViewCell
     @fg_label.font = digit_font
     @fg_label.backgroundColor = :clear.uicolor
     @fg_label.textColor = :black.uicolor
+    
+    @fg3_label = UILabel.new
+    @fg3_label.textAlignment = :center.uialignment
+    @fg3_label.font = digit_font
+    @fg3_label.backgroundColor = :clear.uicolor
+    @fg3_label.textColor = :black.uicolor
+    
+    @ft_label = UILabel.new
+    @ft_label.textAlignment = :center.uialignment
+    @ft_label.font = digit_font
+    @ft_label.backgroundColor = :clear.uicolor
+    @ft_label.textColor = :black.uicolor
     
     @rebounds_label = UILabel.new
     @rebounds_label.textAlignment = :center.uialignment
@@ -60,6 +76,18 @@ class ProfileCell < UITableViewCell
     @blocks_label.backgroundColor = :clear.uicolor
     @blocks_label.textColor = :black.uicolor
     
+    @to_label = UILabel.new
+    @to_label.textAlignment = :center.uialignment
+    @to_label.font = digit_font
+    @to_label.backgroundColor = :clear.uicolor
+    @to_label.textColor = :black.uicolor
+    
+    @f_label = UILabel.new
+    @f_label.textAlignment = :center.uialignment
+    @f_label.font = digit_font
+    @f_label.backgroundColor = :clear.uicolor
+    @f_label.textColor = :black.uicolor    
+    
     @info_label = UILabel.new
     @info_label.textAlignment = :center.uialignment
     @info_label.font = subtitle_font
@@ -72,7 +100,7 @@ class ProfileCell < UITableViewCell
     @infoR_label.font = subtitle_font
     @infoR_label.backgroundColor = :clear.uicolor
     @infoR_label.textColor = :black.uicolor
-    @infoR_label.text = "rebounds"
+    @infoR_label.text = "rebs"
     
     @infoA_label = UILabel.new
     @infoA_label.textAlignment = :center.uialignment
@@ -100,24 +128,48 @@ class ProfileCell < UITableViewCell
     @infoF_label.font = subtitle_font
     @infoF_label.backgroundColor = :clear.uicolor
     @infoF_label.textColor = :black.uicolor
-    @infoF_label.text = "FgA/FgM"
+    @infoF_label.text = "FGs"
     
     @info3F_label = UILabel.new
     @info3F_label.textAlignment = :center.uialignment
     @info3F_label.font = subtitle_font
     @info3F_label.backgroundColor = :clear.uicolor
     @info3F_label.textColor = :black.uicolor
-    @info3F_label.text = "3FgA/3FgM"
+    @info3F_label.text = "3FGs"
     
-
+    @infoft_label = UILabel.new
+    @infoft_label.textAlignment = :center.uialignment
+    @infoft_label.font = subtitle_font
+    @infoft_label.backgroundColor = :clear.uicolor
+    @infoft_label.textColor = :black.uicolor
+    @infoft_label.text = "FTs"
+    
+    @infoTO_label = UILabel.new
+    @infoTO_label.textAlignment = :center.uialignment
+    @infoTO_label.font = subtitle_font
+    @infoTO_label.backgroundColor = :clear.uicolor
+    @infoTO_label.textColor = :black.uicolor
+    @infoTO_label.text = "TOs"
+    
+    @infoFO_label = UILabel.new
+    @infoFO_label.textAlignment = :center.uialignment
+    @infoFO_label.font = subtitle_font
+    @infoFO_label.backgroundColor = :clear.uicolor
+    @infoFO_label.textColor = :black.uicolor
+    @infoFO_label.text = "fouls"
+    
     self.contentView << @date_label 
     
     self.contentView << @points_label
     self.contentView << @fg_label
+    self.contentView << @fg3_label
+    self.contentView << @ft_label
     self.contentView << @rebounds_label 
     self.contentView << @assists_label
     self.contentView << @steals_label
     self.contentView << @blocks_label
+    self.contentView << @to_label
+    self.contentView << @f_label
     
     self.contentView << @info_label
     self.contentView << @infoR_label
@@ -125,6 +177,10 @@ class ProfileCell < UITableViewCell
     self.contentView << @infoS_label
     self.contentView << @infoB_label
     self.contentView << @infoF_label
+    self.contentView << @info3F_label
+    self.contentView << @infoft_label
+    self.contentView << @infoTO_label
+    self.contentView << @infoFO_label
     
     self 
   end
@@ -135,17 +191,21 @@ class ProfileCell < UITableViewCell
     contentRect = self.contentView.bounds
     boundsX = contentRect.origin.x
     widthTable = self.contentView.bounds.width
-    colWidth = (widthTable) / 6
-    date_frame = CGRect.make(x: boundsX + 15, y: 10, width: widthTable/3, height: 50)
-    points_frame = CGRect.make(x: widthTable * 0.45, y: 10, width: colWidth, height: 25)
+    colWidth = (widthTable) / 8
+    date_frame = CGRect.make(x: boundsX + 15, y: 10, width: widthTable/4, height: 50)
+    points_frame = CGRect.make(x: widthTable * 0.36, y: 10, width: colWidth, height: 25)
     
     @date_label.frame = date_frame
     @points_label.frame = points_frame
     @fg_label.frame = @info_label.frame.below(15).height(25)
-    @rebounds_label.frame = points_frame.beside
+    @fg3_label.frame = points_frame.beside
+    @ft_label.frame = @info3F_label.frame.below(15).height(25)
+    @rebounds_label.frame = @fg3_label.frame.beside
     @assists_label.frame = @rebounds_label.frame.beside
     @steals_label.frame = @infoR_label.frame.below(15).height(25)
     @blocks_label.frame = @infoA_label.frame.below(15).height(25)
+    @to_label.frame = @assists_label.frame.beside
+    @f_label.frame = @infoTO_label.frame.below(15).height(25)
     
     @info_label.frame = @points_label.frame.below(4).height(20)
     @infoF_label.frame = @fg_label.frame.below(4).height(20)
@@ -153,6 +213,10 @@ class ProfileCell < UITableViewCell
     @infoA_label.frame = @assists_label.frame.below(4).height(20)
     @infoS_label.frame = @steals_label.frame.below(4).height(20)
     @infoB_label.frame = @blocks_label.frame.below(4).height(20)
+    @info3F_label.frame = @fg3_label.frame.below(4).height(20)
+    @infoft_label.frame = @ft_label.frame.below(4).height(20)
+    @infoTO_label.frame = @to_label.frame.below(4).height(20)
+    @infoFO_label.frame = @f_label.frame.below(4).height(20)
     
     
   end

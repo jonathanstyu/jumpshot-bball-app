@@ -92,7 +92,7 @@ class NewgameViewController < UIViewController
   
   def tableView(tableView, moveRowAtIndexPath: fromIndexPath, toIndexPath: toIndexPath)
     player_to_move = @players[fromIndexPath.section][fromIndexPath.row]
-    @players[toIndexPath.section] << player_to_move 
+    @players[toIndexPath.section] << player_to_move
     @players[fromIndexPath.section].delete(player_to_move)
   end
   
