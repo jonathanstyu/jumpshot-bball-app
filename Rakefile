@@ -23,6 +23,7 @@ Motion::Project::App.setup do |app|
   # app.info_plist['CFBundleURLTypes'] = [{'CFBundleURLSchemes' => ["fb514585911935812"]}]
   app.pods do 
     pod 'SVPullToRefresh'
+    pod 'MCSwipeTableViewCell'
     # pod 'Facebook-iOS-SDK'
   end
 end

@@ -6,6 +6,12 @@
 // project.
 
 
+// MCSwipeTableViewCell
+#define COCOAPODS_POD_AVAILABLE_MCSwipeTableViewCell
+#define COCOAPODS_VERSION_MAJOR_MCSwipeTableViewCell 1
+#define COCOAPODS_VERSION_MINOR_MCSwipeTableViewCell 0
+#define COCOAPODS_VERSION_PATCH_MCSwipeTableViewCell 0
+
 // SVPullToRefresh
 #define COCOAPODS_POD_AVAILABLE_SVPullToRefresh
 #define COCOAPODS_VERSION_MAJOR_SVPullToRefresh 0

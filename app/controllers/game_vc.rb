@@ -132,11 +132,13 @@ class GameViewController < UIViewController
     cell = tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier) || begin
       cell = UITableViewCell.alloc.initWithStyle(UITableViewCellStyleDefault, reuseIdentifier:@reuseIdentifier)
       cell
-    end    
-      cell.text = @players_teams[indexPath.section][indexPath.row].player_name
-      cell.textColor = :white.uicolor
-      cell.font = Device.ipad? ? "Avenir-Black".uifont(25) : "Avenir-Black".uifont(16)
-      cell
+    end 
+    player = Player.where(:id).eq(@players_teams[indexPath.section][indexPath.row].to_i).first
+       
+    cell.text = player.player_name
+    cell.textColor = :white.uicolor
+    cell.font = Device.ipad? ? "Avenir-Black".uifont(25) : "Avenir-Black".uifont(16)
+    cell
   end
   
   def tableView(tableView, didSelectRowAtIndexPath: indexPath)
@@ -162,8 +164,7 @@ class GameViewController < UIViewController
   # Resets the menu, updates the labels 
   def process_data(sender)
     action_tag = sender.tag 
-    accessed_player = @data_tag[:player]
-    player_performance = current_game.performances.where(:player_dat).eq(accessed_player.id).first
+    player_performance = current_game.performances.where(:player_dat).eq(@data_tag[:player].to_i).first
     if action_tag == 1
       player_performance.made_fg
     elsif action_tag == 3

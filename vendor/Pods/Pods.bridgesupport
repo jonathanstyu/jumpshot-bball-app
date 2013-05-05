@@ -1,174 +1,296 @@
 <?xml version='1.0'?>
 <signatures version='1.0'>
-<enum value='10' name='SVInfiniteScrollingStateAll'/>
-<enum value='2' name='SVInfiniteScrollingStateLoading'/>
-<enum value='0' name='SVInfiniteScrollingStateStopped'/>
-<enum value='1' name='SVInfiniteScrollingStateTriggered'/>
-<enum value='10' name='SVPullToRefreshStateAll'/>
-<enum value='2' name='SVPullToRefreshStateLoading'/>
-<enum value='0' name='SVPullToRefreshStateStopped'/>
-<enum value='1' name='SVPullToRefreshStateTriggered'/>
+<enum name='MCSwipeTableViewCellDirectionCenter' value='1'/>
+<enum name='MCSwipeTableViewCellDirectionLeft' value='0'/>
+<enum name='MCSwipeTableViewCellDirectionRight' value='2'/>
+<enum name='MCSwipeTableViewCellModeExit' value='0'/>
+<enum name='MCSwipeTableViewCellModeSwitch' value='1'/>
+<enum name='MCSwipeTableViewCellState1' value='1'/>
+<enum name='MCSwipeTableViewCellState2' value='2'/>
+<enum name='MCSwipeTableViewCellState3' value='3'/>
+<enum name='MCSwipeTableViewCellState4' value='4'/>
+<enum name='MCSwipeTableViewCellStateNone' value='0'/>
+<enum name='SVInfiniteScrollingStateAll' value='10'/>
+<enum name='SVInfiniteScrollingStateLoading' value='2'/>
+<enum name='SVInfiniteScrollingStateStopped' value='0'/>
+<enum name='SVInfiniteScrollingStateTriggered' value='1'/>
+<enum name='SVPullToRefreshStateAll' value='10'/>
+<enum name='SVPullToRefreshStateLoading' value='2'/>
+<enum name='SVPullToRefreshStateStopped' value='0'/>
+<enum name='SVPullToRefreshStateTriggered' value='1'/>
+<class name='MCSwipeTableViewCell'>
+<method selector='delegate'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='firstColor'>
+<retval declared_type='int*' type='^i'/>
+</method>
+<method selector='firstIconName'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='fourthColor'>
+<retval declared_type='int*' type='^i'/>
+</method>
+<method selector='fourthIconName'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='initWithStyle:reuseIdentifier:firstStateIconName:firstColor:secondStateIconName:secondColor:thirdIconName:thirdColor:fourthIconName:fourthColor:'>
+<arg index='0' name='style' declared_type='id' type='@'/>
+<arg index='1' name='reuseIdentifier' declared_type='NSString*' type='@'/>
+<arg index='2' name='firstIconName' declared_type='NSString*' type='@'/>
+<arg index='3' name='firstColor' declared_type='id' type='@'/>
+<arg index='4' name='secondIconName' declared_type='NSString*' type='@'/>
+<arg index='5' name='secondColor' declared_type='id' type='@'/>
+<arg index='6' name='thirdIconName' declared_type='NSString*' type='@'/>
+<arg index='7' name='thirdColor' declared_type='id' type='@'/>
+<arg index='8' name='fourthIconName' declared_type='NSString*' type='@'/>
+<arg index='9' name='fourthColor' declared_type='id' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='mode'>
+<retval declared_type='MCSwipeTableViewCellMode' type='I'/>
+</method>
+<method selector='secondColor'>
+<retval declared_type='int*' type='^i'/>
+</method>
+<method selector='secondIconName'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='setDelegate:'>
+<arg index='0' name='delegate' declared_type='id' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setFirstColor:'>
+<arg index='0' name='firstColor' declared_type='int*' type='^i'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setFirstIconName:'>
+<arg index='0' name='firstIconName' declared_type='NSString*' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setFirstStateIconName:firstColor:secondStateIconName:secondColor:thirdIconName:thirdColor:fourthIconName:fourthColor:'>
+<arg index='0' name='firstIconName' declared_type='NSString*' type='@'/>
+<arg index='1' name='firstColor' declared_type='id' type='@'/>
+<arg index='2' name='secondIconName' declared_type='NSString*' type='@'/>
+<arg index='3' name='secondColor' declared_type='id' type='@'/>
+<arg index='4' name='thirdIconName' declared_type='NSString*' type='@'/>
+<arg index='5' name='thirdColor' declared_type='id' type='@'/>
+<arg index='6' name='fourthIconName' declared_type='NSString*' type='@'/>
+<arg index='7' name='fourthColor' declared_type='id' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setFourthColor:'>
+<arg index='0' name='fourthColor' declared_type='int*' type='^i'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setFourthIconName:'>
+<arg index='0' name='fourthIconName' declared_type='NSString*' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setMode:'>
+<arg index='0' name='mode' declared_type='MCSwipeTableViewCellMode' type='I'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setSecondColor:'>
+<arg index='0' name='secondColor' declared_type='int*' type='^i'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setSecondIconName:'>
+<arg index='0' name='secondIconName' declared_type='NSString*' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setThirdColor:'>
+<arg index='0' name='thirdColor' declared_type='int*' type='^i'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setThirdIconName:'>
+<arg index='0' name='thirdIconName' declared_type='NSString*' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='thirdColor'>
+<retval declared_type='int*' type='^i'/>
+</method>
+<method selector='thirdIconName'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+</class>
+<class name='NSObject'>
+<method selector='swipeTableViewCell:didTriggerState:withMode:'>
+<arg index='0' name='cell' declared_type='MCSwipeTableViewCell*' type='@'/>
+<arg index='1' name='state' declared_type='MCSwipeTableViewCellState' type='I'/>
+<arg index='2' name='mode' declared_type='MCSwipeTableViewCellMode' type='I'/>
+<retval declared_type='void' type='v'/>
+</method>
+</class>
 <class name='SVInfiniteScrollingView'>
 <method selector='activityIndicatorViewStyle'>
-<retval type='i' declared_type='UIActivityIndicatorViewStyle'/>
+<retval declared_type='UIActivityIndicatorViewStyle' type='i'/>
 </method>
 <method selector='enabled'>
-<retval type='B' declared_type='BOOL'/>
+<retval declared_type='BOOL' type='B'/>
 </method>
 <method selector='setActivityIndicatorViewStyle:'>
-<arg index='0' type='i' declared_type='UIActivityIndicatorViewStyle' name='activityIndicatorViewStyle'/>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='activityIndicatorViewStyle' declared_type='UIActivityIndicatorViewStyle' type='i'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='setCustomView:forState:'>
-<arg index='0' type='@' declared_type='UIView*' name='view'/>
-<arg index='1' type='I' declared_type='SVInfiniteScrollingState' name='state'/>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='view' declared_type='UIView*' type='@'/>
+<arg index='1' name='state' declared_type='SVInfiniteScrollingState' type='I'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='setEnabled:'>
-<arg index='0' type='B' declared_type='BOOL' name='enabled'/>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='enabled' declared_type='BOOL' type='B'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='startAnimating'>
-<retval type='v' declared_type='void'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='state'>
-<retval type='I' declared_type='SVInfiniteScrollingState'/>
+<retval declared_type='SVInfiniteScrollingState' type='I'/>
 </method>
 <method selector='stopAnimating'>
-<retval type='v' declared_type='void'/>
+<retval declared_type='void' type='v'/>
 </method>
 </class>
 <class name='SVPullToRefreshView'>
 <method selector='activityIndicatorViewStyle'>
-<retval type='i' declared_type='UIActivityIndicatorViewStyle'/>
+<retval declared_type='UIActivityIndicatorViewStyle' type='i'/>
 </method>
 <method selector='arrowColor'>
-<retval type='@' declared_type='UIColor*'/>
+<retval declared_type='UIColor*' type='@'/>
 </method>
 <method selector='dateFormatter'>
-<retval type='@' declared_type='NSDateFormatter*'/>
+<retval declared_type='NSDateFormatter*' type='@'/>
 </method>
 <method selector='dateLabel'>
-<retval type='@' declared_type='UILabel*'/>
+<retval declared_type='UILabel*' type='@'/>
 </method>
 <method selector='lastUpdatedDate'>
-<retval type='@' declared_type='NSDate*'/>
+<retval declared_type='NSDate*' type='@'/>
 </method>
 <method selector='setActivityIndicatorViewStyle:'>
-<arg index='0' type='i' declared_type='UIActivityIndicatorViewStyle' name='activityIndicatorViewStyle'/>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='activityIndicatorViewStyle' declared_type='UIActivityIndicatorViewStyle' type='i'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='setArrowColor:'>
-<arg index='0' type='@' declared_type='UIColor*' name='arrowColor'/>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='arrowColor' declared_type='UIColor*' type='@'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='setCustomView:forState:'>
-<arg index='0' type='@' declared_type='UIView*' name='view'/>
-<arg index='1' type='I' declared_type='SVPullToRefreshState' name='state'/>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='view' declared_type='UIView*' type='@'/>
+<arg index='1' name='state' declared_type='SVPullToRefreshState' type='I'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='setDateFormatter:'>
-<arg index='0' type='@' declared_type='NSDateFormatter*' name='dateFormatter'/>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='dateFormatter' declared_type='NSDateFormatter*' type='@'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='setDateLabel:'>
-<arg index='0' type='@' declared_type='UILabel*' name='dateLabel'/>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='dateLabel' declared_type='UILabel*' type='@'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='setLastUpdatedDate:'>
-<arg index='0' type='@' declared_type='NSDate*' name='lastUpdatedDate'/>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='lastUpdatedDate' declared_type='NSDate*' type='@'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='setSubtitle:forState:'>
-<arg index='0' type='@' declared_type='NSString*' name='subtitle'/>
-<arg index='1' type='I' declared_type='SVPullToRefreshState' name='state'/>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='subtitle' declared_type='NSString*' type='@'/>
+<arg index='1' name='state' declared_type='SVPullToRefreshState' type='I'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='setSubtitleLabel:'>
-<arg index='0' type='@' declared_type='UILabel*' name='subtitleLabel'/>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='subtitleLabel' declared_type='UILabel*' type='@'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='setTextColor:'>
-<arg index='0' type='@' declared_type='UIColor*' name='textColor'/>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='textColor' declared_type='UIColor*' type='@'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='setTitle:forState:'>
-<arg index='0' type='@' declared_type='NSString*' name='title'/>
-<arg index='1' type='I' declared_type='SVPullToRefreshState' name='state'/>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='title' declared_type='NSString*' type='@'/>
+<arg index='1' name='state' declared_type='SVPullToRefreshState' type='I'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='setTitleLabel:'>
-<arg index='0' type='@' declared_type='UILabel*' name='titleLabel'/>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='titleLabel' declared_type='UILabel*' type='@'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='startAnimating'>
-<retval type='v' declared_type='void'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='state'>
-<retval type='I' declared_type='SVPullToRefreshState'/>
+<retval declared_type='SVPullToRefreshState' type='I'/>
 </method>
 <method selector='stopAnimating'>
-<retval type='v' declared_type='void'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='subtitleLabel'>
-<retval type='@' declared_type='UILabel*'/>
+<retval declared_type='UILabel*' type='@'/>
 </method>
 <method selector='textColor'>
-<retval type='@' declared_type='UIColor*'/>
+<retval declared_type='UIColor*' type='@'/>
 </method>
 <method selector='titleLabel'>
-<retval type='@' declared_type='UILabel*'/>
+<retval declared_type='UILabel*' type='@'/>
 </method>
 <method selector='triggerRefresh'>
-<retval type='v' declared_type='void'/>
+<retval declared_type='void' type='v'/>
 </method>
 </class>
 <class name='UIScrollView'>
 <method selector='addInfiniteScrollingWithActionHandler:'>
-<arg index='0' type='@?' function_pointer='true' declared_type='void (^)(void)' name='actionHandler'>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='actionHandler' declared_type='void (^)(void)' type='@?' function_pointer='true'>
+<retval declared_type='void' type='v'/>
 </arg>
-<retval type='v' declared_type='void'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='addPullToRefreshWithActionHandler:'>
-<arg index='0' type='@?' function_pointer='true' declared_type='void (^)(void)' name='actionHandler'>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='actionHandler' declared_type='void (^)(void)' type='@?' function_pointer='true'>
+<retval declared_type='void' type='v'/>
 </arg>
-<retval type='v' declared_type='void'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='infiniteScrollingView'>
-<retval type='@' declared_type='SVInfiniteScrollingView*'/>
+<retval declared_type='SVInfiniteScrollingView*' type='@'/>
 </method>
 <method selector='pullToRefreshView'>
-<retval type='@' declared_type='SVPullToRefreshView*'/>
+<retval declared_type='SVPullToRefreshView*' type='@'/>
 </method>
 <method selector='setInfiniteScrollingView:'>
-<arg index='0' type='@' declared_type='SVInfiniteScrollingView*' name='infiniteScrollingView'/>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='infiniteScrollingView' declared_type='SVInfiniteScrollingView*' type='@'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='setPullToRefreshView:'>
-<arg index='0' type='@' declared_type='SVPullToRefreshView*' name='pullToRefreshView'/>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='pullToRefreshView' declared_type='SVPullToRefreshView*' type='@'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='setShowsInfiniteScrolling:'>
-<arg index='0' type='B' declared_type='BOOL' name='showsInfiniteScrolling'/>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='showsInfiniteScrolling' declared_type='BOOL' type='B'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='setShowsPullToRefresh:'>
-<arg index='0' type='B' declared_type='BOOL' name='showsPullToRefresh'/>
-<retval type='v' declared_type='void'/>
+<arg index='0' name='showsPullToRefresh' declared_type='BOOL' type='B'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='showsInfiniteScrolling'>
-<retval type='B' declared_type='BOOL'/>
+<retval declared_type='BOOL' type='B'/>
 </method>
 <method selector='showsPullToRefresh'>
-<retval type='B' declared_type='BOOL'/>
+<retval declared_type='BOOL' type='B'/>
 </method>
 <method selector='triggerInfiniteScrolling'>
-<retval type='v' declared_type='void'/>
+<retval declared_type='void' type='v'/>
 </method>
 <method selector='triggerPullToRefresh'>
-<retval type='v' declared_type='void'/>
+<retval declared_type='void' type='v'/>
 </method>
 </class>
+<informal_protocol name='MCSwipeTableViewCellDelegate'>
+<method selector='swipeTableViewCell:didTriggerState:withMode:' type='v20@0:4@8I12I16'>
+<arg index='0' name='cell' declared_type='MCSwipeTableViewCell*' type='@'/>
+<arg index='1' name='state' declared_type='MCSwipeTableViewCellState' type='I'/>
+<arg index='2' name='mode' declared_type='MCSwipeTableViewCellMode' type='I'/>
+<retval declared_type='void' type='v'/>
+</method>
+</informal_protocol>
 </signatures>

@@ -56,7 +56,7 @@ class BoxscoreViewController < UITableViewController
     end
   
     players = [game.team_1, game.team_2]
-    @selected_player = players[indexPath.section][indexPath.row]
+    @selected_player = Player.where(:id).eq(players[indexPath.section][indexPath.row].to_i).first
     performance = Performance.where(:game_dat).eq(game.id).and(:player_dat).eq(@selected_player.id).first
     
     cell.date_label.text = @selected_player.player_name

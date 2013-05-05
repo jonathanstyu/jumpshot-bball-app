@@ -1,10 +1,13 @@
 PODS:
+  - MCSwipeTableViewCell (1.0.0)
   - SVPullToRefresh (0.4.1)
 
 DEPENDENCIES:
+  - MCSwipeTableViewCell
   - SVPullToRefresh
 
 SPEC CHECKSUMS:
+  MCSwipeTableViewCell: 3779b743bf5fa5a73f4f9e6eb0ddc907bffb829f
   SVPullToRefresh: 61a0e4bd12bd6f8e3465909810b0fbeb1a28d5f2
 
 COCOAPODS: 0.19.1
