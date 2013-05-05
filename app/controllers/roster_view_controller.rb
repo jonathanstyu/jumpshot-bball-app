@@ -4,7 +4,7 @@ class RosterViewController < UIViewController
   def viewDidLoad
     super
     self.title = "Roster"
-    view.backgroundColor = :black.uicolor  
+    view.backgroundColor = 0xf4f4f4.uicolor  
     layout_views  
   end
 
@@ -32,6 +32,9 @@ class RosterViewController < UIViewController
     @player_viewer = UITableView.new
     @player_viewer.frame = CGRect.make(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
     @player_viewer.delegate = @player_viewer.dataSource = self
+    @player_viewer.backgroundColor = 0xf4f4f4.uicolor
+    @player_viewer.separatorColor = 0x7f8c8d.uicolor
+    @player_viewer.rowHeight = 75
     view << @player_viewer
   end
   
@@ -44,12 +47,16 @@ class RosterViewController < UIViewController
   def tableView(tableView, cellForRowAtIndexPath: indexPath)
     @reuseIdentifier ||= "CELL_IDENTIFIER"
     cell = tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier) || begin
-      cell = UITableViewCell.alloc.initWithStyle(UITableViewCellStyleValue1, reuseIdentifier:@reuseIdentifier)
+      cell = IndexCell.alloc.initWithStyle(UITableViewCellStyleValue1, reuseIdentifier:@reuseIdentifier)
+      cell.createLabels
       cell
     end
     selected_player = @players[indexPath.row]
-    cell.text = selected_player.player_name  
-    cell.detailTextLabel.text = "Guard"
+    cell.name_label.text = selected_player.player_name  
+    cell.info_label.text = "avg:"
+    cell.ptsaverage.text = "#{selected_player.average(:points)} pts"
+    cell.rebaverage.text = "#{selected_player.average(:rebounds)} reb"
+    cell.astaverage.text = "#{selected_player.average(:assists)} ast"
     cell
   end
   
@@ -70,6 +77,7 @@ class RosterViewController < UIViewController
       UIActionSheet.alert('Add from where?', buttons: ['Cancel', nil, 'Address Book', 'Manually']) {
         |pressed| 
         self.manual_player_add if pressed == 'Manually'
+        self.address_player_add if pressed == 'Address Book'
       }
     
   end
@@ -91,5 +99,27 @@ class RosterViewController < UIViewController
     alert.alertViewStyle = UIAlertViewStylePlainTextInput
     alert.show
   end
+  
+  # Implements the ABPeoplePicker controller that pops up modally to add a person 
+  def address_player_add
+    picker = ABPeoplePickerNavigationController.alloc.init
+    picker.peoplePickerDelegate = self 
+    picker.displayedProperties = [KABPersonFirstNameProperty, KABPersonLastNameProperty, KABPersonEmailProperty]
+    self.presentModalViewController(picker, animated: true)
+  end
+  
+  def peoplePickerNavigationControllerDidCancel(peoplePicker)
+    self.dismissModalViewControllerAnimated(true)
+  end
+  
+  def peoplePickerNavigationController(peoplePicker, shouldContinueAfterSelectingPerson: person, property: property, identifier: identifier)
+    firstname = ABRecordCopyValue(person, KABPersonFirstNameProperty)
+    lastname = ABRecordCopyValue(person, KABPersonLastNameProperty)
+    email = ABRecordCopyValue(person, KABPersonEmailProperty)
+    new_player = Player.create(:player_name => "#{firstname} #{lastname}", :email => email)
+    self.dismissModalViewControllerAnimated(true)
+    return false
+  end
+
   
 end

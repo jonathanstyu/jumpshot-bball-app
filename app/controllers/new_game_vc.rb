@@ -1,4 +1,4 @@
-class NewgameViewController < UIViewController
+class NewgameViewController < UITableViewController
   include SugarCube::Modal 
   # attr_accessor :game
   
@@ -19,32 +19,34 @@ class NewgameViewController < UIViewController
   end
   
   def layout_views
-    # self.navigationItem.leftBarButtonItem = UIBarButtonItem.cancel {self.dismissViewControllerAnimated true, completion: nil}
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem.titled("Start") {save_players}
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem.titled("Clear") {clear_teams}
     
-    save_players = FlatPillButton.new
-    save_players.frame = CGRect.make(x: 10, y: 20, width: (view.bounds.width/2 - 20), height: 30)
-    save_players.setTitle("Start Game", forState: UIControlStateNormal)
-    save_players.addTarget(self, action: "save_players", forControlEvents: UIControlEventTouchUpInside)
-    view << save_players
+    # save_players = FlatPillButton.new
+    # save_players.frame = CGRect.make(x: 10, y: 20, width: (view.bounds.width/2 - 20), height: 30)
+    # save_players.setTitle("Start Game", forState: UIControlStateNormal)
+    # save_players.addTarget(self, action: "save_players", forControlEvents: UIControlEventTouchUpInside)
+    # view << save_players
+    # 
+    # open_edit = FlatPillButton.new
+    # open_edit.frame = save_players.frame.beside.right(10)
+    # open_edit.setTitle("Clear Teams", forState: UIControlStateNormal)
+    # open_edit.setTitle("Disabled", forState: UIControlStateDisabled)
+    # open_edit.addTarget(self, action: "clear_teams", forControlEvents: UIControlEventTouchUpInside)
+    # view << open_edit
     
-    open_edit = FlatPillButton.new
-    open_edit.frame = save_players.frame.beside.right(10)
-    open_edit.setTitle("Clear Teams", forState: UIControlStateNormal)
-    open_edit.setTitle("Disabled", forState: UIControlStateDisabled)
-    open_edit.addTarget(self, action: "clear_teams", forControlEvents: UIControlEventTouchUpInside)
-    view << open_edit
-    
-    @player_viewer = UITableView.new
-    @player_viewer.frame = CGRect.make(x: 0, y: 70, width: view.bounds.width, height: view.bounds.height- 70)
-    @player_viewer.delegate = @player_viewer.dataSource = self
-    @player_viewer.backgroundColor = :clear.uicolor
-    @player_viewer.rowHeight = 75
-    view << @player_viewer
+    # @player_viewer = UITableView.new
+    # @player_viewer.frame = CGRect.make(x: 0, y: 70, width: view.bounds.width, height: view.bounds.height- 70)
+    tableView.delegate = tableView.dataSource = self
+    tableView.backgroundColor = 0xecf0f1.uicolor
+    tableView.separatorColor = 0x7f8c8d.uicolor
+    tableView.rowHeight = 75
+    # view << @player_viewer
   
   end
   
   def viewDidAppear(animated)
-    @player_viewer.reloadSections(NSIndexSet.indexSetWithIndex(0), withRowAnimation:UITableViewRowAnimationAutomatic)
+    tableView.reloadSections(NSIndexSet.indexSetWithIndex(0), withRowAnimation:UITableViewRowAnimationAutomatic)
   end
   
   def tableView(tableView, numberOfRowsInSection: section)
@@ -72,7 +74,7 @@ class NewgameViewController < UIViewController
   end
   
   def swipeTableViewCell(cell, didTriggerState: state, withMode: mode)
-    cellIndex = @player_viewer.indexPathForCell(cell).row
+    cellIndex = self.tableView.indexPathForCell(cell).row
     if state == 1
       cell.detailTextLabel.text = "Team 1"
       @team_assignments["#{@players[cellIndex].id}"] = "team1"
@@ -116,7 +118,7 @@ class NewgameViewController < UIViewController
   end
   
   def clear_teams
-    @player_viewer.reloadSections(NSIndexSet.indexSetWithIndex(0), withRowAnimation:UITableViewRowAnimationAutomatic) 
+    self.tableView.reloadSections(NSIndexSet.indexSetWithIndex(0), withRowAnimation:UITableViewRowAnimationAutomatic) 
     @team_assignments.clear 
   end
   

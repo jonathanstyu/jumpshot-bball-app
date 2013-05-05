@@ -11,7 +11,7 @@ class TutorialViewController < UIViewController
     dismiss_button.on(:touch) {dismiss_modal}
     view << dismiss_button
     
-    screen = UIPageControl.new
+    screen = UIScrollView.new
     screen.backgroundColor = :white.uicolor
     screen.frame = CGRect.make(x: 0, y:30, width: view.bounds.width, height: view.bounds.height - 30)
     screen.contentSize = CGSizeMake(view.bounds.width * 4, view.bounds.height - 30)

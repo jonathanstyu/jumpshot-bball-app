@@ -3,6 +3,7 @@ class BoxscoreViewController < UITableViewController
   
   def viewDidLoad
     super
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem.titled("Share") {share}
     self.title = "Box Score"
     tableView.backgroundColor = :white.uicolor
     tableView.separatorColor = :black.uicolor
@@ -88,6 +89,10 @@ class BoxscoreViewController < UITableViewController
       view.reloadData
       tableView.pullToRefreshView.stopAnimating
     }
+  end
+  
+  def share
+    
   end
   
 end

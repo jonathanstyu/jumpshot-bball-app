@@ -70,12 +70,12 @@ class GameViewController < UIViewController
     made_3fg_button = view.viewWithTag 9
     made_3fg_button.tag = 5
     made_3fg_button.addTarget(self, action: "process_data:", forControlEvents: UIControlEventTouchUpInside)
-    @buttons << made_3fg_button if App::Persistence['3pts'] == true
+    @buttons << made_3fg_button 
 
     missed_3fg_button = view.viewWithTag 10
     missed_3fg_button.tag = 8
     missed_3fg_button.addTarget(self, action: "process_data:", forControlEvents: UIControlEventTouchUpInside)
-    @buttons << missed_3fg_button if App::Persistence['3pts'] == true
+    @buttons << missed_3fg_button 
     
     made_ft_button = view.viewWithTag 11
     made_ft_button.tag = 10
@@ -144,7 +144,13 @@ class GameViewController < UIViewController
   def tableView(tableView, didSelectRowAtIndexPath: indexPath)
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
       @data_tag[:player] = @players_teams[indexPath.section][indexPath.row]
-      @buttons.each {|button| button.enabled = true }
+      @buttons.each do |button|
+        if App::Persistence['3pts'] == true 
+          button.enabled = true
+        else 
+          button.enabled = true unless button.tag == 5 || button.tag == 8
+        end 
+      end 
   end
   
   # weird implementation of the tableview function

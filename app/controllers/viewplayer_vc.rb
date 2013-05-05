@@ -5,6 +5,7 @@ class ViewplayerViewController < UIViewController
     super
     self.title = "Profile"
     view.backgroundColor = 0xf4f4f4.uicolor
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem.titled("Share") {share}
     layout_views
   end
   
@@ -162,6 +163,10 @@ class ViewplayerViewController < UIViewController
   
   def find_new_pic
     puts "hello"
+  end
+  
+  def share
+    
   end
   
 end

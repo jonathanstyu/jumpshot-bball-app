@@ -3,6 +3,8 @@ class BoxindexViewController < UITableViewController
     super
     self.title = "Box Scores"
     self.navigationItem.leftBarButtonItem = self.editButtonItem
+    view.backgroundColor = 0xf4f4f4.uicolor
+    view.separatorColor = 0x7f8c8d.uicolor
   end
 
   def viewDidUnload
@@ -31,7 +33,6 @@ class BoxindexViewController < UITableViewController
     end
     selected_game = @games[indexPath.row]
     cell.text = selected_game.date_played
-    cell.detailTextLabel.text = "Location"
     cell
   end
   
