@@ -46,7 +46,7 @@
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor">
+						<object class="NSColor" key="IBUIBackgroundColor" id="126065195">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
@@ -69,10 +69,7 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="192606504"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor" id="1009701055">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MSAxIDEAA</bytes>
-						</object>
+						<reference key="IBUIBackgroundColor" ref="126065195"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -105,10 +102,7 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="545390549"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor" id="371856370">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MQA</bytes>
-						</object>
+						<reference key="IBUIBackgroundColor" ref="126065195"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -143,7 +137,10 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<string key="IBUIText">0</string>
-						<reference key="IBUITextColor" ref="371856370"/>
+						<object class="NSColor" key="IBUITextColor" id="371856370">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MQA</bytes>
+						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
 						<int key="IBUITextAlignment">1</int>
@@ -210,14 +207,17 @@
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
 									<string key="NSString">block</string>
-									<dictionary key="NSAttributes" id="855554731">
-										<reference key="NSColor" ref="1009701055"/>
+									<dictionary key="NSAttributes" id="664522510">
+										<object class="NSColor" key="NSColor" id="1009701055">
+											<int key="NSColorSpace">1</int>
+											<bytes key="NSRGB">MSAxIDEAA</bytes>
+										</object>
 										<object class="NSFont" key="NSFont" id="644061646">
 											<string key="NSName">Helvetica-Bold</string>
 											<double key="NSSize">27</double>
 											<int key="NSfFlags">16</int>
 										</object>
-										<object class="NSMutableParagraphStyle" key="NSParagraphStyle" id="120546914">
+										<object class="NSMutableParagraphStyle" key="NSParagraphStyle" id="31205373">
 											<int key="NSAlignment">2</int>
 											<nil key="NSTabStops"/>
 										</object>
@@ -261,7 +261,7 @@
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
 									<string key="NSString">assist</string>
-									<reference key="NSAttributes" ref="855554731"/>
+									<reference key="NSAttributes" ref="664522510"/>
 								</object>
 								<reference key="IBUIDisabledBackgroundImage" ref="833931587"/>
 								<reference key="IBUIFontDescription" ref="621238033"/>
@@ -291,7 +291,7 @@
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
 									<string key="NSString">rebound</string>
-									<reference key="NSAttributes" ref="855554731"/>
+									<reference key="NSAttributes" ref="664522510"/>
 								</object>
 								<reference key="IBUIDisabledBackgroundImage" ref="833931587"/>
 								<reference key="IBUIFontDescription" ref="621238033"/>
@@ -321,7 +321,7 @@
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
 									<string key="NSString">FT miss</string>
-									<reference key="NSAttributes" ref="855554731"/>
+									<reference key="NSAttributes" ref="664522510"/>
 								</object>
 								<reference key="IBUIDisabledBackgroundImage" ref="833931587"/>
 								<reference key="IBUIFontDescription" ref="621238033"/>
@@ -351,7 +351,7 @@
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
 									<string key="NSString">FT make</string>
-									<reference key="NSAttributes" ref="855554731"/>
+									<reference key="NSAttributes" ref="664522510"/>
 								</object>
 								<reference key="IBUIDisabledBackgroundImage" ref="833931587"/>
 								<reference key="IBUIFontDescription" ref="621238033"/>
@@ -385,7 +385,7 @@
 										<reference key="NSColor" ref="1009701055"/>
 										<reference key="NSFont" ref="644061646"/>
 										<reference key="NSOriginalFont" ref="644061646"/>
-										<reference key="NSParagraphStyle" ref="120546914"/>
+										<reference key="NSParagraphStyle" ref="31205373"/>
 									</dictionary>
 								</object>
 								<reference key="IBUIDisabledBackgroundImage" ref="833931587"/>
@@ -416,7 +416,7 @@
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
 									<string key="NSString">3FG make</string>
-									<reference key="NSAttributes" ref="855554731"/>
+									<reference key="NSAttributes" ref="664522510"/>
 								</object>
 								<reference key="IBUIDisabledBackgroundImage" ref="833931587"/>
 								<reference key="IBUIFontDescription" ref="621238033"/>
@@ -446,7 +446,7 @@
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
 									<string key="NSString">FG miss</string>
-									<reference key="NSAttributes" ref="855554731"/>
+									<reference key="NSAttributes" ref="664522510"/>
 								</object>
 								<reference key="IBUIDisabledBackgroundImage" ref="833931587"/>
 								<reference key="IBUIFontDescription" ref="621238033"/>
@@ -476,7 +476,7 @@
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
 									<string key="NSString">FG make</string>
-									<reference key="NSAttributes" ref="855554731"/>
+									<reference key="NSAttributes" ref="664522510"/>
 								</object>
 								<reference key="IBUIDisabledBackgroundImage" ref="833931587"/>
 								<reference key="IBUIFontDescription" ref="621238033"/>
@@ -506,7 +506,7 @@
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
 									<string key="NSString">turnover</string>
-									<reference key="NSAttributes" ref="855554731"/>
+									<reference key="NSAttributes" ref="664522510"/>
 								</object>
 								<reference key="IBUIDisabledBackgroundImage" ref="833931587"/>
 								<reference key="IBUIFontDescription" ref="621238033"/>
@@ -533,7 +533,7 @@
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
 									<string key="NSString">steal</string>
-									<reference key="NSAttributes" ref="855554731"/>
+									<reference key="NSAttributes" ref="664522510"/>
 								</object>
 								<reference key="IBUIDisabledBackgroundImage" ref="833931587"/>
 								<reference key="IBUIFontDescription" ref="621238033"/>
@@ -560,7 +560,7 @@
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
 									<string key="NSString">foul</string>
-									<reference key="NSAttributes" ref="855554731"/>
+									<reference key="NSAttributes" ref="664522510"/>
 								</object>
 								<reference key="IBUIDisabledBackgroundImage" ref="833931587"/>
 								<reference key="IBUIFontDescription" ref="621238033"/>
@@ -591,9 +591,8 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="189188261"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
-					<int key="NSColorSpace">1</int>
-					<bytes key="NSRGB">MCAwIDAAA</bytes>
-					<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
+					<int key="NSColorSpace">2</int>
+					<bytes key="NSRGB">MC45MjU0OTAyNjAxIDAuOTQxMTc2NTMzNyAwLjk0NTA5ODEwMjEAA</bytes>
 				</object>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
 					<int key="IBUIStatusBarStyle">2</int>

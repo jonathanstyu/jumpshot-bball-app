@@ -5,7 +5,6 @@ class GameViewController < UIViewController
   def viewDidLoad
     super
     self.title = "Game"
-    view.backgroundColor = :black.uicolor
     layout_views
     reset_menu
   end
@@ -49,7 +48,7 @@ class GameViewController < UIViewController
     left_scroll.backgroundColor = "subtle_dots.png".uicolor
     
     @player_table = view.viewWithTag 1
-    @player_table.separatorColor = :white.uicolor
+    @player_table.separatorColor = 0x7f8c8d.uicolor
     @player_table.rowHeight = 100 if Device.ipad?
     @player_table.dataSource = @player_table.delegate = self 
     
@@ -136,7 +135,7 @@ class GameViewController < UIViewController
     player = Player.where(:id).eq(@players_teams[indexPath.section][indexPath.row].to_i).first
        
     cell.text = player.player_name
-    cell.textColor = :white.uicolor
+    cell.textColor = :black.uicolor
     cell.font = Device.ipad? ? "Avenir-Black".uifont(25) : "Avenir-Black".uifont(16)
     cell
   end

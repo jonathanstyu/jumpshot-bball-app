@@ -37,6 +37,7 @@ GEM
     motion-cocoapods (1.3.0.rc1)
       cocoapods (>= 0.17.0)
     motion-table (0.1.7)
+    motion-testflight (1.5)
     motion_model (0.3.8)
       bubble-wrap (~> 1.1.4)
     multi_json (1.7.2)
@@ -67,6 +68,7 @@ DEPENDENCIES
   geomotion
   motion-cocoapods (~> 1.3.0.rc1)
   motion-table
+  motion-testflight
   motion_model (~> 0.3.8)
   rubymotion_generators
   sugarcube

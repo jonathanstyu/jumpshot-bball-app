@@ -32,7 +32,7 @@ class RosterViewController < UIViewController
     @player_viewer = UITableView.new
     @player_viewer.frame = CGRect.make(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
     @player_viewer.delegate = @player_viewer.dataSource = self
-    @player_viewer.backgroundColor = 0xf4f4f4.uicolor
+    @player_viewer.backgroundColor = 0xecf0f1.uicolor
     @player_viewer.separatorColor = 0x7f8c8d.uicolor
     @player_viewer.rowHeight = 75
     view << @player_viewer

@@ -24,10 +24,6 @@ class ViewplayerViewController < UIViewController
   end
 
   def layout_views
-        
-    @pic_view = view.viewWithTag 2
-    @pic_view.image = "#{player.image}".uiimage
-    # @pic_view.on(:touch) {find_new_pic}
     
     @name_label = view.viewWithTag 7
     @name_label.text = player.player_name.downcase
@@ -122,11 +118,7 @@ class ViewplayerViewController < UIViewController
       end
     }
   end
-  
-  def find_new_pic
-    puts "hello"
-  end
-  
+
   def share
     mail = MFMailComposeViewController.new
     mail.mailComposeDelegate = self 
