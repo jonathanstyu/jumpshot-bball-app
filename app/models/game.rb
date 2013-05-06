@@ -41,23 +41,22 @@ class Game
   def create_index
     players_teams = []
     players_teams[0] = self.team_1
-    players_teams[1] = self.team_2
-    # players_teams[0] = Array.new(Player.all)
-    # players_teams[1] = Array.new(Player.all)
-    
-    # players_teams[0].each do |player|
-    #   if self.team_1.include?(player.id) == false
-    #     players_teams[0].delete(player)
-    #   end
-    # end
-    # 
-    # players_teams[1].each do |player|
-    #   if self.team_2.include?(player.id) == false
-    #     players_teams[1].delete(player)
-    #   end
-    # end
-    
+    players_teams[1] = self.team_2    
     return players_teams
   end
+  
+  def export_data
+    teams = [self.team_1, self.team_2].flatten
+    final = "This is the box score for game played #{self.date_played}: \n\n"
+    teams.each do |player_id|
+      if player_id != nil 
+        individual_performance = self.performances.where(:player_dat).eq(player_id.to_i).first
+        final << individual_performance.export_line + "\n\n"
+      end
+    end  
+    final << "\nThanks for using JumpShot!"  
+    return final
+  end
+
     
 end

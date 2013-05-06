@@ -21,8 +21,22 @@ class Player
       performances.each do |perf|
         avge += perf.send(stat.to_sym)
       end
-      return (avge/performances.count).to_f
+      return (avge.to_f/performances.count.to_f).to_f
     end
+  end
+  
+  def export_data
+    final = "This is the player profile for #{self.player_name}:\n\n"
+    performances = self.return_performances
+    if performances.count == 0
+      "No games found!\n\n"
+    else
+      performances.each do |perf|
+        final << "#{perf.game_name}:\n\n "
+        final << perf.export_line
+      end
+    end
+    final << "\n\nThanks for using JumpShot!"
   end
     
 end

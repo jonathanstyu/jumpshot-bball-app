@@ -4,7 +4,7 @@ class ViewplayerViewController < UIViewController
   def viewDidLoad
     super
     self.title = "Profile"
-    view.backgroundColor = :white.uicolor
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem.titled("Share") {share}
     layout_views
   end
   
@@ -13,100 +13,57 @@ class ViewplayerViewController < UIViewController
     self.player = player
     self
   end
+  
+  def loadView
+    if Device.ipad?
+      views = NSBundle.mainBundle.loadNibNamed 'ipad-playerprofile', owner:self, options:nil
+    else
+      views = NSBundle.mainBundle.loadNibNamed 'iphone-playerprofile', owner:self, options:nil
+    end
+    self.view = views[0]
+  end
 
   def layout_views
-    scr_width = view.bounds.width
-    scr_height = view.bounds.height
-    
-    if Device.ipad?
-      table_y = scr_width / 5
-      name_font = :bold.uifont(30)
-      header_font = :bold.uifont(28)
-      subtitle_font = :bold.uifont(14)
-      name_x = scr_width * 0.25
-      pic_frame = CGRect.make(x: scr_width * 0.05, y: scr_width * 0.02, width: scr_width * 0.15, height: scr_width * 0.15)
-    else
-      table_y = scr_width / 3
-      name_font = :bold.uifont(22)
-      header_font = :bold.uifont(18)
-      subtitle_font = UIFont.systemFontOfSize(11)
-      name_x = scr_width * 0.3
-      pic_frame = CGRect.make(x: scr_width * 0.05, y: scr_width * 0.05, width: scr_width * 0.25, height: scr_width * 0.25)
-    end
-    
-    name_label = UILabel.new
-    name_label.frame = CGRect.make(x: name_x, y:5, width: scr_width*0.95, height: scr_height * 0.07)
-    name_label.text = player.player_name
-    name_label.font = name_font
-    name_label.backgroundColor = :clear.uicolor 
-    view << name_label
-    
-    @pic_view = UIImageView.new 
-    @pic_view.frame = pic_frame 
+        
+    @pic_view = view.viewWithTag 2
     @pic_view.image = "#{player.image}".uiimage
     # @pic_view.on(:touch) {find_new_pic}
-    view << @pic_view
     
-    @pts_avg_label = UILabel.new
-    @pts_avg_label.frame = CGRect.make(x: scr_width * 0.4, y: scr_height * 0.08, width: scr_width / 6, height: 35)
-    @pts_avg_label.textAlignment = :center.uialignment
-    @pts_avg_label.backgroundColor = :clear.uicolor 
+    @name_label = view.viewWithTag 7
+    @name_label.text = player.player_name.downcase
+    
+    @pts_avg_label = view.viewWithTag 4
     @pts_avg_label.text = "#{player.average(:points)}"
-    @pts_avg_label.font = header_font
-    view << @pts_avg_label
     
-    @reb_avg_label = UILabel.new
-    @reb_avg_label.frame = @pts_avg_label.frame.beside
-    @reb_avg_label.textAlignment = :center.uialignment
-    @reb_avg_label.backgroundColor = :clear.uicolor 
+    @reb_avg_label = view.viewWithTag 5
     @reb_avg_label.text = "#{player.average(:rebounds)}"
-    @reb_avg_label.font = header_font
-    view << @reb_avg_label
     
-    @ast_avg_label = UILabel.new
-    @ast_avg_label.textAlignment = :center.uialignment
-    @ast_avg_label.frame = @reb_avg_label.frame.beside
-    @ast_avg_label.backgroundColor = :clear.uicolor 
+    @ast_avg_label = view.viewWithTag 6
     @ast_avg_label.text = "#{player.average(:assists)}"
-    @ast_avg_label.font = header_font
-    view << @ast_avg_label
     
-    pt_subtitle = UILabel.new
-    pt_subtitle.textAlignment = :center.uialignment
-    pt_subtitle.frame = @pts_avg_label.frame.below.height(17)
-    pt_subtitle.font = subtitle_font
-    pt_subtitle.backgroundColor = :clear.uicolor
-    pt_subtitle.text = "pts/game"
-    view << pt_subtitle
+    if Device.ipad?
+      @st_avg_label = view.viewWithTag 8
+      @st_avg_label.text = "#{player.average(:steals)}"
 
-    rb_subtitle = UILabel.new
-    rb_subtitle.textAlignment = :center.uialignment
-    rb_subtitle.frame = @reb_avg_label.frame.below.height(17)
-    rb_subtitle.font = subtitle_font
-    rb_subtitle.backgroundColor = :clear.uicolor
-    rb_subtitle.text = "reb/game"
-    view << rb_subtitle
+      @bl_avg_label = view.viewWithTag 9
+      @bl_avg_label.text = "#{player.average(:blocks)}"
 
-    at_subtitle = UILabel.new
-    at_subtitle.textAlignment = :center.uialignment
-    at_subtitle.frame = @ast_avg_label.frame.below.height(17)
-    at_subtitle.font = subtitle_font
-    at_subtitle.backgroundColor = :clear.uicolor
-    at_subtitle.text = "ast/game"
-    view << at_subtitle
+      @to_avg_label = view.viewWithTag 10
+      @to_avg_label.text = "#{player.average(:turnovers)}"
+    end
     
-    @performance_table = UITableView.new 
-    @performance_table.frame = CGRect.make(x: 0, y: table_y, width: scr_width, height: scr_height - name_label.frame.height)
+    @performance_table = view.viewWithTag 1
     @performance_table.delegate = @performance_table.dataSource = self
-    @performance_table.rowHeight = 130
-    @performance_table.backgroundColor = 0xecf0f1.uicolor
-    @performance_table.separatorColor = 0x7f8c8d.uicolor
+    if Device.ipad?
+      @performance_table.rowHeight = 135
+    else
+      @performance_table.rowHeight = 120
+    end
     @performance_table.addPullToRefreshWithActionHandler(
     Proc.new do 
       loadData
     end
     )
-    view << @performance_table
   end
   
   def tableView(tableView, numberOfRowsInSection: section)
@@ -158,6 +115,11 @@ class ViewplayerViewController < UIViewController
       @pts_avg_label.text = "#{player.average(:points)}"
       @reb_avg_label.text = "#{player.average(:rebounds)}"
       @ast_avg_label.text = "#{player.average(:assists)}"
+      if Device.ipad?
+        @st_avg_label.text = "#{player.average(:steals)}"
+        @bl_avg_label.text = "#{player.average(:blocks)}"
+        @to_avg_label.text = "#{player.average(:turnovers)}"
+      end
     }
   end
   
@@ -166,7 +128,15 @@ class ViewplayerViewController < UIViewController
   end
   
   def share
-    
+    mail = MFMailComposeViewController.new
+    mail.mailComposeDelegate = self 
+    mail.setSubject("Player Profile Statistics")
+    mail.setMessageBody(player.export_data, isHTML: false)
+    present_modal(mail)
+  end
+  
+  def mailComposeController(mailView, didFinishWithResult: result, error: error)
+    self.dismissModalViewControllerAnimated(true)
   end
   
 end

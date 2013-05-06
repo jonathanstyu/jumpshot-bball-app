@@ -96,6 +96,7 @@ class BoxscoreViewController < UITableViewController
     mail = MFMailComposeViewController.new
     mail.mailComposeDelegate = self 
     mail.setSubject("Game Statistics")
+    mail.setMessageBody(game.export_data, isHTML: false)
     present_modal(mail)
   end
   

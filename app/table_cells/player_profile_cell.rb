@@ -207,16 +207,16 @@ class ProfileCell < UITableViewCell
     @to_label.frame = @assists_label.frame.beside
     @f_label.frame = @infoTO_label.frame.below(15).height(25)
     
-    @info_label.frame = @points_label.frame.below(4).height(20)
-    @infoF_label.frame = @fg_label.frame.below(4).height(20)
-    @infoR_label.frame = @rebounds_label.frame.below(4).height(20)
-    @infoA_label.frame = @assists_label.frame.below(4).height(20)
-    @infoS_label.frame = @steals_label.frame.below(4).height(20)
-    @infoB_label.frame = @blocks_label.frame.below(4).height(20)
-    @info3F_label.frame = @fg3_label.frame.below(4).height(20)
-    @infoft_label.frame = @ft_label.frame.below(4).height(20)
-    @infoTO_label.frame = @to_label.frame.below(4).height(20)
-    @infoFO_label.frame = @f_label.frame.below(4).height(20)
+    @info_label.frame = @points_label.frame.below(4).height(16)
+    @infoF_label.frame = @fg_label.frame.below(4).height(16)
+    @infoR_label.frame = @rebounds_label.frame.below(4).height(16)
+    @infoA_label.frame = @assists_label.frame.below(4).height(16)
+    @infoS_label.frame = @steals_label.frame.below(4).height(16)
+    @infoB_label.frame = @blocks_label.frame.below(4).height(16)
+    @info3F_label.frame = @fg3_label.frame.below(4).height(16)
+    @infoft_label.frame = @ft_label.frame.below(4).height(16)
+    @infoTO_label.frame = @to_label.frame.below(4).height(16)
+    @infoFO_label.frame = @f_label.frame.below(4).height(16)
     
     
   end

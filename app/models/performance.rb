@@ -76,4 +76,10 @@ class Performance
     self.ft = digit.join("-")
   end
   
+  def export_line
+    player = Player.where(:id).eq(self.player_dat).first
+    data_row = "#{player.player_name}: #{self.points} points, #{self.rebounds} rebounds, #{self.assists} assists, #{self.steals} steals, and #{self.blocks} blocks, #{self.turnovers} turnovers, #{self.fouls} fouls, #{self.fg} fg%, #{self.threefg} 3fg%, #{self.ft} ft%"
+    return data_row
+  end
+  
 end

@@ -13,7 +13,7 @@ Bundler.require
 Motion::Project::App.setup do |app|
   app.name = 'JumpShot'
   app.prerendered_icon = true
-  app.device_family = [:iphone, :ipad]
+  app.device_family = [:ipad, :iphone]
   app.interface_orientations = [:portrait]
   
   # For facebook integration 
