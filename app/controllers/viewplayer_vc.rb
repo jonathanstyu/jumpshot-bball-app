@@ -4,8 +4,7 @@ class ViewplayerViewController < UIViewController
   def viewDidLoad
     super
     self.title = "Profile"
-    view.backgroundColor = 0xf4f4f4.uicolor
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem.titled("Share") {share}
+    view.backgroundColor = :white.uicolor
     layout_views
   end
   
@@ -28,9 +27,9 @@ class ViewplayerViewController < UIViewController
       pic_frame = CGRect.make(x: scr_width * 0.05, y: scr_width * 0.02, width: scr_width * 0.15, height: scr_width * 0.15)
     else
       table_y = scr_width / 3
-      name_font = :bold.uifont(23)
-      header_font = :bold.uifont(20)
-      subtitle_font = :bold.uifont(11)
+      name_font = :bold.uifont(22)
+      header_font = :bold.uifont(18)
+      subtitle_font = UIFont.systemFontOfSize(11)
       name_x = scr_width * 0.3
       pic_frame = CGRect.make(x: scr_width * 0.05, y: scr_width * 0.05, width: scr_width * 0.25, height: scr_width * 0.25)
     end
@@ -49,7 +48,7 @@ class ViewplayerViewController < UIViewController
     view << @pic_view
     
     @pts_avg_label = UILabel.new
-    @pts_avg_label.frame = CGRect.make(x: scr_width * 0.45, y: scr_height * 0.08, width: scr_width / 6, height: 40)
+    @pts_avg_label.frame = CGRect.make(x: scr_width * 0.4, y: scr_height * 0.08, width: scr_width / 6, height: 35)
     @pts_avg_label.textAlignment = :center.uialignment
     @pts_avg_label.backgroundColor = :clear.uicolor 
     @pts_avg_label.text = "#{player.average(:points)}"
@@ -100,7 +99,8 @@ class ViewplayerViewController < UIViewController
     @performance_table.frame = CGRect.make(x: 0, y: table_y, width: scr_width, height: scr_height - name_label.frame.height)
     @performance_table.delegate = @performance_table.dataSource = self
     @performance_table.rowHeight = 130
-    @performance_table.backgroundColor = :white.uicolor
+    @performance_table.backgroundColor = 0xecf0f1.uicolor
+    @performance_table.separatorColor = 0x7f8c8d.uicolor
     @performance_table.addPullToRefreshWithActionHandler(
     Proc.new do 
       loadData
@@ -125,9 +125,9 @@ class ViewplayerViewController < UIViewController
 
     cell.date_label.text = performance.game_name
     cell.points_label.text = performance.points.to_s
-    cell.fg_label.text = "#{performance.fg[0].to_s}/#{performance.fg[1].to_s}"
-    cell.ft_label.text = "#{performance.ft[0].to_s}/#{performance.ft[1].to_s}"
-    cell.fg3_label.text = "#{performance.threefg[0].to_s}/#{performance.threefg[1].to_s}"
+    cell.fg_label.text = performance.fg
+    cell.ft_label.text = performance.ft
+    cell.fg3_label.text = performance.threefg
     cell.rebounds_label.text = performance.rebounds.to_s
     cell.assists_label.text = performance.assists.to_s
     cell.steals_label.text = performance.steals.to_s

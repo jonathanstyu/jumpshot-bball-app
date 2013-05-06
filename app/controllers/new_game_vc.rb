@@ -22,26 +22,10 @@ class NewgameViewController < UITableViewController
     self.navigationItem.rightBarButtonItem = UIBarButtonItem.titled("Start") {save_players}
     self.navigationItem.leftBarButtonItem = UIBarButtonItem.titled("Clear") {clear_teams}
     
-    # save_players = FlatPillButton.new
-    # save_players.frame = CGRect.make(x: 10, y: 20, width: (view.bounds.width/2 - 20), height: 30)
-    # save_players.setTitle("Start Game", forState: UIControlStateNormal)
-    # save_players.addTarget(self, action: "save_players", forControlEvents: UIControlEventTouchUpInside)
-    # view << save_players
-    # 
-    # open_edit = FlatPillButton.new
-    # open_edit.frame = save_players.frame.beside.right(10)
-    # open_edit.setTitle("Clear Teams", forState: UIControlStateNormal)
-    # open_edit.setTitle("Disabled", forState: UIControlStateDisabled)
-    # open_edit.addTarget(self, action: "clear_teams", forControlEvents: UIControlEventTouchUpInside)
-    # view << open_edit
-    
-    # @player_viewer = UITableView.new
-    # @player_viewer.frame = CGRect.make(x: 0, y: 70, width: view.bounds.width, height: view.bounds.height- 70)
     tableView.delegate = tableView.dataSource = self
     tableView.backgroundColor = 0xecf0f1.uicolor
     tableView.separatorColor = 0x7f8c8d.uicolor
     tableView.rowHeight = 75
-    # view << @player_viewer
   
   end
   

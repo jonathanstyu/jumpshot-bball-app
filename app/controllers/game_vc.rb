@@ -180,13 +180,13 @@ class GameViewController < UIViewController
     elsif action_tag == 5
       player_performance.made_3fg
     elsif action_tag == 2
-      player_performance.missed_3fg
+      player_performance.missed_fg
     elsif action_tag == 6
       player_performance.steals += 1
     elsif action_tag == 7
       player_performance.blocks += 1
     elsif action_tag == 8
-      player_performance.missed_fg
+      player_performance.missed_3fg
     elsif action_tag == 9
       player_performance.turnovers += 1
     elsif action_tag == 10

@@ -10,53 +10,70 @@ class Performance
   :steals => {:type => :int, :default => 0}, 
   :blocks => {:type => :int, :default => 0}, 
   :turnovers => {:type => :int, :default => 0}, 
-  :fg => {:type => :array, :default => [0,0]},
+  :fg => {:type => :string, :default => "0-0"},
   :game_name => {:type => :string, :default => "Game Deleted"},
-  :threefg => {:type => :array, :default => [0,0]}, 
-  :ft => {:type => :array, :default => [0,0]}, 
+  :threefg => {:type => :string, :default => "0-0"}, 
+  :ft => {:type => :string, :default => "0-0"}, 
   :fouls => {:type => :int, :default => 0}
   
   belongs_to :game
   
   def made_fg
-    self.fg[1] += 1
-    self.fg[0] += 1 
+    digit = self.fg.split("-")
+    digit[1] = digit[1].to_i + 1
+    digit[0] = digit[0].to_i + 1
     if App::Persistence['12pts'] == true
       self.points += 2
     else
       self.points += 1
     end
+    self.fg = digit.join("-")
   end
   
   def missed_fg
-    self.fg[1] += 1
+    digit = self.fg.split("-")
+    digit[1] = digit[1].to_i + 1
+    self.fg = digit.join("-")
   end
   
   def made_3fg
-    self.threefg[1] += 1
-    self.threefg[0] += 1 
-    self.fg[1] += 1
-    self.fg[0] += 1 
+    digit3 = self.threefg.split("-")
+    digit3[1] = digit3[1].to_i + 1
+    digit3[0] = digit3[0].to_i + 1
+      
+    digit = self.fg.split("-")
+    digit[1] = digit[1].to_i + 1
+    digit[0] = digit[0].to_i + 1
     if App::Persistence['12pts'] == true
       self.points += 3
     else
       self.points += 2
     end
+    self.threefg = digit3.join("-")
+    self.fg = digit.join("-")
   end
   
   def missed_3fg
-    self.threefg[1] += 1
-    self.fg[1] += 1
+    digit3 = self.threefg.split("-")
+    digit3[1] = digit3[1].to_i + 1
+    digit = self.fg.split("-")
+    digit[1] = digit[1].to_i + 1
+    self.fg = digit.join("-")
+    self.threefg = digit3.join("-")
   end
   
   def made_ft
-    self.ft[0] += 1
-    self.ft[1] += 1 
+    digit = self.ft.split("-")
+    digit[1] = digit[1].to_i + 1
+    digit[0] = digit[0].to_i + 1
     self.points += 1
+    self.ft = digit.join("-")
   end
   
   def missed_ft
-    self.ft[1] += 1 
+    digit = self.ft.split("-")
+    digit[1] = digit[1].to_i + 1
+    self.ft = digit.join("-")
   end
   
 end

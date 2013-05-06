@@ -17,7 +17,7 @@ Motion::Project::App.setup do |app|
   app.interface_orientations = [:portrait]
   
   # For facebook integration 
-  app.frameworks += %w{ AddressBook, AddressBookUI }
+  app.frameworks += %w{ AddressBook, AddressBookUI, MessageUI }
   # app.identifier = 'com.jon.test-app'
   # app.info_plist['FacebookAppID'] = 514585911935812
   # app.info_plist['CFBundleURLTypes'] = [{'CFBundleURLSchemes' => ["fb514585911935812"]}]

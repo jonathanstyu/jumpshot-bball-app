@@ -19,7 +19,7 @@ class AppDelegate
     settings_view.tabBarItem.setFinishedSelectedImage("settings.png".uiimage, withFinishedUnselectedImage:"settings.png".uiimage)
     
 
-    UINavigationBar.appearance.tintColor = :black.uicolor
+    UINavigationBar.appearance.tintColor = 0x2c3e50.uicolor
     tab_controller = UITabBarController.alloc.init
     tab_controller.viewControllers = [game_view, box_view, roster_view, settings_view]
     @window.rootViewController = tab_controller

@@ -1,12 +1,13 @@
 class BoxscoreViewController < UITableViewController
+  include SugarCube::Modal
   attr_accessor :game
   
   def viewDidLoad
     super
     self.navigationItem.rightBarButtonItem = UIBarButtonItem.titled("Share") {share}
     self.title = "Box Score"
-    tableView.backgroundColor = :white.uicolor
-    tableView.separatorColor = :black.uicolor
+    tableView.backgroundColor = 0xecf0f1.uicolor
+    tableView.separatorColor = 0x7f8c8d.uicolor
     tableView.rowHeight = 135
     tableView.dataSource = tableView.delegate = self
     tableView.addPullToRefreshWithActionHandler(
@@ -65,9 +66,9 @@ class BoxscoreViewController < UITableViewController
     cell.date_label.numberOfLines = 0
     
     cell.points_label.text = performance.points.to_s
-    cell.fg_label.text = "#{performance.fg[0].to_s}/#{performance.fg[1].to_s}"
-    cell.ft_label.text = "#{performance.ft[0].to_s}/#{performance.ft[1].to_s}"
-    cell.fg3_label.text = "#{performance.threefg[0].to_s}/#{performance.threefg[1].to_s}"
+    cell.fg_label.text = performance.fg
+    cell.ft_label.text = performance.ft
+    cell.fg3_label.text = performance.threefg
     cell.rebounds_label.text = performance.rebounds.to_s
     cell.assists_label.text = performance.assists.to_s
     cell.steals_label.text = performance.steals.to_s
@@ -92,7 +93,14 @@ class BoxscoreViewController < UITableViewController
   end
   
   def share
-    
+    mail = MFMailComposeViewController.new
+    mail.mailComposeDelegate = self 
+    mail.setSubject("Game Statistics")
+    present_modal(mail)
+  end
+  
+  def mailComposeController(mailView, didFinishWithResult: result, error: error)
+    self.dismissModalViewControllerAnimated(true)
   end
   
 end
