@@ -3,20 +3,14 @@ class TutorialViewController < UIViewController
   
   def viewDidLoad
     super
-    view.backgroundColor = 0xf4f4f4.uicolor
+    view.backgroundColor = 0xecf0f1.uicolor
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem.titled("Close") {dismiss_modal}
     
-    dismiss_button = FlatPillButton.new
-    dismiss_button.frame = CGRect.make(x: view.bounds.width * 0.20, y: 5, width: view.bounds.width * 0.60, height: 25)
-    dismiss_button.setTitle("Dismiss", forState: UIControlStateNormal)
-    dismiss_button.on(:touch) {dismiss_modal}
-    view << dismiss_button
-    
-    screen = UIScrollView.new
-    screen.backgroundColor = :white.uicolor
-    screen.frame = CGRect.make(x: 0, y:30, width: view.bounds.width, height: view.bounds.height - 30)
-    screen.contentSize = CGSizeMake(view.bounds.width * 4, view.bounds.height - 30)
-    screen.pagingEnabled = true
-    view << screen 
+    self.view = UIWebView.new
+    url = NSURL.URLWithString("https://googledrive.com/host/0BxpHKace-ZS3R0lGdEhMVTlCV2s/Tutorial-Index.html")
+    request = NSURLRequest.requestWithURL(url)
+    self.view.loadRequest request
+
   end
 
   def viewDidUnload

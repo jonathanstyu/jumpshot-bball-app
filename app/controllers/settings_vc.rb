@@ -17,12 +17,6 @@ class SettingsViewController < UIViewController
       cells: [
         {title: "Open Tutorial", action: :open_tutorial}
       ]
-    }, {
-      title: "App Made With ...", 
-      cells: [
-        {title: "Rubymotion"}, 
-        {title: "Motion-model"}
-      ]
     }]
     self.view = self.createTableViewFromData(@grouped_table_view_data)
   end
@@ -49,7 +43,7 @@ class SettingsViewController < UIViewController
   
   def open_tutorial
     tutorial = TutorialViewController.new
-    present_modal(tutorial)
+    present_modal(UINavigationController.alloc.initWithRootViewController(tutorial))
   end
   
 end

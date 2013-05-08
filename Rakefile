@@ -18,9 +18,9 @@ Motion::Project::App.setup do |app|
   app.device_family = [:iphone, :ipad]
   app.interface_orientations = [:portrait]
   app.frameworks += %w{ AddressBook, AddressBookUI, MessageUI }
-  app.identifier = 'com.joyo.jumpshot'
+  app.identifier = 'net.jonathanyu.jumpshot'
   app.codesign_certificate = 'iPhone Distribution: Jonathan Yu'
-  app.provisioning_profile = '/Users/jonathan/Desktop/JumpShot.mobileprovision'
+  app.provisioning_profile = '/Users/jonathan/Desktop/jumpshotappstore.mobileprovision'
   app.testflight do 
     app.testflight.sdk = 'vendor/TestFlight'
     app.testflight.app_token = 'b358f1b4-fe79-43aa-9ce9-78417fc89d87'
@@ -28,6 +28,9 @@ Motion::Project::App.setup do |app|
     app.testflight.team_token = 'd5588d6b67c9f33ecef2e9d836dfa397_MjIwMjIzMjAxMy0wNS0wNiAxODoyMTowMS41NTM1MjE'
     app.testflight.notify = true
     app.testflight.identify_testers = true
+  end
+  app.development do
+    app.entitlements['get-task-allow'] = false
   end
   # For facebook integration 
   # app.info_plist['FacebookAppID'] = 514585911935812

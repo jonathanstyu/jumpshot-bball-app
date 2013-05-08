@@ -12,7 +12,7 @@ class AppDelegate
     
     roster_view = UINavigationController.alloc.initWithRootViewController(RosterViewController.alloc.init)
     roster_view.title = "Roster"
-    roster_view.tabBarItem.setFinishedSelectedImage("people.png".uiimage, withFinishedUnselectedImage:"people.png".uiimage)
+    roster_view.tabBarItem.setFinishedSelectedImage("roster.png".uiimage, withFinishedUnselectedImage:"roster.png".uiimage)
     
     settings_view = UINavigationController.alloc.initWithRootViewController(SettingsViewController.alloc.init)
     settings_view.title = "Settings"

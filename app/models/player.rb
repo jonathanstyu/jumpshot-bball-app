@@ -21,7 +21,7 @@ class Player
       performances.each do |perf|
         avge += perf.send(stat.to_sym)
       end
-      return (avge.to_f/performances.count.to_f).to_f
+      return (avge.to_f/performances.count.to_f).to_f.round(1)
     end
   end
   
