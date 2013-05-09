@@ -52,7 +52,7 @@ class RosterViewController < UIViewController
       cell
     end
     selected_player = @players[indexPath.row]
-    cell.name_label.text = selected_player.player_name  
+    cell.name_label.text = selected_player.name  
     cell.info_label.text = "avg:"
     cell.ptsaverage.text = "#{selected_player.average(:points)} pts"
     cell.rebaverage.text = "#{selected_player.average(:rebounds)} reb"
@@ -84,7 +84,12 @@ class RosterViewController < UIViewController
   
   def alertView(alertView, clickedButtonAtIndex: buttonIndex)
     if buttonIndex == 1
-      new_player = Player.create(:player_name => alertView.textFieldAtIndex(0).text)
+      if name_check("#{alertView.textFieldAtIndex(0).text}")
+        new_player = Player.create_new(alertView.textFieldAtIndex(0).text)
+      else
+        name_used = UIAlertView.alloc.initWithTitle("Alert", message: "Player with same name already exists!", delegate: self, cancelButtonTitle: "Okay", otherButtonTitles: nil)
+        name_used.show
+      end
       @player_viewer.reloadData
     end
   end
@@ -116,9 +121,22 @@ class RosterViewController < UIViewController
     firstname = ABRecordCopyValue(person, KABPersonFirstNameProperty)
     lastname = ABRecordCopyValue(person, KABPersonLastNameProperty)
     email = ABRecordCopyValue(person, KABPersonEmailProperty)
-    new_player = Player.create(:player_name => "#{firstname} #{lastname}", :email => email)
+    if name_check("#{firstname} #{lastname}")
+      new_player = Player.create_new("#{firstname} #{lastname}")
+    else
+      name_used = UIAlertView.alloc.initWithTitle("Alert", message: "Player with same name already exists!", delegate: self, cancelButtonTitle: "Okay", otherButtonTitles: nil)
+      name_used.show
+    end
     self.dismissModalViewControllerAnimated(true)
     return false
+  end
+  
+  def name_check(name)
+    if Player.find(:name => "#{name}").count > 0
+      return false 
+    else
+      return true
+    end
   end
 
   

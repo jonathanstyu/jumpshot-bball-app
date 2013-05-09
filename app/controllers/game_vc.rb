@@ -12,8 +12,9 @@ class GameViewController < UIViewController
   def initWithGame(game)
     initWithNibName(nil, bundle:nil)
     self.current_game = game
-    @players_teams = current_game.create_index
-    current_game.create_performances
+    current_game.create_index
+    @players_teams = current_game.create_statlines
+    @data_tag = {}
     self
   end
 
@@ -132,9 +133,8 @@ class GameViewController < UIViewController
       cell = UITableViewCell.alloc.initWithStyle(UITableViewCellStyleDefault, reuseIdentifier:@reuseIdentifier)
       cell
     end 
-    player = Player.where(:id).eq(@players_teams[indexPath.section][indexPath.row].to_i).first
-       
-    cell.text = player.player_name
+    
+    cell.text = @players_teams[indexPath.section][indexPath.row].player_key
     cell.textColor = :black.uicolor
     cell.font = Device.ipad? ? "Avenir-Black".uifont(25) : "Avenir-Black".uifont(16)
     cell
@@ -142,7 +142,7 @@ class GameViewController < UIViewController
   
   def tableView(tableView, didSelectRowAtIndexPath: indexPath)
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
-      @data_tag[:player] = @players_teams[indexPath.section][indexPath.row]
+      @data_tag[:player] = [indexPath.section, indexPath.row]
       @buttons.each do |button|
         if App::Persistence['3pts'] == true 
           button.enabled = true
@@ -169,41 +169,40 @@ class GameViewController < UIViewController
   # Resets the menu, updates the labels 
   def process_data(sender)
     action_tag = sender.tag 
-    player_performance = current_game.performances.where(:player_dat).eq(@data_tag[:player].to_i).first
+    p_stat = @players_teams[@data_tag[:player][0]][@data_tag[:player][1]]
     if action_tag == 1
-      player_performance.made_fg
+      p_stat.made_fg
     elsif action_tag == 3
-      player_performance.rebounds += 1
+      p_stat.increment('rebounds')
     elsif action_tag == 4
-      player_performance.assists += 1 
+      p_stat.increment('assists')
     elsif action_tag == 5
-      player_performance.made_3fg
+      p_stat.made_3fg
     elsif action_tag == 2
-      player_performance.missed_fg
+      p_stat.missed_fg
     elsif action_tag == 6
-      player_performance.steals += 1
+      p_stat.increment('steals')
     elsif action_tag == 7
-      player_performance.blocks += 1
+      p_stat.increment('blocks')
     elsif action_tag == 8
-      player_performance.missed_3fg
+      p_stat.missed_3fg
     elsif action_tag == 9
-      player_performance.turnovers += 1
+      p_stat.increment('turnovers')
     elsif action_tag == 10
-      player_performance.made_ft
+      p_stat.made_ft
     elsif action_tag == 11
-      player_performance.missed_ft
+      p_stat.missed_ft
     elsif action_tag == 12
-      player_performance.fouls += 1
+      p_stat.increment('fouls') 
     end
     @team1_label.text = "#{current_game.tally_points(1)}"
     @team2_label.text = "#{current_game.tally_points(2)}"
-    reset_menu
+    puts current_game.team1
   end
 
   
   # Clears up the menu to prepare for the next number 
   def reset_menu
-    @data_tag = {}
     @buttons.each {|button| button.enabled = false }
   end
   

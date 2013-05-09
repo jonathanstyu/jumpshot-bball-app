@@ -42,6 +42,8 @@ GEM
       bubble-wrap (~> 1.1.4)
     multi_json (1.7.2)
     multipart-post (1.2.0)
+    nano-store (0.6.3)
+      motion-cocoapods (>= 1.2.1)
     netrc (0.7.7)
     octokit (1.24.0)
       addressable (~> 2.2)
@@ -70,5 +72,6 @@ DEPENDENCIES
   motion-table
   motion-testflight
   motion_model (~> 0.3.8)
+  nano-store
   rubymotion_generators
   sugarcube

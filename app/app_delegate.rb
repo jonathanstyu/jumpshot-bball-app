@@ -1,6 +1,13 @@
 class AppDelegate
   def application(application, didFinishLaunchingWithOptions:launchOptions)
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
+    
+    NanoStore.shared_store = NanoStore.store(:file, App.documents_path + "/nano.db")
+    
+    # NUIAppearance.init
+    # # NUISettings.initWithStylesheet("mytheme")
+    # NUISettings.init
+    # NUISettings.setAutoUpdatePath("/Users/jonathan/Desktop/Rubymotion/Tracker-App/resources/mytheme.nss")
 
     game_view = UINavigationController.alloc.initWithRootViewController(NewgameViewController.alloc.init)
     game_view.title = "Game"
@@ -18,14 +25,13 @@ class AppDelegate
     settings_view.title = "Settings"
     settings_view.tabBarItem.setFinishedSelectedImage("settings.png".uiimage, withFinishedUnselectedImage:"settings.png".uiimage)
     
-
     UINavigationBar.appearance.tintColor = 0x2c3e50.uicolor
     tab_controller = UITabBarController.alloc.init
     tab_controller.viewControllers = [game_view, box_view, roster_view, settings_view]
     @window.rootViewController = tab_controller
     @window.makeKeyAndVisible
     
-    set_up_local_data
+    # set_up_local_data
     set_up_settings
     
     true
@@ -57,7 +63,7 @@ class AppDelegate
   end
   
   def applicationWillDidBecomeActive(application)
-    set_up_local_data
+    # set_up_local_data
   end
   
 end

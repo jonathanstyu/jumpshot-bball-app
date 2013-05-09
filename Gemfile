@@ -10,3 +10,4 @@ gem 'motion-cocoapods', '~> 1.3.0.rc1'
 gem 'motion_model', '~> 0.3.8'  #, :git => 'https://github.com/sxross/MotionModel.git' #
 # Note the following issue with motion-model https://github.com/sxross/MotionModel/issues/32
 gem 'motion-testflight'
+gem 'nano-store'

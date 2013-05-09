@@ -59,22 +59,22 @@ class BoxscoreViewController < UITableViewController
   
     players = [game.team_1, game.team_2]
     @selected_player = Player.where(:id).eq(players[indexPath.section][indexPath.row].to_i).first
-    performance = Performance.where(:game_dat).eq(game.id).and(:player_dat).eq(@selected_player.id).first
+    statline = Statline.find(:game_key => game.key, :player_dat => @selected_player.key).first
     
     cell.date_label.text = @selected_player.player_name
     cell.date_label.lineBreakMode = NSLineBreakByWordWrapping
     cell.date_label.numberOfLines = 0
     
-    cell.points_label.text = performance.points.to_s
-    cell.fg_label.text = performance.fg
-    cell.ft_label.text = performance.ft
-    cell.fg3_label.text = performance.threefg
-    cell.rebounds_label.text = performance.rebounds.to_s
-    cell.assists_label.text = performance.assists.to_s
-    cell.steals_label.text = performance.steals.to_s
-    cell.blocks_label.text = performance.blocks.to_s
-    cell.to_label.text = performance.turnovers.to_s
-    cell.f_label.text = performance.fouls.to_s    
+    cell.points_label.text = statline.points.to_s
+    cell.fg_label.text = statline.fg
+    cell.ft_label.text = statline.ft
+    cell.fg3_label.text = statline.threefg
+    cell.rebounds_label.text = statline.rebounds.to_s
+    cell.assists_label.text = statline.assists.to_s
+    cell.steals_label.text = statline.steals.to_s
+    cell.blocks_label.text = statline.blocks.to_s
+    cell.to_label.text = statline.turnovers.to_s
+    cell.f_label.text = statline.fouls.to_s    
 
     cell
   end

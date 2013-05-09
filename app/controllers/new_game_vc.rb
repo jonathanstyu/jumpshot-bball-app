@@ -48,7 +48,7 @@ class NewgameViewController < UITableViewController
       cell
     end
     
-    cell.text = @players[indexPath.row].player_name
+    cell.text = @players[indexPath.row].name
     cell.textLabel.font = :bold.uifont(19)
     cell.detailTextLabel.font = :bold.uifont(14)
     
@@ -61,13 +61,13 @@ class NewgameViewController < UITableViewController
     cellIndex = self.tableView.indexPathForCell(cell).row
     if state == 1
       cell.detailTextLabel.text = "Team 1"
-      @team_assignments["#{@players[cellIndex].id}"] = "team1"
+      @team_assignments["#{@players[cellIndex].name}"] = "team1"
     elsif state == 2
       cell.detailTextLabel.text = "Team 2"
-      @team_assignments["#{@players[cellIndex].id}"] = "team2"
+      @team_assignments["#{@players[cellIndex].name}"] = "team2"
     else
       cell.detailTextLabel.text = "No Team"
-      @team_assignments["#{@players[cellIndex].id}"] = "none"
+      @team_assignments["#{@players[cellIndex].name}"] = "none"
     end
   end
   
@@ -94,7 +94,7 @@ class NewgameViewController < UITableViewController
           team_2 << k
         end
       }
-      set_up = Game.create(:team_1 => team_1, :team_2 => team_2)
+      set_up = Game.create_new(team_1, team_2)
       game_play = GameViewController.alloc.initWithGame(set_up)
       self.navigationController.pushViewController(game_play, animated: true)
     end

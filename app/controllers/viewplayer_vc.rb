@@ -63,7 +63,7 @@ class ViewplayerViewController < UIViewController
   end
   
   def tableView(tableView, numberOfRowsInSection: section)
-    @performances = player.return_performances
+    @performances = player.return_statlines
     return @performances.count
   end
   

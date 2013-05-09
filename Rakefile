@@ -7,8 +7,8 @@ require 'sugarcube-gestures'
 require 'motion-cocoapods'
 require 'motion_model'
 require 'bubble-wrap'
-require 'bubble-wrap/ui'
 require 'motion-testflight'
+require 'nano-store'
 Bundler.require
 
 Motion::Project::App.setup do |app|
@@ -38,6 +38,8 @@ Motion::Project::App.setup do |app|
   app.pods do 
     pod 'SVPullToRefresh'
     pod 'MCSwipeTableViewCell'
+    pod 'NanoStore'
+    # pod 'NUI'
     # pod 'Facebook-iOS-SDK'
   end
 end
