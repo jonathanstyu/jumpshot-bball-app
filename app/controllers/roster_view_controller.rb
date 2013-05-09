@@ -27,7 +27,7 @@ class RosterViewController < UIViewController
   
   def layout_views
     self.navigationItem.rightBarButtonItem = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemAdd, target: self, action: :open_add_player)
-    self.navigationItem.leftBarButtonItem = self.editButtonItem
+    # self.navigationItem.leftBarButtonItem = self.editButtonItem
     
     @player_viewer = UITableView.new
     @player_viewer.frame = CGRect.make(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
@@ -68,11 +68,21 @@ class RosterViewController < UIViewController
   
   def tableView(tableView, commitEditingStyle: editing_style, forRowAtIndexPath: indexPath)
     if editing_style == UITableViewCellEditingStyleDelete
-      @players.delete_at(indexPath.row)
+      a = @players[indexPath.row]
+      a.delete
       @player_viewer.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimationAutomatic)
     end
   end
+  
+  def tableView(tableView, editingStyleForRowAtIndexPath: indexPath)
+    if tableView.editing == true
+      return UITableViewCellEditingStyleDelete
+    else
+      return UITableViewCellEditingStyleNone
+    end
+  end
 
+  # Action sheet that gives them choice 
   def open_add_player
       UIActionSheet.alert('Add from where?', buttons: ['Cancel', nil, 'Address Book', 'Manually']) {
         |pressed| 
@@ -82,6 +92,7 @@ class RosterViewController < UIViewController
     
   end
   
+  # If someone choses that they want to implement the name manually then this checks to see if someone had already added a person with the same name and uses input to create their name
   def alertView(alertView, clickedButtonAtIndex: buttonIndex)
     if buttonIndex == 1
       if name_check("#{alertView.textFieldAtIndex(0).text}")
@@ -117,6 +128,7 @@ class RosterViewController < UIViewController
     self.dismissModalViewControllerAnimated(true)
   end
   
+  # Implements the Address Book person picker and creates a Player from chosen 
   def peoplePickerNavigationController(peoplePicker, shouldContinueAfterSelectingPerson: person, property: property, identifier: identifier)
     firstname = ABRecordCopyValue(person, KABPersonFirstNameProperty)
     lastname = ABRecordCopyValue(person, KABPersonLastNameProperty)
@@ -131,6 +143,7 @@ class RosterViewController < UIViewController
     return false
   end
   
+  # Helper method that checks to see if a player with the same name had been added already 
   def name_check(name)
     if Player.find(:name => "#{name}").count > 0
       return false 

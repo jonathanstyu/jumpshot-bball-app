@@ -2,7 +2,7 @@ class BoxindexViewController < UITableViewController
   def viewDidLoad
     super
     self.title = "Box Scores"
-    self.navigationItem.leftBarButtonItem = self.editButtonItem
+    # self.navigationItem.leftBarButtonItem = self.editButtonItem
     view.backgroundColor = 0xecf0f1.uicolor
     view.separatorColor = 0x7f8c8d.uicolor
   end
@@ -44,7 +44,8 @@ class BoxindexViewController < UITableViewController
   
   def tableView(tableView, commitEditingStyle: editing_style, forRowAtIndexPath: indexPath)
     if editing_style == UITableViewCellEditingStyleDelete
-      @games.delete_at(indexPath.row)
+      a = @games[indexPath.row]
+      a.delete
       tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimationAutomatic)
     end
   end

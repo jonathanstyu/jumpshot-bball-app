@@ -3,11 +3,6 @@ class AppDelegate
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
     
     NanoStore.shared_store = NanoStore.store(:file, App.documents_path + "/nano.db")
-    
-    # NUIAppearance.init
-    # # NUISettings.initWithStylesheet("mytheme")
-    # NUISettings.init
-    # NUISettings.setAutoUpdatePath("/Users/jonathan/Desktop/Rubymotion/Tracker-App/resources/mytheme.nss")
 
     game_view = UINavigationController.alloc.initWithRootViewController(NewgameViewController.alloc.init)
     game_view.title = "Game"
@@ -31,18 +26,12 @@ class AppDelegate
     @window.rootViewController = tab_controller
     @window.makeKeyAndVisible
     
-    # set_up_local_data
     set_up_settings
     
     true
   end
 
   # Helper functions that help record games 
-  def set_up_local_data
-    Player.deserialize_from_file('players.dat')
-    Game.deserialize_from_file('games.dat')
-    Performance.deserialize_from_file('performance.dat')
-  end
   
   def set_up_settings
     App::Persistence['3pts'] = true
@@ -50,20 +39,7 @@ class AppDelegate
     App::Persistence['teamnumb'] = false
   end
   
-  def applicationWillResignActive(application)
-    Game.serialize_to_file('games.dat')
-    Performance.serialize_to_file('performance.dat')
-    Player.serialize_to_file('players.dat')
-  end
-  
-  def applicationWillTerminate(application)
-    Game.serialize_to_file('games.dat')
-    Performance.serialize_to_file('performance.dat')
-    Player.serialize_to_file('players.dat')
-  end
-  
   def applicationWillDidBecomeActive(application)
-    # set_up_local_data
   end
   
 end

@@ -44,6 +44,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{192, 0}, {128, 524}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="710246153">
@@ -4457,6 +4458,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrameSize">{95, 37}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="477539248"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="549198444">
@@ -4491,6 +4493,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{94, 0}, {99, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="682364635"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="765154510">
@@ -4516,6 +4519,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 36}, {95, 60}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1010279388"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="445237069">
@@ -4549,6 +4553,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{94, 36}, {99, 60}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1031740001"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="445237069"/>
@@ -4576,6 +4581,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{12, 264}, {80, 54}}</string>
 								<reference key="NSSuperview" ref="1031740001"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="590458650"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor" id="61520502">
@@ -4589,6 +4595,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
+								<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 								<bool key="IBUIHasAttributedTitle">YES</bool>
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
@@ -4621,6 +4628,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{100, 202}, {80, 54}}</string>
 								<reference key="NSSuperview" ref="1031740001"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="236862760"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -4634,6 +4642,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
+								<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 								<bool key="IBUIHasAttributedTitle">YES</bool>
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
@@ -4649,6 +4658,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{12, 202}, {80, 54}}</string>
 								<reference key="NSSuperview" ref="1031740001"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="665974975"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -4662,6 +4672,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
+								<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 								<bool key="IBUIHasAttributedTitle">YES</bool>
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
@@ -4685,6 +4696,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{100, 140}, {80, 54}}</string>
 								<reference key="NSSuperview" ref="1031740001"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="357121024"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -4698,6 +4710,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
+								<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 								<bool key="IBUIHasAttributedTitle">YES</bool>
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
@@ -4713,6 +4726,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{12, 140}, {80, 54}}</string>
 								<reference key="NSSuperview" ref="1031740001"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1798251"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -4726,6 +4740,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
+								<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 								<bool key="IBUIHasAttributedTitle">YES</bool>
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
@@ -4749,6 +4764,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{100, 78}, {80, 54}}</string>
 								<reference key="NSSuperview" ref="1031740001"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="229057501"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -4762,6 +4778,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
+								<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 								<bool key="IBUIHasAttributedTitle">YES</bool>
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
@@ -4785,6 +4802,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{12, 78}, {80, 54}}</string>
 								<reference key="NSSuperview" ref="1031740001"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="860026017"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -4798,6 +4816,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
+								<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 								<bool key="IBUIHasAttributedTitle">YES</bool>
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
@@ -4813,6 +4832,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{100, 16}, {80, 54}}</string>
 								<reference key="NSSuperview" ref="1031740001"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="768962548"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -4826,6 +4846,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
+								<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 								<bool key="IBUIHasAttributedTitle">YES</bool>
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
@@ -4841,6 +4862,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{12, 16}, {80, 54}}</string>
 								<reference key="NSSuperview" ref="1031740001"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="276214200"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -4854,6 +4876,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<bool key="IBUIEnabled">NO</bool>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
+								<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 								<bool key="IBUIHasAttributedTitle">YES</bool>
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
@@ -4869,6 +4892,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{12, 326}, {80, 54}}</string>
 								<reference key="NSSuperview" ref="1031740001"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="782036475"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor" id="617671696">
@@ -4882,6 +4906,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
+								<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 								<bool key="IBUIHasAttributedTitle">YES</bool>
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
@@ -4897,6 +4922,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{100, 264}, {80, 54}}</string>
 								<reference key="NSSuperview" ref="1031740001"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="132648890"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="61520502"/>
@@ -4907,6 +4933,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
+								<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 								<bool key="IBUIHasAttributedTitle">YES</bool>
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
@@ -4922,6 +4949,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{100, 326}, {80, 54}}</string>
 								<reference key="NSSuperview" ref="1031740001"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="815326705"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="617671696"/>
@@ -4932,6 +4960,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
+								<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 								<bool key="IBUIHasAttributedTitle">YES</bool>
 								<int key="IBUILineBreakMode">1</int>
 								<object class="NSAttributedString" key="IBUINormalAttributedTitle">
@@ -4945,6 +4974,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 						</array>
 						<string key="NSFrame">{{0, 96}, {193, 428}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="150757737"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -4962,6 +4992,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 				</array>
 				<string key="NSFrame">{{0, 44}, {320, 524}}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="451829035"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">2</int>

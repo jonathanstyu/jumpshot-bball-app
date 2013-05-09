@@ -25,7 +25,11 @@ class NewgameViewController < UITableViewController
     tableView.delegate = tableView.dataSource = self
     tableView.backgroundColor = 0xecf0f1.uicolor
     tableView.separatorColor = 0x7f8c8d.uicolor
-    tableView.rowHeight = 75
+    if Device.ipad?
+      tableView.rowHeight = 75
+    else
+      tableView.rowHeight = 65
+    end
   
   end
   
@@ -78,6 +82,7 @@ class NewgameViewController < UITableViewController
   def save_players  
     player_values = @team_assignments.values
     if player_values.count {|x| x == 'team2'} == 0 || player_values.count {|x| x == 'team1'} == 0
+      # If there is a set up where a team has no players, it is not fair, right?
       bad_input = UIAlertView.alloc.initWithTitle("Alert", message: "A team has no players!", delegate: self, cancelButtonTitle: "Okay", otherButtonTitles: nil)
       bad_input.show
     elsif player_values.count {|x| x == 'team1'} != player_values.count {|x| x == 'team2'} && App::Persistence['teamnumb'] == false
@@ -87,6 +92,7 @@ class NewgameViewController < UITableViewController
     else
       team_1 = []
       team_2 = []
+      # Looks at each player and assigns them to their individual things 
       @team_assignments.each {|k, v| 
         if v == "team1"
           team_1 << k

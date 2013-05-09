@@ -5,7 +5,7 @@ class BoxscoreViewController < UITableViewController
   def viewDidLoad
     super
     self.navigationItem.rightBarButtonItem = UIBarButtonItem.titled("Share") {share}
-    self.title = "Box Score"
+    self.title = "#{game.date_played}"
     tableView.backgroundColor = 0xecf0f1.uicolor
     tableView.separatorColor = 0x7f8c8d.uicolor
     tableView.rowHeight = 135

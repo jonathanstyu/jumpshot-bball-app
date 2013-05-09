@@ -45,6 +45,7 @@
 						<string key="NSFrame">{{427, 0}, {341, 1024}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="126065195">
 							<int key="NSColorSpace">3</int>
@@ -1792,6 +1793,8 @@
 								<float key="scoringTypeFloat">29</float>
 								<int key="contentType">3</int>
 							</object>
+							<reference ref="1002038017"/>
+							<reference ref="112016000"/>
 							<reference ref="954895128"/>
 							<reference ref="499648064"/>
 							<reference ref="956391478"/>
@@ -1801,9 +1804,7 @@
 							<reference ref="528456649"/>
 							<reference ref="1014741652"/>
 							<reference ref="68934074"/>
-							<reference ref="1002038017"/>
 							<reference ref="66693263"/>
-							<reference ref="112016000"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
