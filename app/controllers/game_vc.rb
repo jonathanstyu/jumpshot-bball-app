@@ -39,10 +39,10 @@ class GameViewController < UIViewController
   def layout_views
     
     @team1_label = view.viewWithTag 4
-    @team1_label.text = "0"
+    @team1_label.text = "#{tally_points(1)}"
     
     @team2_label = view.viewWithTag 5
-    @team2_label.text = "0"
+    @team2_label.text = "#{tally_points(2)}"
     
     # Panel for the action recording buttons 
     left_scroll = view.viewWithTag 6  
@@ -194,16 +194,31 @@ class GameViewController < UIViewController
       p_stat.missed_ft
     elsif action_tag == 12
       p_stat.increment('fouls') 
-    end
-    @team1_label.text = "#{current_game.tally_points(1)}"
-    @team2_label.text = "#{current_game.tally_points(2)}"
-    puts current_game.team1
+    end    
+    
+    @team1_label.text = "#{tally_points(1)}"
+    @team2_label.text = "#{tally_points(2)}"
   end
 
   
   # Clears up the menu to prepare for the next number 
   def reset_menu
     @buttons.each {|button| button.enabled = false }
+  end
+  
+  def tally_points(team_name)
+    total = 0
+    
+    if team_name.to_i == 1
+      @players_teams[0].each do |statl|
+        total += statl.points
+      end
+    else
+      @players_teams[1].each do |statl|
+        total += statl.points
+      end
+    end
+    return total
   end
   
   

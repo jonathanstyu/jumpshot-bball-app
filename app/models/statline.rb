@@ -19,10 +19,10 @@ class Statline < NanoStore::Model
   attribute :min
   
   class << self
-    def create_new baller_num, game_num
+    def create_new baller_num, game_data
       obj = new(player_key: baller_num, 
-      game_key: game_num,
-      game_name: "Blank", 
+      game_key: game_data[0],
+      game_name: game_data[1], 
       points: 0,
       rebounds: 0,
       assists: 0,
@@ -103,16 +103,13 @@ class Statline < NanoStore::Model
       self.fouls += 1
     when 'turnovers'
       self.turnovers += 1
-    else
-      raise 'error, bad input'
     end
     self.save
   end
   
-  # def export_line
-  #   player = Player.where(:id).eq(self.player_dat).first
-  #   data_row = "#{player.player_name}: #{self.points} points, #{self.rebounds} rebounds, #{self.assists} assists, #{self.steals} steals, and #{self.blocks} blocks, #{self.turnovers} turnovers, #{self.fouls} fouls, #{self.fg} fg%, #{self.threefg} 3fg%, #{self.ft} ft%"
-  #   return data_row
-  # end
+  def export
+    data_row = "#{self.points} points, #{self.rebounds} rebounds, #{self.assists} assists, #{self.steals} steals, and #{self.blocks} blocks, #{self.turnovers} turnovers, #{self.fouls} fouls, #{self.fg_m}/#{self.fg_a} fg%, #{self.threefg_m}/#{self.threefg_a} 3fg%, #{self.ft_m}/#{self.ft_a} ft%"
+    return data_row
+  end
   
 end

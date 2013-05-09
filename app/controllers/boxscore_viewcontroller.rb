@@ -33,7 +33,7 @@ class BoxscoreViewController < UITableViewController
   end
   
   def tableView(tableView, numberOfRowsInSection: section)
-    @performances = Performance.where(:game_dat).eq(game.id).all
+    @performances = Statline.find(:game_key => game.key)
     return (@performances.count / 2)
   end
   
@@ -57,18 +57,17 @@ class BoxscoreViewController < UITableViewController
       cell
     end
   
-    players = [game.team_1, game.team_2]
-    @selected_player = Player.where(:id).eq(players[indexPath.section][indexPath.row].to_i).first
-    statline = Statline.find(:game_key => game.key, :player_dat => @selected_player.key).first
+    players = [game.team1, game.team2]
+    statline = Statline.find(:game_key => game.key, :player_key => players[indexPath.section][indexPath.row]).first
     
-    cell.date_label.text = @selected_player.player_name
+    cell.date_label.text = statline.player_key
     cell.date_label.lineBreakMode = NSLineBreakByWordWrapping
     cell.date_label.numberOfLines = 0
     
     cell.points_label.text = statline.points.to_s
-    cell.fg_label.text = statline.fg
-    cell.ft_label.text = statline.ft
-    cell.fg3_label.text = statline.threefg
+    cell.fg_label.text = "#{statline.fg_m}/#{statline.fg_a}"
+    cell.ft_label.text = "#{statline.ft_m}/#{statline.ft_a}"
+    cell.fg3_label.text = "#{statline.threefg_m}/#{statline.threefg_a}"
     cell.rebounds_label.text = statline.rebounds.to_s
     cell.assists_label.text = statline.assists.to_s
     cell.steals_label.text = statline.steals.to_s

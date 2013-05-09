@@ -6,7 +6,7 @@ class Game < NanoStore::Model
   
   class << self
     def create_new(team1, team2)
-      obj = new(date_played: Time.now,
+      obj = new(date_played: Time.now.strftime("%m-%d, %l%P"),
       team1: team1,
       team2: team2)
       obj.save
@@ -21,7 +21,7 @@ class Game < NanoStore::Model
     
     players_teams.each_with_index do |teams, idx|
       teams.each_with_index do |player_name, index|
-        answer[idx] << Statline.create_new(player_name, self.key)
+        answer[idx] << Statline.create_new(player_name, [self.key, self.date_played])
       end
     end
     return answer
@@ -30,23 +30,7 @@ class Game < NanoStore::Model
   def return_statlines
     return Statline.find(:game_key, NSFEqualTo, self.key)
   end
-  
-  # Helps calculate the point total for each team 
-  def tally_points(team_name)
-    team1_statlines = Statline.find(:game_key => self.key, :player_key => self.team1)
-    team2_statlines = Statline.find(:game_key => self.key, :player_key => self.team2)
-    total = 0
-    if team_name.to_i == 1
-      team1_statlines.each do |statline|
-        total += statline.points
-      end
-    else
-      team2_statlines.each do |statline|
-        total += statline.points
-      end
-    end
-    return total
-  end
+
   
   # setter method to help set up the right array structure for a sectioned table
   def create_index

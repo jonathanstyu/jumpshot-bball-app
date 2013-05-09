@@ -26,7 +26,7 @@ class ViewplayerViewController < UIViewController
   def layout_views
     
     @name_label = view.viewWithTag 7
-    @name_label.text = player.player_name.downcase
+    @name_label.text = player.name.downcase
     
     @pts_avg_label = view.viewWithTag 4
     @pts_avg_label.text = "#{player.average(:points)}"
@@ -74,19 +74,19 @@ class ViewplayerViewController < UIViewController
       cell.createLabels
       cell
     end
-    performance = @performances[indexPath.row]
+    stat = @performances[indexPath.row]
 
-    cell.date_label.text = performance.game_name
-    cell.points_label.text = performance.points.to_s
-    cell.fg_label.text = performance.fg
-    cell.ft_label.text = performance.ft
-    cell.fg3_label.text = performance.threefg
-    cell.rebounds_label.text = performance.rebounds.to_s
-    cell.assists_label.text = performance.assists.to_s
-    cell.steals_label.text = performance.steals.to_s
-    cell.blocks_label.text = performance.blocks.to_s
-    cell.to_label.text = performance.turnovers.to_s
-    cell.f_label.text = performance.fouls.to_s
+    cell.date_label.text = stat.game_name
+    cell.points_label.text = stat.points.to_s
+    cell.fg_label.text = "#{stat.fg_m}/#{stat.fg_a}"
+    cell.ft_label.text = "#{stat.ft_m}/#{stat.ft_a}"
+    cell.fg3_label.text = "#{stat.threefg_m}/#{stat.threefg_a}"
+    cell.rebounds_label.text = stat.rebounds.to_s
+    cell.assists_label.text = stat.assists.to_s
+    cell.steals_label.text = stat.steals.to_s
+    cell.blocks_label.text = stat.blocks.to_s
+    cell.to_label.text = stat.turnovers.to_s
+    cell.f_label.text = stat.fouls.to_s
     
     cell
   end
