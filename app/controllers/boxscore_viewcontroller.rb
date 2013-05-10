@@ -80,8 +80,6 @@ class BoxscoreViewController < UITableViewController
   
   def tableView(tableView, didSelectRowAtIndexPath: indexPath)
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    # player_panel = ViewplayerViewController.alloc.initWithPlayer(@selected_player)
-    # self.navigationController.pushViewController(player_panel, animated: true)
   end
   
   def loadData

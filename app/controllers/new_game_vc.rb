@@ -102,6 +102,7 @@ class NewgameViewController < UITableViewController
       }
       set_up = Game.create_new(team_1, team_2)
       game_play = GameViewController.alloc.initWithGame(set_up)
+      game_play.setHidesBottomBarWhenPushed(true)
       self.navigationController.pushViewController(game_play, animated: true)
     end
     

@@ -32,6 +32,21 @@ class Game < NanoStore::Model
   def return_statlines
     return Statline.find(:game_key, NSFEqualTo, self.key)
   end
+  
+  # Invoke this to init with an old game and avoid thorny issues 
+  def retrieve_old_statlines
+    players_teams = []
+    players_teams[0] = self.team1
+    players_teams[1] = self.team2
+    answer = [[],[]]
+    
+    players_teams.each_with_index do |teams, idx|
+      teams.each_with_index do |player_name, index|
+        answer[idx] << Statline.find(:game_key => self.key, :player_key => player_name).first
+      end
+    end
+    return answer
+  end
 
   
   # Setter method to help set up the right array structure for a sectioned table

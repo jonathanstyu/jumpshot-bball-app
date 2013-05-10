@@ -17,6 +17,14 @@ class GameViewController < UIViewController
     @data_tag = {}
     self
   end
+  
+  def initWithOldGame(game)
+    initWithNibName(nil, bundle:nil)
+    self.current_game = game
+    @players_teams = current_game.retrieve_old_statlines
+    @data_tag = {}
+    self
+  end
 
   def viewDidUnload
     super
@@ -220,6 +228,6 @@ class GameViewController < UIViewController
     end
     return total
   end
-  
+
   
 end

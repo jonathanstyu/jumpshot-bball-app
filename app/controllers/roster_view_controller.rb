@@ -63,6 +63,7 @@ class RosterViewController < UIViewController
   def tableView(tableView, didSelectRowAtIndexPath: indexPath)
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
     player_panel = ViewplayerViewController.alloc.initWithPlayer(@players[indexPath.row])
+    player_panel.setHidesBottomBarWhenPushed(true)
     self.navigationController.pushViewController(player_panel, animated: true)
   end
   
@@ -71,14 +72,6 @@ class RosterViewController < UIViewController
       a = @players[indexPath.row]
       a.delete
       @player_viewer.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimationAutomatic)
-    end
-  end
-  
-  def tableView(tableView, editingStyleForRowAtIndexPath: indexPath)
-    if tableView.editing == true
-      return UITableViewCellEditingStyleDelete
-    else
-      return UITableViewCellEditingStyleNone
     end
   end
 

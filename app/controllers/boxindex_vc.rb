@@ -2,7 +2,7 @@ class BoxindexViewController < UITableViewController
   def viewDidLoad
     super
     self.title = "Box Scores"
-    # self.navigationItem.leftBarButtonItem = self.editButtonItem
+    self.navigationItem.leftBarButtonItem = self.editButtonItem
     view.backgroundColor = 0xecf0f1.uicolor
     view.separatorColor = 0x7f8c8d.uicolor
   end
@@ -33,12 +33,14 @@ class BoxindexViewController < UITableViewController
     end
     selected_game = @games[indexPath.row]
     cell.text = selected_game.date_played
+    cell.editingAccessoryType = UITableViewCellAccessoryDetailDisclosureButton
     cell
   end
   
   def tableView(tableView, didSelectRowAtIndexPath: indexPath)
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
     game_panel = BoxscoreViewController.alloc.initWithGame(@games[indexPath.row])
+    game_panel.setHidesBottomBarWhenPushed(true)
     self.navigationController.pushViewController(game_panel, animated: true)
   end
   
@@ -53,6 +55,12 @@ class BoxindexViewController < UITableViewController
   def setEditing(is_editing, animated: is_animated)
     tableView.setEditing(is_editing, animated: is_animated)
     super
+  end
+  
+  def tableView(tableView, accessoryButtonTappedForRowWithIndexPath:indexPath)
+    game_cont = GameViewController.alloc.initWithOldGame(@games[indexPath.row])
+    game_cont.setHidesBottomBarWhenPushed(true)
+    self.navigationController.pushViewController(game_cont, animated: true)
   end
   
   # Handles the custom tab 
