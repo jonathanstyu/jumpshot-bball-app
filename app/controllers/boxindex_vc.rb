@@ -55,4 +55,13 @@ class BoxindexViewController < UITableViewController
     super
   end
   
+  # Handles the custom tab 
+  def tabImageName
+    return 'box.png'
+  end
+  
+  def tabTitle
+    return 'Box Scores'
+  end
+  
 end

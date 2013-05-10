@@ -25,3 +25,4 @@ install_resource()
       ;;
   esac
 }
+install_resource 'AKTabBarController/AKTabBarController/AKTabBarController.bundle'

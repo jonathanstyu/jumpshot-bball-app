@@ -38,6 +38,7 @@ Motion::Project::App.setup do |app|
     pod 'SVPullToRefresh'
     pod 'MCSwipeTableViewCell'
     pod 'NanoStore'
+    pod 'AKTabBarController'
     # pod 'NUI'
     # pod 'Facebook-iOS-SDK'
   end

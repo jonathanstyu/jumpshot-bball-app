@@ -4,7 +4,7 @@ class NewgameViewController < UITableViewController
   
   def viewDidLoad
     super
-    self.title = "New Game"
+    self.title = "New"
     view.backgroundColor = :white.uicolor
     layout_views
   end
@@ -110,6 +110,14 @@ class NewgameViewController < UITableViewController
   def clear_teams
     self.tableView.reloadSections(NSIndexSet.indexSetWithIndex(0), withRowAnimation:UITableViewRowAnimationAutomatic) 
     @team_assignments.clear 
+  end
+  
+  def tabImageName
+    return "bball.png"
+  end
+  
+  def tabTitle
+    return "Start A Game"
   end
   
 end

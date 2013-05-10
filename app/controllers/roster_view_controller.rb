@@ -152,5 +152,13 @@ class RosterViewController < UIViewController
     end
   end
 
+  # Handles the custom tab 
+  def tabImageName
+    return 'roster.png'
+  end
+  
+  def tabTitle
+    return 'Roster'
+  end
   
 end

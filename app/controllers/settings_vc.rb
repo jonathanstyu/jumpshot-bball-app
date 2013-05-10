@@ -46,4 +46,14 @@ class SettingsViewController < UIViewController
     present_modal(UINavigationController.alloc.initWithRootViewController(tutorial))
   end
   
+  # Handles the custom tab 
+  def tabImageName
+    return 'settings.png'
+  end
+  
+  def tabTitle
+    return 'Settings'
+  end
+  
+  
 end

@@ -1,15 +1,18 @@
 PODS:
+  - AKTabBarController (1.0.1)
   - MCSwipeTableViewCell (1.0.0)
   - NanoStore (2.6.4)
   - SVPullToRefresh (0.4.1)
 
 DEPENDENCIES:
+  - AKTabBarController
   - MCSwipeTableViewCell
   - NanoStore
   - NanoStore (~> 2.6.0)
   - SVPullToRefresh
 
 SPEC CHECKSUMS:
+  AKTabBarController: d3876684504512be83b90b5eabefce3853af043f
   MCSwipeTableViewCell: 3779b743bf5fa5a73f4f9e6eb0ddc907bffb829f
   NanoStore: 73d29e30e1e7f253f719c6ad1d60181ebcf1b5be
   SVPullToRefresh: 61a0e4bd12bd6f8e3465909810b0fbeb1a28d5f2

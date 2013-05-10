@@ -6,6 +6,12 @@
 // project.
 
 
+// AKTabBarController
+#define COCOAPODS_POD_AVAILABLE_AKTabBarController
+#define COCOAPODS_VERSION_MAJOR_AKTabBarController 1
+#define COCOAPODS_VERSION_MINOR_AKTabBarController 0
+#define COCOAPODS_VERSION_PATCH_AKTabBarController 1
+
 // MCSwipeTableViewCell
 #define COCOAPODS_POD_AVAILABLE_MCSwipeTableViewCell
 #define COCOAPODS_VERSION_MAJOR_MCSwipeTableViewCell 1
