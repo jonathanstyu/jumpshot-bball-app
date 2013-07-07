@@ -6,11 +6,11 @@ Jumpshot is a basketball tracking app written in RubyMotion. I had written it be
 
 !["Adding Players"](https://raw.github.com/jonathanstyu/Tracker-App/Datas/demo.gif)
 
-* It uses a NIB built in xCode to create a colorful, intuitive way to track players' stats. 
+* It uses a NIB built in Xcode to create a colorful, intuitive way to track players' stats. 
 
 !["Game Tracker View"](https://raw.github.com/jonathanstyu/Tracker-App/Datas/gametrack.png)
 
-* Scoring is easy and rather fun 
+* Scoring is easy and rather fun to do 
 
 !["Scoring"](https://raw.github.com/jonathanstyu/Tracker-App/Datas/Game.gif)
 
